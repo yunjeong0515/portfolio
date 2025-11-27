@@ -8,16 +8,32 @@
   border-bottom: 1px solid #fff;
   background: rgba(233, 233, 233, 0.5);
   backdrop-filter: blur(5px);
+  .index-home {
+    display: none;
+  }
   &.main {
     background: rgba(217, 217, 217, 0);
     backdrop-filter: blur(0);
     border-radius: 0;
+    border-bottom: 1px solid rgba($color: #fff, $alpha: 0.2);
     .wrapper {
-      justify-content: center;
-      .header-logo {
-        h1 {
-          color: #fff;
+      // justify-content: ㄹ;
+      .home-btn {
+        .home-icon {
+          display: none;
         }
+        span {
+          &.home-title {
+            display: none;
+          }
+          &.main-title {
+            display: block;
+            color: #fff;
+          }
+        }
+      }
+      .header-logo {
+        display: none;
       }
       .nav {
         display: none;
@@ -36,7 +52,6 @@
       transform: translate(-50%, -50%);
       h1 {
         font-size: 25px;
-        letter-spacing: 1px;
       }
     }
     .home-btn {
@@ -44,7 +59,7 @@
       align-items: center;
       gap: 8px;
       .home-icon {
-        width: 20px;
+        width: 24px;
         aspect-ratio: 1 / 1;
         img {
           width: 100%;
@@ -53,8 +68,14 @@
         }
       }
       span {
-        font-size: 25px;
+        font-size: 20px;
         color: $black900;
+        &.home-title {
+          display: block;
+        }
+        &.main-title {
+          display: none;
+        }
       }
     }
     .nav {
@@ -71,6 +92,7 @@
             .dot-icon {
               width: 10px;
               height: 10px;
+              border-radius: 1px;
               aspect-ratio: 1/1;
               background-color: $black900;
             }
@@ -80,7 +102,7 @@
               height: 25px;
               span {
                 display: block;
-                font-size: 25px;
+                font-size: 20px;
                 line-height: 1;
                 transition: transform 0.3s ease-out;
                 color: $black900;
