@@ -1,0 +1,1 @@
+import{Q as e}from"./QPage.d8f488b9.js";import{_ as o}from"./plugin-vue_export-helper.21dcd24c.js";import{t,v as a,x as r}from"./index.d98ae974.js";import"./render.fb9d86c6.js";const n=t({name:"IndexPage",data(){return{}},methods:{},mounted(){}});function s(c,p,m,d,f,i){return a(),r(e,{class:"aboutpage-container"})}var l=o(n,[["render",s]]);export{l as default};
