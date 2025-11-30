@@ -3,7 +3,7 @@
     <div class="header" :class="{ main: $route.meta.IndexPage }">
       <div class="wrapper">
         <router-link to="/" class="home-btn">
-          <div class="home-icon">
+          <!-- <div class="home-icon">
             <svg
               width="24"
               height="24"
@@ -16,19 +16,23 @@
                 fill="#fff"
               />
             </svg>
+          </div> -->
+          <div class="dot-icon"></div>
+          <div class="text-wrapper home-title">
+            <span class="font_ibm font_400 original-text">HOME</span>
+            <span class="font_ibm font_400 hover-text">HOME</span>
           </div>
-          <span class="font_ibm font_400 home-title">HOME</span>
           <span class="font_ibm font_400 main-title"
             >Yunjeong’s Web Portfolio</span
           >
         </router-link>
-        <router-link class="header-logo" to="">
+        <router-link class="header-logo" to="/">
           <h1 class="font_ibm font_400">Yunjeong’s Web Portfolio</h1>
         </router-link>
         <div class="nav">
           <ul>
             <li>
-              <router-link to="/about">
+              <router-link to="/about" :class="{ on: $route.meta.AboutPage }">
                 <div class="dot-icon"></div>
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">ABOUT</span>
@@ -36,7 +40,7 @@
                 </div>
               </router-link>
             </li>
-            <li>
+            <!-- <li>
               <router-link to="">
                 <div class="dot-icon"></div>
                 <div class="text-wrapper">
@@ -44,9 +48,12 @@
                   <span class="font_ibm font_400 hover-text">WORK</span>
                 </div>
               </router-link>
-            </li>
+            </li> -->
             <li>
-              <router-link to="">
+              <router-link
+                to="/project"
+                :class="{ on: $route.meta.ProjectPage }"
+              >
                 <div class="dot-icon"></div>
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">PROJECT</span>

@@ -4,52 +4,30 @@
     <div class="container-wrap">
       <div class="wrapper">
         <div class="main-title-wrap">
-          <!-- <div class="sub-text">
-            <div class="icon">
-              <img src="../assets/imgs/icon/home_w.svg" alt="" />
+          <div class="rolling-container">
+            <div class="rolling-track">
+              <span v-for="n in 6" :key="n" class="rolling-item font_700">
+                <em>YUNJEONG </em>’S WEB PORTFOLIO
+              </span>
             </div>
-            <span ref="subText" class="sub-text-content font_ibm"
-              >Yunjeong’s Web Portfolio</span
-            >
-          </div> -->
-          <div class="focus-keyword">
-            <span ref="dynamicWord" class="dynamic-word font_900"
-              >User-Centric</span
-            >
           </div>
-          <span class="font_ibm static-text text-r">Web Publisher.</span>
+          <span class="font_ibm sub-text text-r">&lt;Publisher/&gt;</span>
         </div>
-        <!-- <div class="title-wrap">
-          <div class="sub-text">
-            <span ref="subText" class="sub-text-content font_ibm"
-              >사용자 중심의 퍼블리셔</span
-            >
-          </div>
-          <div class="focus-keyword">
-            <span ref="dynamicWord" class="dynamic-word font_900"
-              >User-Centric</span
-            >
-          </div>
-          <span class="font_ibm static-text text-r">Web Publisher.</span>
-        </div> -->
         <div class="main-wrap">
           <div class="folder-list">
             <ul>
               <li>
-                <router-link to="">
+                <router-link to="/about">
                   <div class="folder-wrapper" ref="folderItem">
                     <div class="folder-icon-wrap">
                       <div class="folder-front folder-icon">
-                        <img
-                          src="../assets/imgs/index/folder_front01.svg"
-                          alt=""
-                        />
+                        <div class="front-box"></div>
                       </div>
-                      <div class="text-card">
+                      <!-- <div class="text-card">
                         <span class="font_ibm fonbt_500"
                           >저에 대해 알아보세요!</span
                         >
-                      </div>
+                      </div> -->
                       <div class="folder-center folder-icon">
                         <img
                           src="../assets/imgs/index/about_card01.png"
@@ -74,20 +52,17 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="">
+                <router-link to="/project">
                   <div class="folder-wrapper" ref="folderItem">
                     <div class="folder-icon-wrap">
                       <div class="folder-front folder-icon">
-                        <img
-                          src="../assets/imgs/index/folder_front01.svg"
-                          alt=""
-                        />
+                        <div class="front-box"></div>
                       </div>
-                      <div class="text-card">
+                      <!-- <div class="text-card">
                         <span class="font_ibm fonbt_500"
                           >저에 대해 알아보세요!</span
                         >
-                      </div>
+                      </div> -->
                       <div class="folder-center folder-icon">
                         <img
                           src="../assets/imgs/index/about_card01.png"
@@ -108,7 +83,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="font_ibm font_500">WORK</span>
+                  <span class="font_ibm font_500">PROJECT</span>
                 </router-link>
               </li>
             </ul>

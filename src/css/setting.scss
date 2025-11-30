@@ -5,6 +5,42 @@
   margin: 0 auto;
 }
 
+.scroll-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  span {
+    font-size: 15px;
+    color: $black900;
+    animation: scroll_fadeUp 1.5s ease-in-out infinite;
+  }
+  .icon {
+    width: 24px;
+    aspect-ratio: 1 / 1;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      animation: scroll_fadeUp 1.5s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes scroll_fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
 @media (max-width: 1280px) {
   .wrapper {
     padding: 0 40px;
