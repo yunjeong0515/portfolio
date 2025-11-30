@@ -48,50 +48,114 @@
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
+      // .main-title-wrap {
+      //   display: flex;
+      //   flex-direction: column;
+      //   gap: 1rem;
+      //   .sub-text {
+      //     display: flex;
+      //     align-items: center;
+      //     gap: 8px;
+      //     span {
+      //       font-size: 2rem;
+      //       color: #fff;
+      //     }
+      //     .icon {
+      //       width: 2.4rem;
+      //       aspect-ratio: 1 / 1;
+      //       img {
+      //         width: 100%;
+      //         object-fit: contain;
+      //       }
+      //     }
+      //   }
+      //   .focus-keyword {
+      //     display: flex;
+      //     justify-content: center;
+      //     min-height: 20rem;
+      //     overflow: hidden;
+      //     span {
+      //       position: relative;
+      //       font-size: 18rem;
+      //       line-height: 1;
+      //       color: #fff;
+      //       white-space: nowrap;
+      //       .char {
+      //         display: inline-block;
+      //         position: relative;
+      //       }
+      //     }
+      //   }
+      //   .static-text {
+      //     font-size: 3rem;
+      //     color: #fff;
+      //     text-align: right;
+      //   }
+      // }
       .main-title-wrap {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        .sub-text {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          span {
-            font-size: 2rem;
-            color: #fff;
-          }
-          .icon {
-            width: 2.4rem;
-            aspect-ratio: 1 / 1;
-            img {
-              width: 100%;
-              object-fit: contain;
-            }
-          }
-        }
-        .focus-keyword {
-          display: flex;
-          justify-content: center;
-          min-height: 20rem;
+        gap: 0.5rem;
+        .rolling-container {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100vw;
           overflow: hidden;
-          span {
-            position: relative;
-            font-size: 18rem;
-            line-height: 1;
-            color: #fff;
-            white-space: nowrap;
-            .char {
-              display: inline-block;
-              position: relative;
+          white-space: nowrap;
+          .rolling-track {
+            display: inline-block;
+            background: linear-gradient(
+              90deg,
+              $blue50,
+              $blue500,
+              $blue50,
+              $blue300
+            );
+            background-size: 300% 300%;
+            animation: marquee 80s linear infinite,
+              rotateGradient 10s linear infinite;
+            -webkit-background-clip: text;
+            color: transparent;
+            span {
+              font-size: 18rem;
+              letter-spacing: 0.5rem;
+              background: none;
+              -webkit-text-fill-color: transparent;
+              em {
+                font-style: italic;
+              }
             }
           }
         }
-        .static-text {
-          font-size: 3rem;
+
+        @keyframes marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes rotateGradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .sub-text {
+          font-size: 2rem;
           color: #fff;
           text-align: right;
         }
       }
+
       .main-wrap {
         .folder-list {
           width: 50%;
@@ -156,9 +220,23 @@
                       z-index: 2;
                     }
                     .folder-front {
+                      display: flex;
+                      align-items: flex-end;
                       z-index: 10;
                       transform-origin: bottom;
                       transform-style: preserve-3d;
+                      .front-box {
+                        width: 100%;
+                        height: 80%;
+                        background-image: linear-gradient(
+                          to bottom,
+                          rgba(42, 186, 251, 0.4),
+                          rgba(38, 118, 246, 0.4)
+                        );
+                        backdrop-filter: blur(20px);
+                        border-radius: 2rem;
+                        overflow: hidden;
+                      }
                     }
                   }
                 }
@@ -170,13 +248,11 @@
                   .folder-wrapper {
                     .folder-icon-wrap {
                       .folder-front {
-                        filter: brightness(1.05);
                         // box-shadow: inset 0 -25px 40px rgba(0, 0, 0, 0.35);
                         transform: rotateX(-30deg) rotateY(0deg) rotateZ(0deg);
                       }
                       .folder-center {
-                        transform: translateX(20%) translateY(-70%)
-                          rotate(18deg);
+                        transform: translateX(0%) translateY(-50%) rotate(5deg);
                       }
                       .text-card {
                         transform: translateX(-30%) translateY(-130%)
@@ -273,6 +349,7 @@
     bottom: 0;
     transform: translate(0, 0);
     width: 40vw;
+    height: fit-content;
     max-width: 550px;
     z-index: 100;
     border-radius: 20px;
@@ -307,7 +384,7 @@
       }
     }
     .terminal-body {
-      padding: 3.5rem 1.5rem;
+      padding: 2.5rem 1.5rem 3.5rem 1.5rem;
       .main-text {
         height: 100%;
         min-height: 10vh;
@@ -429,6 +506,15 @@
       padding: 30px 0 120px 0;
       .wrapper {
         .main-title-wrap {
+          .rolling-container {
+            .rolling-track {
+              animation: marquee 50s linear infinite,
+                rotateGradient 10s linear infinite;
+              span {
+                font-size: 12rem;
+              }
+            }
+          }
           .focus-keyword {
             min-height: 10rem;
             span {
@@ -457,15 +543,17 @@
                       }
                       .folder-center {
                         z-index: 7;
-                        transform: translateX(20%) translateY(-70%)
-                          rotate(18deg);
+                        transform: translateX(0%) translateY(-50%) rotate(5deg);
                       }
                       .folder-back {
                         z-index: 2;
                       }
                       .folder-front {
-                        filter: brightness(1.05);
                         transform: rotateX(-30deg) rotateY(0deg) rotateZ(0deg);
+                        .front-box {
+                          backdrop-filter: blur(10px);
+                          height: 90%;
+                        }
                       }
                     }
                   }
@@ -519,7 +607,7 @@
     background: rgba(0, 0, 0, 0.3);
     .terminal-window {
       left: 50%;
-      top: 60%;
+      top: 50%;
       transform: translate(-50%, -50%);
       bottom: auto;
       width: 90vw;

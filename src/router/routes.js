@@ -11,7 +11,12 @@ const routes = [
       {
         path: "/about",
         component: () => import("pages/AboutPage.vue"),
-        meta: { IndexPage: true },
+        meta: { AboutPage: true },
+      },
+      {
+        path: "/project",
+        component: () => import("pages/ProjectPage.vue"),
+        meta: { ProjectPage: true },
       },
     ],
   },
