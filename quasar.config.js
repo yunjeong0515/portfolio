@@ -45,7 +45,7 @@ module.exports = configure(function (/* ctx */) {
       },
       vueRouterMode: "history",
       // available values: 'hash', 'history'
-      publicPath: "/portfolio-2025/",
+      publicPath: "/portfolio/",
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,

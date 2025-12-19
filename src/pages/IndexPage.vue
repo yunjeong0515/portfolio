@@ -65,12 +65,12 @@
                           >저에 대해 알아보세요!</span
                         >
                       </div> -->
-                      <div class="folder-center folder-icon">
+                      <!-- <div class="folder-center folder-icon">
                         <img
                           src="../assets/imgs/index/about_card01.png"
                           alt=""
                         />
-                      </div>
+                      </div> -->
                       <div class="default-center folder-icon">
                         <img
                           src="../assets/imgs/index/folder_center.svg"

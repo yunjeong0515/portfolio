@@ -181,4 +181,23 @@
 }
 
 @media (max-width: 1280px) {
+  .header {
+    .wrapper {
+      .home-btn {
+        display: none;
+      }
+      .header-logo {
+        display: block;
+      }
+    }
+    &.main {
+      .wrapper {
+        .header-logo {
+          display: block;
+          color: #fff;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
 }
