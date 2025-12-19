@@ -1,1 +1,0 @@
-import{Q as e}from"./QPage.7eef61bf.js";import{_ as o}from"./plugin-vue_export-helper.21dcd24c.js";import{t,v as a,x as r}from"./index.3fda32b3.js";import"./render.fb9d86c6.js";const n=t({name:"AboutPage",data(){return{}},methods:{},mounted(){}});function s(c,p,m,f,i,u){return a(),r(e,{class:"aboutpage-container"})}var x=o(n,[["render",s]]);export{x as default};
