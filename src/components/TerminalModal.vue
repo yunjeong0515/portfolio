@@ -14,7 +14,8 @@
         <div class="main-text">
           <p class="font_ibm font_500 main-text-output" ref="typingOutput">
             Welcome to Yunjeong’s Web Portfolio.<br /><br />
-            Something great is in the works! Stay tuned for the new updates.<br />
+            Something great is in the works! <br />
+            Stay tuned for the new updates.<br />
             Coming Soon...
           </p>
           <!-- <p class="font_ibm font_500 main-text-output" ref="typingOutput">
