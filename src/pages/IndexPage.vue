@@ -165,9 +165,9 @@ export default defineComponent({
       const isCurrentlyMobile = window.innerWidth <= 768;
 
       // 창 크기가 768px 이하로 줄어들면 모달을 닫음
-      if (isCurrentlyMobile) {
-        this.isTerminalOpen = false;
-      }
+      // if (isCurrentlyMobile) {
+      //   this.isTerminalOpen = false;
+      // }
 
       // 만약 모바일 크기에서 데스크톱 크기로 커지면,
       // isTerminalOpen의 상태는 유지(false)되지만, 다음 갱신을 위해 isMobileSize 업데이트
