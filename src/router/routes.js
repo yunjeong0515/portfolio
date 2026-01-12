@@ -1,13 +1,20 @@
 const routes = [
   {
     path: "/",
-    component: () => import("layouts/MainLayout.vue"),
+    // 빈 레이아웃 적용
+    component: () => import("layouts/EmptyLayout.vue"),
     children: [
       {
         path: "",
         component: () => import("pages/IndexPage.vue"),
         meta: { IndexPage: true },
       },
+    ],
+  },
+  {
+    path: "/",
+    component: () => import("layouts/MainLayout.vue"),
+    children: [
       {
         path: "/about",
         component: () => import("pages/AboutPage.vue"),

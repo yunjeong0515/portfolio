@@ -241,7 +241,7 @@
                   }
                 }
                 span {
-                  font-size: 2.5rem;
+                  font-size: 2rem;
                   color: #fff;
                 }
                 &:hover {
@@ -394,7 +394,7 @@
           white-space: pre-wrap;
           .char {
             font-family: "IBM Plex Mono", monospace;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             color: #fff;
             display: inline-block;
             vertical-align: top;
@@ -403,6 +403,7 @@
       }
       p {
         font-size: 1.5rem;
+        letter-spacing: 0.1rem;
         color: #fff;
       }
       .dynamic-cursor {

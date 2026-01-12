@@ -132,8 +132,10 @@
   .rolling-section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 150px 0;
     gap: 100px;
-    padding: 100px 0;
     width: 100%;
     overflow: hidden;
     .rolling-wrapper {
@@ -183,9 +185,62 @@
       }
     }
   }
+  .bio-section {
+    width: 100%;
+    height: 100vh;
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+
+    .bio-content-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .bio-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+
+      /* ⭐ 부모(.bio-row)의 투명도를 제거하세요! */
+      opacity: 1 !important;
+      transform: none !important;
+
+      .bio-text {
+        font-size: 5.5rem;
+        color: $black900;
+        white-space: nowrap;
+      }
+
+      .video-box {
+        width: 160px;
+        height: 90px;
+        overflow: hidden;
+        background: #000;
+        video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
   .intro-section {
     width: 100%;
     height: 100vh;
+    background-color: $blue500;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.08) 1px,
+      /* 선 색상과 두께 (아주 연한 블랙) */ transparent 1px
+    );
+    background-size: 20% 100%;
     .pin-wrapper {
       display: flex;
       flex-direction: column;
@@ -193,40 +248,309 @@
       align-items: center;
       width: 100%;
       height: 100vh;
+      .wrapper {
+        position: relative;
+      }
+      .sub-title {
+        position: absolute;
+        left: 0;
+        top: 150px;
+        .wrapper {
+          span {
+            font-size: 2rem;
+            color: #fff;
+          }
+        }
+      }
       .title-wrap {
         display: flex;
         flex-direction: column;
         gap: 5rem;
-        .split-text {
+        .en-text {
+          font-size: 5.5rem;
+          letter-spacing: 0.3rem;
+          word-break: keep-all;
           text-align: center;
           .char {
             display: inline-block;
-            color: $blue50;
+            color: rgba($color: #fff, $alpha: 0.2);
             position: relative;
 
             // 위에 덮어씌울 글자 (진한 색)
-            &::after {
-              content: attr(data-char);
-              position: absolute;
-              left: 0;
-              top: 0;
-              color: $blue500; // 채워질 색상
-              width: var(--fill-width, 0%);
-              overflow: hidden;
-              transition: none;
+            // &::after {
+            //   content: attr(data-char);
+            //   position: absolute;
+            //   left: 0;
+            //   top: 0;
+            //   color: $blue500; // 채워질 색상
+            //   width: var(--fill-width, 0%);
+            //   overflow: hidden;
+            //   transition: none;
+            // }
+          }
+        }
+        .kr-text {
+          opacity: 0;
+          transform: translateY(50px);
+          font-size: 2.5rem;
+          text-align: center;
+          word-break: keep-all;
+          color: $blue50;
+        }
+      }
+    }
+  }
+  .horizontal-section {
+    width: 100%;
+    background-color: $black900;
+    overflow: hidden;
+
+    .pin-wrapper {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      position: relative;
+      background-color: #fff;
+    }
+
+    .sub-title {
+      position: absolute; // 화면에 고정
+      top: 100px;
+      left: 0;
+      z-index: 10;
+      span {
+        font-size: 2rem;
+        color: $black900;
+      }
+      &.is-dark-mode {
+        span {
+          color: #fff;
+        }
+      }
+    }
+
+    .horizontal-inner {
+      display: flex;
+      flex-wrap: nowrap; // 줄바꿈 방지
+      height: 100%;
+      will-change: transform;
+      background-color: $black900;
+      .one-page {
+        width: 100vw; // 한 화면 전체 너비
+        min-width: 1000px;
+        height: 100%;
+        flex-shrink: 0; // 너비 고정
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .identity-section {
+        background-color: #fff;
+        .wrapper {
+          display: flex;
+          align-items: flex-end;
+          width: 100%;
+          height: 100%;
+          .contents-inner {
+            display: flex;
+            align-items: stretch;
+            gap: 3vw;
+            padding: 100px 0 0 0;
+            .img-area {
+              width: 30%;
+              .profile-img {
+                width: 100%;
+                min-width: 270px;
+                aspect-ratio: 289 / 422;
+                opacity: 0;
+                will-change: transform, opacity;
+                img {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                }
+              }
+            }
+            .text-area {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              width: 70%;
+              padding: 5% 0;
+              .title-wrap {
+                display: flex;
+                flex-direction: column;
+                gap: 3rem;
+                h2 {
+                  font-size: 3rem;
+                  color: $blue500;
+                }
+                p {
+                  font-size: 3.5rem;
+                  color: $black900;
+                }
+              }
+              .scrolling-svg-text {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: 100%;
+
+                svg {
+                  display: block;
+                  width: 70%;
+                  max-width: 969px;
+                  aspect-ratio: 969 / 189;
+                  object-fit: contain;
+                }
+              }
+            }
+          }
+        }
+      }
+      .focus-section {
+        position: relative;
+        min-width: 1500px;
+        background: url(../assets/imgs/about/focus_bg.png) no-repeat center
+          center / cover;
+        // background-color: $black900;
+        .inner {
+          display: flex;
+          width: 100%;
+          height: 100%;
+          padding: 100px 80px;
+          .title-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            gap: 3rem;
+            h2 {
+              font-size: 3rem;
+              color: #fff;
+            }
+            p {
+              font-size: 7rem;
+              color: #fff;
+            }
+          }
+          #three-container {
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            right: 100px;
+            top: 0;
+
+            canvas {
+              display: block;
+              width: 100% !important;
+              height: 100% !important;
+            }
+          }
+        }
+      }
+      .workflow-section {
+        position: relative;
+        min-width: auto;
+        .content-wrap {
+          width: 100%;
+          height: 100%;
+          .inner {
+            display: flex;
+            align-items: flex-end;
+            gap: 15rem;
+            width: 100%;
+            height: 100%;
+            padding: 150px 80px;
+            .title-wrap {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-end;
+              gap: 3rem;
+              h2 {
+                font-size: 3rem;
+                color: $mainpink;
+              }
+              p {
+                font-size: 4rem;
+                text-align: left;
+                color: #fff;
+                white-space: nowrap;
+              }
+            }
+            .workflow-tags {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: space-between;
+              gap: 20px;
+              .tag {
+                font-size: 13rem;
+                line-height: 1;
+                color: transparent;
+                -webkit-text-stroke-color: #fff;
+                -webkit-text-stroke-width: 1px;
+                transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+                &:hover {
+                  color: #fff;
+                }
+              }
             }
           }
         }
 
-        h2 {
-          font-size: 5.5rem;
-          letter-spacing: 0.3rem;
-          word-break: keep-all;
+        .base-content {
+          .inner {
+            .workflow-tags {
+              .tag {
+                color: transparent;
+                -webkit-text-stroke-color: #fff;
+                -webkit-text-stroke-width: 1px;
+              }
+            }
+          }
         }
-        p {
-          font-size: 3rem;
-          word-break: keep-all;
-        }
+        // .hidden-content {
+        //   position: absolute;
+        //   left: 0;
+        //   top: 0;
+        //   inset: 0;
+        //   z-index: 2;
+        //   position: absolute;
+        //   inset: 0;
+        //   z-index: 2;
+        //   background: linear-gradient(
+        //     180deg,
+        //     #fb9c84 0%,
+        //     #f06680 50%,
+        //     #812470 100%
+        //   );
+        //   color: #fff; /* 반전된 글자색 */
+        //   pointer-events: none; /* 중요: 마우스 이벤트를 무시해서 아래 tag가 호버를 감지하게 함 */
+
+        //   --x: 50%;
+        //   --y: 50%;
+        //   --size: 0px; /* 초기 크기 0 */
+
+        //   -webkit-mask-image: radial-gradient(
+        //     circle at var(--x) var(--y),
+        //     black var(--size),
+        //     transparent 0
+        //   );
+        //   mask-image: radial-gradient(
+        //     circle at var(--x) var(--y),
+        //     black var(--size),
+        //     transparent 0
+        //   );
+        //   .inner {
+        //     .workflow-tags {
+        //       .tag {
+        //         color: #fff;
+        //       }
+        //     }
+        //   }
+        // }
       }
     }
   }

@@ -12,19 +12,19 @@
 
       <div class="terminal-body">
         <div class="main-text">
-          <p class="font_ibm font_500 main-text-output" ref="typingOutput">
+          <!-- <p class="font_ibm font_500 main-text-output" ref="typingOutput">
             Welcome to Yunjeong’s Web Portfolio.<br /><br />
             Something great is in the works! <br />
             Stay tuned for the new updates.<br />
             Coming Soon...
-          </p>
-          <!-- <p class="font_ibm font_500 main-text-output" ref="typingOutput">
+          </p> -->
+          <p class="font_ibm font_400 main-text-output" ref="typingOutput">
             Welcome to Yunjeong’s Web Portfolio.<br /><br />
             Let's dive in and check out the results!<br />
             Please click a folder to view the details.
-          </p> -->
+          </p>
         </div>
-        <p class="sub-text font_ibm font_500">
+        <p class="sub-text font_ibm font_400">
           yunjeong@publisher-portfolio:~ $
         </p>
       </div>

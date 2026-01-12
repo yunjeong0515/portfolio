@@ -1,26 +1,43 @@
 <template>
   <q-page class="projectpage-container">
     <section class="visual-section">
-      <div class="wrapper">
-        <div class="sub-title">
+      <div class="sub-title">
+        <div class="wrapper">
           <span class="font_ibm">Digital Experiences-</span>
         </div>
-        <div class="title-wrap">
-          <span class="font_ibm">2024-2025</span>
-          <h2 class="font_500">PROJECT</h2>
-        </div>
-        <div class="thumb-rolling-container">
-          <ul>
-            <li>
-              <img />
-            </li>
-          </ul>
-        </div>
-        <div class="scroll-icon">
-          <span class="font_ibm">SCROLL</span>
-          <div class="icon">
-            <img src="../assets/imgs/icon/arrow_down_b9.svg" alt="" />
+      </div>
+
+      <div class="thumb-rolling-container">
+        <div class="thumb-stage">
+          <div class="thumb-roller">
+            <div
+              class="thumb-card"
+              v-for="(p, i) in [...projects, ...projects]"
+              :key="i"
+            >
+              <img :src="p.thumbnail" />
+            </div>
           </div>
+        </div>
+      </div>
+
+      <div class="title-wrap">
+        <div class="wrapper">
+          <span class="font_ibm">2024-</span>
+          <h2 class="font_500">
+            <span class="key">P</span>
+            <span class="key">R</span>
+            <span class="key">J</span>
+            <span class="key">E</span>
+            <span class="key">C</span>
+            <span class="key">T</span>
+          </h2>
+        </div>
+      </div>
+      <div class="scroll-icon">
+        <span class="font_ibm">SCROLL</span>
+        <div class="icon">
+          <img src="../assets/imgs/icon/arrow_down_b9.svg" alt="" />
         </div>
       </div>
     </section>
@@ -155,7 +172,6 @@
                   project.description
                 }}</span>
               </div>
-              <span class="project-date font_ibm">{{ project.date }}</span>
               <!-- <div class="project-skills">
                 <span
                   v-for="skill in project.skills"
@@ -165,6 +181,22 @@
                   {{ skill }}
                 </span>
               </div> -->
+              <div class="project-category">
+                <span
+                  v-for="(cat, index) in project.category"
+                  :key="index"
+                  class="category-tag font_ibm"
+                >
+                  {{ cat }}
+                  <i
+                    v-if="index < project.category.length - 1"
+                    class="separator"
+                    >/</i
+                  >
+                </span>
+              </div>
+
+              <span class="project-date font_ibm">{{ project.date }}</span>
             </div>
             <!-- <div class="project-thumb">
                 <img

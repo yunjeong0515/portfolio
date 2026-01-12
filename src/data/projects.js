@@ -9,6 +9,7 @@ export const projects = [
     thumbnail: "path/to/thumb1.jpg",
     hoverImage: "path/to/hover1.jpg",
     skills: ["Vue.js", "Quasar Framework", "JavaScript", "SCSS"],
+    category: ["Website", "Admin"], // 카테고리 추가
   },
   {
     id: 2,
@@ -27,6 +28,7 @@ export const projects = [
       "Quasar Framework",
       "SCSS",
     ],
+    category: ["Website", "Admin"],
   },
   {
     id: 3,
@@ -36,6 +38,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 4,
@@ -45,6 +48,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 5,
@@ -54,6 +58,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 6,
@@ -63,6 +68,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 7,
@@ -72,6 +78,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 8,
@@ -81,6 +88,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 9,
@@ -90,6 +98,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 10,
@@ -99,6 +108,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 11,
@@ -108,6 +118,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 12,
@@ -117,6 +128,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 13,
@@ -126,15 +138,17 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 14,
-    name: "음양오행",
+    name: "음양오행", // 데이터에 중복된 이름이 있네요 :)
     description: "Corporate Website Renewal",
     date: "2025.05",
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 15,
@@ -144,6 +158,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 16,
@@ -153,6 +168,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 17,
@@ -162,6 +178,7 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
   {
     id: 18,
@@ -171,5 +188,6 @@ export const projects = [
     thumbnail: "path/to/thumb2.jpg",
     hoverImage: "path/to/hover2.jpg",
     skills: ["html", "css", "JavaScript", "GSAP", "ScrollTrigger"],
+    category: ["Website", "Admin"],
   },
 ];

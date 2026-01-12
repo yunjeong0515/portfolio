@@ -19,7 +19,7 @@
           <div class="folder-list">
             <ul>
               <li>
-                <router-link to="/">
+                <router-link to="/about">
                   <div class="folder-wrapper" ref="folderItem">
                     <div class="folder-icon-wrap">
                       <div class="folder-front folder-icon">
@@ -50,7 +50,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="font_ibm font_500">ABOUT</span>
+                  <span class="font_ibm font_400">About</span>
                 </router-link>
               </li>
               <li>
@@ -85,7 +85,7 @@
                       </div>
                     </div>
                   </div>
-                  <span class="font_ibm font_500">PROJECT</span>
+                  <span class="font_ibm">Project</span>
                 </router-link>
               </li>
             </ul>

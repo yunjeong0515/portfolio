@@ -1,13 +1,15 @@
 .header {
   position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
+  left: 50%;
+  top: 20px;
+  transform: translate(-50%, 0);
+  width: calc(100% - 60px);
   height: 50px;
+  border-radius: 10px;
   z-index: 1000;
   // border-bottom: 1px solid #fff;
   background: rgba(233, 233, 233, 0.1);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
   .index-home {
     display: none;
   }
@@ -44,6 +46,7 @@
     display: flex;
     align-items: center;
     height: 50px;
+    padding: 0 30px;
     justify-content: space-between;
     .header-logo {
       position: absolute;
@@ -51,7 +54,7 @@
       top: 50%;
       transform: translate(-50%, -50%);
       h1 {
-        font-size: 15px;
+        font-size: 20px;
       }
     }
     .home-btn {
@@ -70,7 +73,7 @@
       .dot-icon {
         width: 8px;
         height: 8px;
-        border-radius: 100%;
+        border-radius: 1px;
         aspect-ratio: 1/1;
         background-color: $black900;
       }
