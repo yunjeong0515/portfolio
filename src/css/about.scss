@@ -85,18 +85,18 @@
           .keyworld-wrap {
             display: flex;
             align-items: center;
-            font-size: 15rem;
+            font-size: 8vw;
           }
           .stac-text {
-            font-size: 8rem;
-            margin-left: 65%;
+            font-size: 4vw;
+            text-align: right;
             color: $black700;
           }
         }
         .intro-text {
           position: absolute;
           left: 0;
-          bottom: 100px;
+          bottom: 50px;
           display: flex;
           flex-direction: column;
           span {
@@ -109,11 +109,13 @@
         }
         .profile-img {
           position: absolute;
-          right: 0;
+          left: 50%;
           bottom: 0;
-          width: 17vw;
+          transform: translate(-50%, 0);
+          width: 20vw;
           aspect-ratio: 3 / 4;
           img {
+            display: block;
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -207,8 +209,6 @@
       align-items: center;
       justify-content: center;
       gap: 20px;
-
-      /* ⭐ 부모(.bio-row)의 투명도를 제거하세요! */
       opacity: 1 !important;
       transform: none !important;
 
@@ -248,24 +248,15 @@
       align-items: center;
       width: 100%;
       height: 100vh;
-      .wrapper {
-        position: relative;
-      }
-      .sub-title {
-        position: absolute;
-        left: 0;
-        top: 150px;
-        .wrapper {
-          span {
-            font-size: 2rem;
-            color: #fff;
-          }
-        }
-      }
       .title-wrap {
         display: flex;
         flex-direction: column;
         gap: 5rem;
+        .sub-title {
+          font-size: 2rem;
+          color: #fff;
+          text-align: center;
+        }
         .en-text {
           font-size: 5.5rem;
           letter-spacing: 0.3rem;
@@ -301,37 +292,22 @@
     }
   }
   .horizontal-section {
+    position: relative;
     width: 100%;
     background-color: $black900;
     overflow: hidden;
-
     .pin-wrapper {
       display: flex;
-      width: 100%;
+      width: 100vw;
       height: 100vh;
       position: relative;
-      background-color: #fff;
-    }
-
-    .sub-title {
-      position: absolute; // 화면에 고정
-      top: 100px;
-      left: 0;
-      z-index: 10;
-      span {
-        font-size: 2rem;
-        color: $black900;
-      }
-      &.is-dark-mode {
-        span {
-          color: #fff;
-        }
-      }
+      background-color: $black900;
     }
 
     .horizontal-inner {
       display: flex;
       flex-wrap: nowrap; // 줄바꿈 방지
+      width: max-content;
       height: 100%;
       will-change: transform;
       background-color: $black900;
@@ -451,7 +427,8 @@
       }
       .workflow-section {
         position: relative;
-        min-width: auto;
+        width: fit-content;
+        min-width: fit-content;
         .content-wrap {
           width: 100%;
           height: 100%;
@@ -473,7 +450,7 @@
                 color: $mainpink;
               }
               p {
-                font-size: 4rem;
+                font-size: 3.5rem;
                 text-align: left;
                 color: #fff;
                 white-space: nowrap;
@@ -511,46 +488,116 @@
             }
           }
         }
-        // .hidden-content {
-        //   position: absolute;
-        //   left: 0;
-        //   top: 0;
-        //   inset: 0;
-        //   z-index: 2;
-        //   position: absolute;
-        //   inset: 0;
-        //   z-index: 2;
-        //   background: linear-gradient(
-        //     180deg,
-        //     #fb9c84 0%,
-        //     #f06680 50%,
-        //     #812470 100%
-        //   );
-        //   color: #fff; /* 반전된 글자색 */
-        //   pointer-events: none; /* 중요: 마우스 이벤트를 무시해서 아래 tag가 호버를 감지하게 함 */
-
-        //   --x: 50%;
-        //   --y: 50%;
-        //   --size: 0px; /* 초기 크기 0 */
-
-        //   -webkit-mask-image: radial-gradient(
-        //     circle at var(--x) var(--y),
-        //     black var(--size),
-        //     transparent 0
-        //   );
-        //   mask-image: radial-gradient(
-        //     circle at var(--x) var(--y),
-        //     black var(--size),
-        //     transparent 0
-        //   );
-        //   .inner {
-        //     .workflow-tags {
-        //       .tag {
-        //         color: #fff;
-        //       }
-        //     }
-        //   }
-        // }
+      }
+      .experience-section {
+        position: relative;
+        background-color: $black900;
+        &::after {
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: translate(40%, -40%);
+          width: 60vw;
+          aspect-ratio: 1 / 1;
+          background: url(../assets/imgs/about/ellipse.png) no-repeat center
+            center / contain;
+          content: "";
+        }
+        .content-wrap {
+          width: 100%;
+          height: 100%;
+          .inner {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 15rem;
+            width: 100%;
+            height: 100%;
+            padding: 150px 80px;
+            .title-wrap {
+              position: relative;
+              z-index: 10;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              justify-content: flex-end;
+              gap: 3rem;
+              h2 {
+                font-size: 3rem;
+                color: $mainblue;
+              }
+              p {
+                font-size: 3.5rem;
+                text-align: left;
+                color: #fff;
+                white-space: nowrap;
+              }
+            }
+            .img-wrap {
+              position: absolute;
+              left: 50%;
+              transform: translate(-40%, 0%);
+              bottom: 0;
+              .macbook-img {
+                width: 50vw;
+                transform: rotate(-22deg);
+                img {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .vision-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $mainblue;
+    color: #fff;
+    padding: 100px 0;
+    .wrapper {
+      width: 100%;
+      height: 100%;
+    }
+    .contents-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      .title {
+        font-size: 3rem;
+        color: #fff;
+      }
+      .text-wrap {
+        display: flex;
+        align-items: flex-end;
+        gap: 4rem;
+        .main-text {
+          font-size: 8vw;
+          line-height: 1;
+          color: #fff;
+          white-space: nowrap;
+        }
+        .sub-text {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1vw;
+          span {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            &.row02 {
+              margin-left: 2rem;
+            }
+          }
+        }
       }
     }
   }

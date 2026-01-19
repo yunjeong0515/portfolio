@@ -16,12 +16,12 @@ const routes = [
     component: () => import("layouts/MainLayout.vue"),
     children: [
       {
-        path: "/about",
+        path: "about",
         component: () => import("pages/AboutPage.vue"),
         meta: { AboutPage: true },
       },
       {
-        path: "/project",
+        path: "project",
         component: () => import("pages/ProjectPage.vue"),
         meta: { ProjectPage: true },
       },

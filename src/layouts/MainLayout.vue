@@ -1,22 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <div class="header" :class="{ main: $route.meta.IndexPage }">
+    <header class="header" :class="{ main: $route.meta.IndexPage }">
       <div class="wrapper">
         <router-link to="/" class="home-btn">
-          <!-- <div class="home-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z"
-                fill="#fff"
-              />
-            </svg>
-          </div> -->
           <div class="dot-icon"></div>
           <div class="text-wrapper home-title">
             <span class="font_ibm font_400 original-text">HOME</span>
@@ -27,12 +13,33 @@
           >
         </router-link>
         <router-link class="header-logo" to="/">
-          <h1 class="font_ibm font_400">Yunjeong’s Web Portfolio</h1>
+          <!-- <h1 class="font_ibm font_400">Yunjeong’s Web Portfolio</h1> -->
+          <svg
+            width="1000"
+            height="1000"
+            viewBox="0 0 1000 1000"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M267.695 875V628L46.6953 177H213.695L287.695 339L341.695 476H349.695L403.695 339L477.695 177H638.695L417.695 628V875H267.695ZM953.304 177V680C953.304 711.333 947.638 740 936.304 766C925.638 791.333 909.971 813 889.304 831C869.304 849 844.971 863 816.304 873C787.638 882.333 755.638 887 720.304 887C648.971 887 593.638 869.333 554.304 834C515.638 798 490.971 751 480.304 693L622.304 664C627.638 694 637.638 718.333 652.304 737C667.638 755.667 690.304 765 720.304 765C745.638 765 765.304 757 779.304 741C793.971 724.333 801.304 699 801.304 665V300H571.304V177H953.304Z"
+              fill="#0a0a0a"
+            />
+          </svg>
         </router-link>
+        <button
+          class="hamburger-menu"
+          :class="{ 'is-active': leftDrawerOpen }"
+          @click="leftDrawerOpen = !leftDrawerOpen"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <div class="nav">
           <ul>
             <li>
-              <router-link to="/" :class="{ on: $route.meta.AboutPage }">
+              <router-link to="/about" :class="{ on: $route.meta.AboutPage }">
                 <div class="dot-icon"></div>
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">ABOUT</span>
@@ -40,17 +47,11 @@
                 </div>
               </router-link>
             </li>
-            <!-- <li>
-              <router-link to="">
-                <div class="dot-icon"></div>
-                <div class="text-wrapper">
-                  <span class="font_ibm font_400 original-text">WORK</span>
-                  <span class="font_ibm font_400 hover-text">WORK</span>
-                </div>
-              </router-link>
-            </li> -->
             <li>
-              <router-link to="/" :class="{ on: $route.meta.ProjectPage }">
+              <router-link
+                to="/project"
+                :class="{ on: $route.meta.ProjectPage }"
+              >
                 <div class="dot-icon"></div>
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">PROJECT</span>
@@ -61,10 +62,39 @@
           </ul>
         </div>
       </div>
-    </div>
+    </header>
+    <transition name="fade-slide">
+      <div v-if="leftDrawerOpen" class="mobile-full-menu">
+        <nav class="menu-content">
+          <ul class="menu-list">
+            <li>
+              <router-link to="/" @click="leftDrawerOpen = false">
+                <span class="num font_mon">01</span>
+                <span class="text font_mon">HOME</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/about" @click="leftDrawerOpen = false">
+                <span class="num font_mon">02</span>
+                <span class="text font_mon">ABOUT</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/project" @click="leftDrawerOpen = false">
+                <span class="num font_mon">03</span>
+                <span class="text font_mon">PROJECT</span>
+              </router-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </transition>
     <q-page-container>
       <router-view />
     </q-page-container>
+    <footer class="footer">
+      <div class="wrapper"></div>
+    </footer>
   </q-layout>
 </template>
 
@@ -77,7 +107,7 @@ export default defineComponent({
   name: "MainLayout",
 
   data() {
-    return {};
+    return { leftDrawerOpen: false };
   },
   methods: {},
   mounted() {},

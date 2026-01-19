@@ -10,13 +10,11 @@
       <div class="thumb-rolling-container">
         <div class="thumb-stage">
           <div class="thumb-roller">
-            <div
-              class="thumb-card"
-              v-for="(p, i) in [...projects, ...projects]"
-              :key="i"
-            >
-              <img :src="p.thumbnail" />
-            </div>
+            <template v-for="(p, i) in [...projects, ...projects]" :key="i">
+              <div v-if="p.thumbnail_sub" class="thumb-card">
+                <img :src="p.thumbnail_sub" :alt="p.name" />
+              </div>
+            </template>
           </div>
         </div>
       </div>
@@ -24,9 +22,10 @@
       <div class="title-wrap">
         <div class="wrapper">
           <span class="font_ibm">2024-</span>
-          <h2 class="font_500">
+          <h2 class="project-title font_500">
             <span class="key">P</span>
             <span class="key">R</span>
+            <span class="key">O</span>
             <span class="key">J</span>
             <span class="key">E</span>
             <span class="key">C</span>
@@ -46,7 +45,7 @@
         <div class="head-tite-wrap">
           <span class="count font_ibm">{{ projects.length }}</span>
           <div class="title-wrap">
-            <h2 class="font_400">PROJECT</h2>
+            <h2 class="font_mon font_400">PROJECT</h2>
             <div class="icon">
               <img src="../assets/imgs/icon/line_arrow_w.svg" alt="" />
             </div>
@@ -146,11 +145,11 @@
             <div class="project-info">
               <div class="title-wrap">
                 <h3 class="project-name font_500">{{ project.name }}</h3>
-                <span class="project-description">{{
+                <span class="project-description font_mon">{{
                   project.description
                 }}</span>
               </div>
-              <span class="project-date font_ibm">{{ project.date }}</span>
+              <span class="project-date font_mon">{{ project.date }}</span>
             </div>
           </div>
         </div>
@@ -196,7 +195,7 @@
                 </span>
               </div>
 
-              <span class="project-date font_ibm">{{ project.date }}</span>
+              <span class="project-date font_mon">{{ project.date }}</span>
             </div>
             <!-- <div class="project-thumb">
                 <img
@@ -222,8 +221,11 @@
 import router from "src/router";
 import { defineComponent } from "vue";
 import { RouterLink } from "vue-router";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "src/data/projects";
 
+gsap.registerPlugin(ScrollTrigger);
 export default defineComponent({
   name: "ProjectPage",
 
@@ -241,7 +243,22 @@ export default defineComponent({
     clearHover() {
       this.hoveredProjectId = null;
     },
+    initTitleAnimation() {
+      gsap.from(".project-title .key", {
+        scrollTrigger: {
+          trigger: ".project-title",
+          start: "top 85%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.05,
+        ease: "back.out(1.7)",
+      });
+    },
   },
-  mounted() {},
+  mounted() {
+    this.initTitleAnimation();
+  },
 });
 </script>

@@ -54,7 +54,7 @@
                 </router-link>
               </li>
               <li>
-                <router-link to="/">
+                <router-link to="/project">
                   <div class="folder-wrapper" ref="folderItem">
                     <div class="folder-icon-wrap">
                       <div class="folder-front folder-icon">

@@ -118,31 +118,23 @@
     </section>
     <section class="intro-section" ref="introSection">
       <div class="pin-wrapper">
-        <div class="sub-title">
-          <div class="wrapper">
-            <span class="font_ibm">{ What started it? }</span>
+        <div class="wrapper">
+          <div class="title-wrap">
+            <span class="sub-title font_ibm">{ What started it? }</span>
+            <h2 class="split-text font_ibm en-text font_400">
+              Curiosity about how design is implemented <br />
+              on the web led me to start my career as a publisher.
+            </h2>
+            <p class="kr-text font_ibm font_400">
+              디자인이 웹사이트에서 구현되는 과정에 대한 호기심으로 퍼블리셔의
+              길을 시작했습니다.
+            </p>
           </div>
-        </div>
-        <div class="title-wrap">
-          <h2 class="split-text font_ibm en-text font_400">
-            Curiosity about how design is implemented <br />
-            on the web led me to start my career as a publisher.
-          </h2>
-          <p class="kr-text font_ibm font_400">
-            디자인이 웹사이트에서 구현되는 과정에 대한 호기심으로 퍼블리셔의
-            길을 시작했습니다.
-          </p>
         </div>
       </div>
     </section>
     <section class="horizontal-section" ref="horizontalSection">
       <div class="pin-wrapper">
-        <div class="sub-title">
-          <div class="wrapper">
-            <span class="font_ibm">{ Profile }</span>
-          </div>
-        </div>
-
         <div class="horizontal-inner" ref="horizontalInner">
           <div class="identity-section one-page">
             <div class="wrapper">
@@ -194,8 +186,8 @@
             </div>
           </div>
           <div class="workflow-section one-page is-dark-bg">
-            <div class=" content-wrap">
-              <div class="inner text-center">
+            <div class="content-wrap">
+              <div class="inner">
                 <div class="workflow-tags">
                   <span class="tag font_mon font_700">DESIGN</span>
                   <span class="tag font_mon font_700">CODE</span>
@@ -210,23 +202,41 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="hidden-content content-wrap">
-              <div class="inner text-center">
-                <div class="workflow-tags">
-                  <span class="tag font_mon font_700">DESIGN</span>
-                  <span class="tag font_mon font_700">CODE</span>
-                  <span class="tag font_mon font_700">EXPERIENCE</span>
-                </div>
+          </div>
+          <div class="experience-section one-page is-dark-bg">
+            <div class="content-wrap">
+              <div class="inner">
                 <div class="title-wrap">
-                  <h2 class="font_ibm">&lt;Workflow/&gt;</h2>
+                  <h2 class="font_ibm">&lt;Experience/&gt;</h2>
                   <p>
-                    디자인 의도를 이해하고 <br />구조를 해석해 웹 위에
-                    구현합니다.
+                    실제 서비스 환경에서 사용되는 코드를 만들어왔습니다.<br />
+                    디자이너, 프론트엔드 개발자와 협업하며 <br />
+                    운영·유지보수·개선까지 이어지는 작업을 경험해왔습니다.
                   </p>
                 </div>
+                <div class="img-wrap">
+                  <div class=""></div>
+                  <div class="macbook-img">
+                    <img src="../assets/imgs/about/macbook.png" alt="" />
+                  </div>
+                </div>
               </div>
-            </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="vision-section" ref="sectionRef">
+      <div class="physics-canvas" ref="canvasContainer"></div>
+      <div class="wrapper">
+        <div class="contents-wrap">
+          <span class="title font_ibm">&lt;Vision/&gt;</span>
+          <div class="text-wrap">
+            <span class="main-text font_mon font_700">CREATIVE CODE</span>
+            <div class="sub-text">
+              <span>깔끔하고 구조화된 코드를 작성하여 </span>
+              <span class="row02">디자인과 기능을 안정적으로 구현합니다.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -249,324 +259,16 @@
 <script>
 // ⭐ useMouse는 @vueuse/core에서, 나머지는 vue 자체에서 가져옵니다.
 import { useMouse } from "@vueuse/core";
-import { shallowRef, ref, nextTick } from "vue";
+import { shallowRef, ref } from "vue";
 import * as THREE from "three";
 import { RoundedBoxGeometry } from "three/addons/geometries/RoundedBoxGeometry.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { gsap } from "gsap";
-import { projects } from "src/data/projects";
-import { onMounted } from "vue";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+// 외부로 분리한 Three.js 로직 임포트
+import { initBlobBackground } from "src/assets/js/visualEffects";
 
 gsap.registerPlugin(ScrollTrigger);
-
-// ============================================
-// Three.js 셰이더 코드 (Vertex 및 Fragment)
-// ============================================
-
-const vertexShader = `
-    varying vec2 vUv;
-    void main() {
-      vec3 pos = position.xyz;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.);
-      vUv = uv;
-    }
-  `;
-
-const fragmentShader = `
-    uniform float uTime;
-    uniform vec2 uResolution;
-    uniform vec3 uColor1;
-    uniform vec3 uColor2;
-    uniform vec3 uColor3;
-    uniform vec3 uColor4;
-    uniform vec3 uColor5;
-    uniform vec3 uColor6;
-    uniform float uSpeed;
-    uniform float uIntensity;
-    uniform sampler2D uTouchTexture;
-    uniform float uGrainIntensity;
-    uniform float uZoom;
-    uniform vec3 uDarkNavy;
-    uniform float uGradientSize;
-    uniform float uGradientCount;
-    uniform float uColor1Weight;
-    uniform float uColor2Weight;
-
-    varying vec2 vUv;
-
-    #define PI 3.14159265359
-
-    // Grain function for film grain effect
-    float grain(vec2 uv, float time) {
-      vec2 grainUv = uv * uResolution * 0.5;
-      float grainValue = fract(sin(dot(grainUv + time, vec2(12.9898, 78.233))) * 43758.5453);
-      return grainValue * 2.0 - 1.0;
-    }
-
-    vec3 getGradientColor(vec2 uv, float time) {
-      float gradientRadius = uGradientSize;
-
-      // Multiple animated centers
-      vec2 center1 = vec2(0.5 + sin(time * uSpeed * 0.4) * 0.4, 0.5 + cos(time * uSpeed * 0.5) * 0.4);
-    vec2 center2 = vec2(0.5 + cos(time * uSpeed * 0.6 + 1.0) * 0.5, 0.5 + sin(time * uSpeed * 0.45 + 0.5) * 0.5);
-    vec2 center3 = vec2(0.5 + sin(time * uSpeed * 0.35 + 2.0) * 0.45, 0.5 + cos(time * uSpeed * 0.55 + 1.5) * 0.45);
-    vec2 center4 = vec2(0.5 + cos(time * uSpeed * 0.5 + 3.0) * 0.4, 0.5 + sin(time * uSpeed * 0.4 + 2.5) * 0.4);
-    vec2 center5 = vec2(0.5 + sin(time * uSpeed * 0.7 + 4.0) * 0.35, 0.5 + cos(time * uSpeed * 0.6 + 3.5) * 0.35);
-    vec2 center6 = vec2(0.5 + cos(time * uSpeed * 0.45 + 5.0) * 0.5, 0.5 + sin(time * uSpeed * 0.65 + 4.5) * 0.5);
-
-      float dist1 = length(uv - center1);
-      float dist2 = length(uv - center2);
-      float dist3 = length(uv - center3);
-      float dist4 = length(uv - center4);
-      float dist5 = length(uv - center5);
-      float dist6 = length(uv - center6);
-
-      float influence1 = 1.0 - smoothstep(0.0, gradientRadius, dist1);
-      float influence2 = 1.0 - smoothstep(0.0, gradientRadius, dist2);
-      float influence3 = 1.0 - smoothstep(0.0, gradientRadius, dist3);
-      float influence4 = 1.0 - smoothstep(0.0, gradientRadius, dist4);
-      float influence5 = 1.0 - smoothstep(0.0, gradientRadius, dist5);
-      float influence6 = 1.0 - smoothstep(0.0, gradientRadius, dist6);
-
-      float totalInfluence = (influence1 + influence2 + influence3 + influence4 + influence5 + influence6) / uGradientCount;
-
-      // Touch Texture influence
-      vec4 touch = texture2D(uTouchTexture, uv);
-      float touchIntensity = touch.r * 0.5 + touch.g * 0.5;
-
-      // Color mixing
-      vec3 colorA = mix(uColor1, uColor2, sin(uTime * 0.5));
-      vec3 colorB = mix(uColor3, uColor4, cos(uTime * 0.4));
-
-      vec3 blendedColor = mix(uDarkNavy, colorA, uColor1Weight * (influence1 + influence3 + influence5));
-      blendedColor = mix(blendedColor, colorB, uColor2Weight * (influence2 + influence4 + influence6));
-
-      blendedColor = mix(blendedColor, uDarkNavy, 0.4);
-      blendedColor += touchIntensity * 0.5;
-
-      return blendedColor;
-    }
-
-    void main() {
-      vec2 uv = vUv;
-
-      uv = (uv - 0.5) / uZoom + 0.5;
-
-      vec3 finalColor = getGradientColor(uv, uTime);
-
-      // Add Film Grain
-      float noise = grain(gl_FragCoord.xy / uResolution.xy, uTime);
-      finalColor += noise * uGrainIntensity;
-
-      gl_FragColor = vec4(finalColor, 1.0);
-    }
-  `;
-
-const containerRef = ref(null); // #container 역할 (3D 공간)
-const viewMode = ref("grid");
-const projectsData = ref(projects); // 프로젝트 데이터
-const hoveredProjectId = ref(null);
-
-const n = projects.length;
-
-const handleBoxMouseEnter = (e) => {
-  gsap.to(e.currentTarget, {
-    duration: 0.3,
-    rotationX: -14,
-    y: "-130%",
-    ease: "back.out(6)",
-  });
-};
-const handleBoxMouseLeave = (e) => {
-  gsap.to(e.currentTarget, {
-    duration: 0.4,
-    rotationX: 0,
-    y: "-50%",
-  });
-};
-
-// ... 기존 변수 선언들 (n, projectsData 등)
-const handleMouseMove = (e) => {
-  // 주신 코드의 로직을 유지하되, 전체적인 회전 중심을 마우스에 따라 제어
-  gsap.to(".box", {
-    duration: 0.6,
-    rotationY: (i) =>
-      45 + (i / n) * 206.5 + 90 * (e.clientX / window.innerWidth),
-  });
-};
-
-const initGSAPProjectList = (container) => {
-  if (!container || n === 0) return;
-
-  // 1. 컨테이너 원근감 설정 (주신 코드 수치 800)
-  gsap.set(container, { perspective: 800 });
-
-  projectsData.value.forEach((project, i) => {
-    const b = document.createElement("div");
-    b.classList.add("box");
-
-    // 글자 반전을 해결하기 위해 card-content로 감쌉니다.
-    b.innerHTML = `
-      <div class="card-content">
-        <div class="project-title">${project.name}</div>
-        <div class="project-date">${project.date}</div>
-      </div>
-    `;
-
-    // 2. 호버 이벤트 (주신 로직 그대로: 위로 튀어오르며 회전)
-    b.onmouseenter = () => {
-      gsap.to(b, {
-        duration: 0.3,
-        rotationX: -14,
-        y: "-130%",
-        ease: "back.out(6)",
-      });
-    };
-    b.onmouseleave = () => {
-      gsap.to(b, { duration: 0.4, rotationX: 0, y: "-50%" });
-    };
-
-    container.appendChild(b);
-
-    // 3. 초기 위치 설정 (주신 수치 그대로)
-    gsap.set(b, {
-      left: "50%",
-      top: "50%",
-      x: "-50%",
-      y: "-50%",
-      z: 600,
-      width: 300,
-      height: 600,
-      borderRadius: 20,
-      background: `hsl(${(i / n) * 360}, 100%, 50%)`,
-      position: "absolute",
-    });
-
-    // 4. 등장 애니메이션 (수정 포인트: transformOrigin)
-    gsap.fromTo(
-      b,
-      {
-        scaleY: 0,
-        zIndex: i < n / 2 ? -i : i,
-        rotationY: 90 + (i / n) * 206.5,
-        // ⭐ 핵심: -1060%를 +1060%로 변경 (축이 앞으로 오면서 안으로 굽음)
-        // 만약 카드가 너무 겹친다면 이 수치를 1500% 등으로 더 키우세요.
-        transformOrigin: "50% 50% 1200%",
-      },
-      {
-        scaleY: 1,
-        duration: 1,
-        delay: 1 - 0.5 * (i / n),
-        ease: "elastic",
-      }
-    );
-  });
-
-  window.addEventListener("mousemove", handleMouseMove);
-};
-// ============================================
-// TouchTexture Class (캔버스에 마우스 궤적을 그림)
-// ============================================
-
-class TouchTexture {
-  constructor() {
-    this.size = 64;
-    this.width = this.height = this.size;
-    this.maxAge = 64;
-    this.radius = 0.16 * this.size;
-    this.speed = 1 / this.maxAge;
-    this.trail = [];
-    this.last = null;
-    this.initTexture();
-  }
-
-  initTexture() {
-    this.canvas = document.createElement("canvas");
-    this.canvas.width = this.width;
-    this.canvas.height = this.height;
-    this.ctx = this.canvas.getContext("2d");
-    this.ctx.fillStyle = "black";
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.texture = new THREE.Texture(this.canvas);
-  }
-
-  update() {
-    this.clear();
-    let speed = this.speed;
-    for (let i = this.trail.length - 1; i >= 0; i--) {
-      const point = this.trail[i];
-      let f = point.force * speed * (1 - point.age / this.maxAge);
-      point.x += point.vx * f;
-      point.y += point.vy * f;
-      point.age++;
-      if (point.age > this.maxAge) {
-        this.trail.splice(i, 1);
-      } else {
-        this.drawPoint(point);
-      }
-    }
-    this.texture.needsUpdate = true;
-  }
-
-  clear() {
-    this.ctx.fillStyle = "black";
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  addTouch(point) {
-    let force = 0;
-    let vx = 0;
-    let vy = 0;
-    const last = this.last;
-    if (last) {
-      const dx = point.x - last.x;
-      const dy = point.y - last.y;
-      if (dx === 0 && dy === 0) return;
-      const dd = dx * dx + dy * dy;
-      let d = Math.sqrt(dd);
-      vx = dx / d;
-      vy = dy / d;
-      force = Math.min(dd * 20000, 2.0);
-    }
-    this.last = { x: point.x, y: point.y };
-    this.trail.push({ x: point.x, y: point.y, age: 0, force, vx, vy });
-  }
-
-  drawPoint(point) {
-    const pos = {
-      x: point.x * this.width,
-      y: (1 - point.y) * this.height,
-    };
-
-    let intensity = 1;
-    if (point.age < this.maxAge * 0.3) {
-      intensity = Math.sin((point.age / (this.maxAge * 0.3)) * (Math.PI / 2));
-    } else {
-      const t = 1 - (point.age - this.maxAge * 0.3) / (this.maxAge * 0.7);
-      intensity = -t * (t - 2);
-    }
-    intensity *= point.force;
-
-    const radius = this.radius;
-    let color = `${((point.vx + 1) / 2) * 255}, ${
-      ((point.vy + 1) / 2) * 255
-    }, ${intensity * 255}`;
-
-    let offset = this.size * 5;
-    this.ctx.shadowOffsetX = offset;
-    this.ctx.shadowOffsetY = offset;
-    this.ctx.shadowBlur = radius * 1;
-    this.ctx.shadowColor = `rgba(${color},${0.2 * intensity})`;
-
-    this.ctx.beginPath();
-    this.ctx.fillStyle = "rgba(255,0,0,1)";
-    this.ctx.arc(pos.x - offset, pos.y - offset, radius, 0, Math.PI * 2);
-    this.ctx.fill();
-  }
-}
-
-// ----------------------------------------------------------------------
 
 export default {
   name: "AboutPage",
@@ -589,18 +291,18 @@ export default {
       typingSpeed: 80,
       deletingSpeed: 70,
       delayAfterTyping: 2000,
-      timer: null, // 타이머 추가
-
+      timer: null,
       rollingTls: [],
     };
   },
 
   methods: {
-    // === 1. 타이핑 효과 메소드 (Options API) ===
+    // 1. 헤더 타이핑 애니메이션
     typeEn() {
       clearTimeout(this.timer);
       const currentIndex = this.index % this.texts.length;
       const currentFullText = this.texts[currentIndex].en;
+
       if (!this.isDeleting) {
         this.currentEnText = currentFullText.substring(0, this.enIndex + 1);
         this.enIndex++;
@@ -609,290 +311,65 @@ export default {
           this.timer = setTimeout(this.typeEn, this.delayAfterTyping);
           return;
         }
-        this.timer = setTimeout(this.typeEn, this.typingSpeed);
       } else {
         this.currentEnText = currentFullText.substring(0, this.enIndex - 1);
         this.enIndex--;
         if (this.enIndex <= 0) {
           this.isDeleting = false;
           this.index = (this.index + 1) % this.texts.length;
-          this.timer = setTimeout(this.typeEn, this.typingSpeed);
-          return;
         }
-        this.timer = setTimeout(this.typeEn, this.deletingSpeed);
       }
-    },
-  },
-
-  setup() {
-    // ----------------------------------------------------------------------
-    // Three.js 상태: shallowRef를 사용하여 반응성 프록시화 방지
-    // ----------------------------------------------------------------------
-    const touchTexture = shallowRef(null);
-    const uniforms = shallowRef(null);
-    const renderer = shallowRef(null);
-    const scene = shallowRef(null);
-    const camera = shallowRef(null);
-    const animationFrameId = ref(null);
-    const clock = new THREE.Clock(); // 일반 객체
-
-    const { x: mouseX, y: mouseY } = useMouse();
-
-    // === 1. 이벤트 핸들러 ===
-    const onResize = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      if (camera.value && renderer.value && uniforms.value) {
-        camera.value.left = width / -2;
-        camera.value.right = width / 2;
-        camera.value.top = height / 2;
-        camera.value.bottom = height / -2;
-        camera.value.updateProjectionMatrix();
-
-        renderer.value.setSize(width, height);
-        uniforms.value.uResolution.value.set(width, height);
-      }
-    };
-
-    const onMouseMove = (event) => {
-      if (!touchTexture.value) return;
-
-      const normalizedX = event.clientX / window.innerWidth;
-      const normalizedY =
-        (window.innerHeight - event.clientY) / window.innerHeight;
-
-      touchTexture.value.addTouch({ x: normalizedX, y: normalizedY });
-    };
-
-    // === 2. 렌더링 루프 ===
-    const animate = () => {
-      const delta = clock.getDelta();
-      if (uniforms.value && touchTexture.value) {
-        // null 체크 추가
-        uniforms.value.uTime.value += delta;
-        touchTexture.value.update();
-      }
-      if (renderer.value && scene.value && camera.value) {
-        // null 체크 추가
-        renderer.value.render(scene.value, camera.value);
-      }
-      animationFrameId.value = requestAnimationFrame(animate);
-    };
-
-    // === 3. 초기화 ===
-    const initThree = () => {
-      const canvas = document.getElementById("BlobBg");
-      if (!canvas) return;
-
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-
-      camera.value = new THREE.OrthographicCamera(
-        width / -2,
-        width / 2,
-        height / 2,
-        height / -2,
-        1,
-        1000
+      this.timer = setTimeout(
+        this.typeEn,
+        this.isDeleting ? this.deletingSpeed : this.typingSpeed
       );
-      camera.value.position.z = 1;
-      scene.value = new THREE.Scene();
+    },
 
-      renderer.value = new THREE.WebGLRenderer({ canvas, antialias: true });
-      renderer.value.setSize(width, height);
-      renderer.value.setPixelRatio(window.devicePixelRatio);
-
-      touchTexture.value = new TouchTexture();
-
-      // uniforms에 할당
-      const newBaseColor = new THREE.Vector3(0.33, 0.53, 0.96);
-
-      const brightBlobColor = new THREE.Vector3(0.5, 0.7, 1.0);
-
-      uniforms.value = {
-        uTime: { value: 0 },
-        uResolution: { value: new THREE.Vector2(width, height) },
-
-        // ⭐ 1. 블롭의 밝은 색상 (밝은 톤 유지)
-        uColor1: { value: brightBlobColor },
-        uColor3: { value: brightBlobColor },
-        uColor5: { value: brightBlobColor },
-
-        // ⭐ 2. 블롭의 어두운 색상 (배경색과 유사하게 설정)
-        uColor2: { value: newBaseColor },
-        uColor4: { value: newBaseColor },
-        uColor6: { value: newBaseColor },
-
-        uSpeed: { value: 1.2 },
-        uIntensity: { value: 1.8 },
-        uTouchTexture: { value: touchTexture.value.texture },
-        uGrainIntensity: { value: 0.02 },
-        uZoom: { value: 1.0 },
-
-        // ⭐ 3. 배경의 기본 어두운 색상 (가장 중요)
-        uDarkNavy: { value: newBaseColor }, // #5486F5로 설정
-
-        uGradientSize: { value: 0.5 },
-        uGradientCount: { value: 4.0 },
-        uColor1Weight: { value: 1.0 },
-        uColor2Weight: { value: 1.0 },
-      };
-
-      const geometry = new THREE.PlaneGeometry(width, height, 1, 1);
-      const material = new THREE.ShaderMaterial({
-        uniforms: uniforms.value,
-        vertexShader: vertexShader,
-        fragmentShader: fragmentShader,
-      });
-
-      const mesh = new THREE.Mesh(geometry, material);
-      scene.value.add(mesh);
-
-      // 이벤트 리스너 등록
-      window.addEventListener("resize", onResize);
-      window.addEventListener("mousemove", onMouseMove);
-
-      animate();
-    };
-
-    const initRollingText = () => {
-      // .rolling-content 클래스를 가진 모든 요소를 선택
+    initRollingText() {
       const wrappers = document.querySelectorAll(".rolling-content");
-      const tls = [];
+      if (wrappers.length === 0) return;
 
       wrappers.forEach((el, idx) => {
         const isSecondLine = idx === 1;
-        const width = el.offsetWidth / 2; // 전체 아이템의 절반 너비
+        const width = el.offsetWidth / 2; // 전체 컨텐츠의 절반
 
-        // 첫 번째 줄: 0 -> -width (왼쪽으로 이동)
-        // 두 번째 줄: -width -> 0 (오른쪽으로 이동)
         const startX = isSecondLine ? -width : 0;
         const endX = isSecondLine ? 0 : -width;
 
-        // 초기 위치 세팅
+        // 1. 기본 무한 루프 설정
         gsap.set(el, { x: startX });
-
         const tl = gsap.to(el, {
           x: endX,
-          duration: 35, // 속도가 너무 빠르면 30으로 늘리세요
+          duration: 35,
           ease: "none",
           repeat: -1,
         });
 
+        // 2. 스크롤 속도 감지 및 가속 (ScrollTrigger)
         ScrollTrigger.create({
           trigger: ".rolling-section",
           start: "top bottom",
           end: "bottom top",
           onUpdate: (self) => {
+            // 스크롤 속도 계산 (절대값)
             const velocity = Math.abs(self.getVelocity() / 150);
             const speed = 1 + velocity;
+
+            // 속도 증가 (TimeScale 조절)
             gsap.to(tl, { timeScale: speed, duration: 0.3 });
+
+            // 원래 속도로 부드럽게 복귀
             gsap.to(tl, { timeScale: 1, delay: 0.5, duration: 1 });
           },
         });
 
-        tls.push(tl);
+        // 나중에 해제하기 위해 배열에 저장
+        this.rollingTls.push(tl);
       });
-      return tls;
-    };
+    },
 
-    // 템플릿 및 Options API에서 접근할 모든 상태와 함수를 반환합니다.
-    return {
-      mouseX,
-      mouseY,
-      // Options API 라이프사이클 훅에서 호출/정리하기 위해 반환
-      initThree,
-      onResize,
-      onMouseMove,
-      animate,
-
-      touchTexture,
-      uniforms,
-      renderer,
-      scene,
-      camera,
-      animationFrameId,
-      clock,
-
-      containerRef,
-      initGSAPProjectList,
-      handleMouseMove,
-
-      // Options API에서 사용하지 않지만 정리 필요
-      handleBoxMouseEnter,
-      handleBoxMouseLeave,
-
-      initRollingText,
-    };
-  },
-
-  // ⭐ Options API 라이프사이클 훅: 타이핑 시작 및 Three.js 초기화/정리
-  mounted() {
-    const initBioReveal = () => {
-      // 1. 모든 줄(.bio-row)을 찾습니다.
-      const rows = document.querySelectorAll(
-        ".bio-row, .row01, .row02, .row03"
-      );
-
-      rows.forEach((row) => {
-        // 2. 해당 줄 안의 직접적인 자식들(video-box, span 등)을 선택합니다.
-        const children = row.children;
-
-        // 3. ⭐ 시작 전에 자식들을 미리 숨깁니다 (CSS 설정을 대신함)
-        gsap.set(children, {
-          opacity: 0,
-          y: 50,
-        });
-
-        // 4. 애니메이션 실행
-        gsap.to(children, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "back.out(1.7)",
-          scrollTrigger: {
-            trigger: row, // 부모인 row가 화면에 들어오면
-            start: "top 85%", // 실행
-            // markers: true,
-            toggleActions: "play none none reverse",
-          },
-        });
-      });
-    };
-
-    initBioReveal();
-
-    // 1. 타이핑 시작 (methods에 정의됨)
-    this.typeEn();
-
-    // 2. Three.js 초기화 (setup에서 반환된 함수 호출)
-    this.$nextTick(() => {
-      if (this.initThree) {
-        this.initThree();
-      }
-      if (this.containerRef && this.initGSAPProjectList) {
-        // ref를 통해 DOM 요소 접근
-        this.initGSAPProjectList(this.containerRef);
-      }
-
-      this.rollingTls = this.initRollingText();
-    });
-
-    const initIntroAnimation = () => {
-      const panels = gsap.utils.toArray(".parallax__item");
-
-      panels.forEach((panel, i) => {
-        ScrollTrigger.create({
-          trigger: panel,
-          start: "top top",
-          pin: true,
-          pinSpacing: false, // 다음 섹션이 아래서 올라와 덮게 만듦
-          scrub: true,
-        });
-      });
-
+    // 2. 인트로 섹션: 글자 쪼개기 및 한 글자씩 채워지는 애니메이션
+    initIntroAnimation() {
       const targets = document.querySelectorAll(".intro-section .split-text");
       if (targets.length === 0) return;
 
@@ -908,14 +385,11 @@ export default {
               const span = document.createElement("span");
               span.classList.add("char");
               span.innerText = char === " " ? "\u00A0" : char;
-              span.setAttribute("data-char", char);
               target.appendChild(span);
             });
           }
         });
       });
-
-      const allChars = document.querySelectorAll(".intro-section .char");
 
       const enChars = document.querySelectorAll(".en-text .char");
       const krText = document.querySelector(".kr-text");
@@ -931,35 +405,43 @@ export default {
         },
       });
 
-      // STEP 1: 영문 글자가 한 글자씩 진해짐 (왼쪽->오른쪽 진행)
       tl.to(enChars, {
         color: "#fff",
-        opacity: 1, // 투명도도 함께 조절 가능
-        stagger: 0.1, // 글자 간의 간격
+        opacity: 1,
+        stagger: 0.1,
         ease: "none",
-      });
+      }).to(krText, { opacity: 1, y: 0, duration: 0.5 }, "+=0.1");
+    },
 
-      // STEP 2: 국문 텍스트 등장
-      tl.to(
-        krText,
-        {
+    // 3. Bio 섹션: 아래에서 위로 순차적 등장
+    initBioReveal() {
+      const rows = document.querySelectorAll(
+        ".bio-row, .row01, .row02, .row03"
+      );
+      rows.forEach((row) => {
+        const children = row.children;
+        gsap.set(children, { opacity: 0, y: 50 });
+        gsap.to(children, {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        },
-        "+=0.1"
-      );
-    };
+          duration: 0.8,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+          scrollTrigger: {
+            trigger: row,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      });
+    },
 
-    initIntroAnimation();
-
-    const initHorizontalScroll = () => {
+    // 4. 가로 스크롤 메인 제어 (가장 중요)
+    initHorizontalScroll() {
       const horiSection = document.querySelector(".horizontal-section");
-      const horiInner = horiSection.querySelector(".horizontal-inner");
-      const horiTitle = horiSection.querySelector(".sub-title");
+      const horiInner = document.querySelector(".horizontal-inner");
+      if (!horiSection || !horiInner) return;
 
-      // 1. 전체 가로 스크롤 애니메이션 (기준점)
       const scrollTween = gsap.to(horiInner, {
         x: () => -(horiInner.scrollWidth - window.innerWidth),
         ease: "none",
@@ -973,28 +455,13 @@ export default {
         },
       });
 
-      // 2. 어두운 배경을 가진 모든 섹션을 찾아서 각각 트리거를 걸어줍니다.
-      // .focus-section 외에도 어두운 섹션에 .is-dark-bg 라는 클래스를 붙여두면 관리하기 편합니다.
-      const darkSections = horiSection.querySelectorAll(
-        ".focus-section, .is-dark-bg"
-      );
+      // 가로 스크롤에 종속된 하위 애니메이션들에 scrollTween 전달
+      this.initIdentityAnimation(scrollTween);
+      this.initFocusThree(scrollTween);
+    },
 
-      darkSections.forEach((darkSection) => {
-        ScrollTrigger.create({
-          trigger: darkSection,
-          containerAnimation: scrollTween, // 가로 스크롤 애니메이션과 동기화하는 핵심 옵션!
-          start: "left 50px", // 섹션의 왼쪽이 타이틀 위치(약 50px)에 닿을 때
-          // end: "right 50px", // 섹션의 오른쪽이 타이틀 위치를 벗어날 때
-          onEnter: () => horiTitle.classList.add("is-dark-mode"),
-          onLeave: () => horiTitle.classList.remove("is-dark-mode"),
-          // onEnterBack: () => horiTitle.classList.add("is-dark-mode"),
-          onLeaveBack: () => horiTitle.classList.remove("is-dark-mode"),
-        });
-      });
-    };
-    initHorizontalScroll();
-
-    const initIdentityAnimation = (scrollTween) => {
+    // 5. Identity 섹션: 프로필 이미지 등장 및 SVG 텍스트 드로잉
+    initIdentityAnimation(scrollTween) {
       const identitySec = document.querySelector(".identity-section");
       if (!identitySec) return;
 
@@ -1004,57 +471,62 @@ export default {
       );
       const svgTarget = identitySec.querySelector(".scrolling-svg-text svg");
 
-      // 초기 상태 설정
+      // 1. 초기값 설정 (가장 먼저 실행)
       gsap.set(profileImg, { opacity: 0, x: -50 });
       gsap.set(titleTexts, { opacity: 0, y: 20 });
+
       if (svgTarget) {
+        // CSS보다 JS 세팅이 우선되도록 확실히 가림
         gsap.set(svgTarget, {
           opacity: 1,
           clipPath: "inset(0% 100% 0% 0%)",
+          webkitClipPath: "inset(0% 100% 0% 0%)",
         });
       }
 
-      const tl = gsap.timeline({
+      // 2. 프로필 & 텍스트: "딱" 등장
+      gsap.to([profileImg, ...titleTexts], {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: identitySec,
           containerAnimation: scrollTween,
-          // ★ 이 부분이 핵심입니다: 섹션의 왼쪽이 화면의 50% 위치에 오면 시작
-          start: "left 50%",
-          // 종료 지점을 더 뒤로 미뤄서(예: 0% 또는 마이너스) 전체 호흡을 길게 가져갑니다
-          end: "right 20%",
-          scrub: 2,
+          start: "left 70%",
+          toggleActions: "play none none reverse",
         },
       });
 
-      tl.to(profileImg, {
-        opacity: 1,
-        x: 0,
-        duration: 1.5,
-      })
-        .to(
-          titleTexts,
-          {
-            opacity: 1,
-            y: 0,
-            stagger: 0.3,
-            duration: 1,
-          },
-          "-=0.8"
-        )
-        .to(
+      // 3. SVG 텍스트: 스크롤 진행도에 맞춰 마스킹 해제
+      if (svgTarget) {
+        gsap.fromTo(
           svgTarget,
           {
-            clipPath: "inset(0% 0% 0% 0%)",
-            ease: "none",
-            duration: 4,
+            clipPath: "inset(0% 100% 0% 0%)",
+            webkitClipPath: "inset(0% 100% 0% 0%)",
           },
-          "+=0.2"
+          {
+            clipPath: "inset(0% 0% 0% 0%)",
+            webkitClipPath: "inset(0% 0% 0% 0%)",
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".scrolling-svg-text",
+              containerAnimation: scrollTween,
+              start: "left left", // 화면 오른쪽에 걸치자마자 가려진 상태 유지 확인
+              end: "center center",
+              scrub: 1,
+              immediateRender: false,
+            },
+          }
         );
-    };
+      }
+    },
 
-    initIdentityAnimation();
-
-    const initFocusThree = (scrollTween) => {
+    // 6. Focus 섹션: 3D 유리 박스 (Three.js)
+    initFocusThree(scrollTween) {
       const container = document.getElementById("three-container");
       if (!container) return;
 
@@ -1075,55 +547,38 @@ export default {
       renderer.setPixelRatio(window.devicePixelRatio);
       container.appendChild(renderer.domElement);
 
-      // --- 1. 조명 (피그마 효과는 조명이 부드러워야 합니다) ---
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
-      scene.add(ambientLight);
-
+      scene.add(new THREE.AmbientLight(0xffffff, 1.0));
       const topLight = new THREE.PointLight(0xffffff, 1.5);
       topLight.position.set(2, 5, 2);
       scene.add(topLight);
 
-      // --- 2. 텍스처 (검정색 글자 유지) ---
       const createTextTexture = (text) => {
         const canvas = document.createElement("canvas");
         const context = canvas.getContext("2d");
         const size = 1024;
         canvas.width = size;
         canvas.height = size;
-        context.clearRect(0, 0, size, size);
-
-        context.fillStyle = "#fff"; // 피그마 텍스트처럼 선명한 다크 그레이
+        context.fillStyle = "#fff";
         context.font = "Bold 140px sans-serif";
         context.textAlign = "center";
         context.textBaseline = "middle";
         context.fillText(text, size / 2, size / 2);
-
-        const texture = new THREE.CanvasTexture(canvas);
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.anisotropy = 8;
-        return texture;
+        return new THREE.CanvasTexture(canvas);
       };
 
-      // --- 3. 피그마 글래스 재질 (핵심 셋팅) ---
       const labels = ["Focus", "Logic", "Clean", "Speed", "Refactor", "Strong"];
       const materials = labels.map(
         (text) =>
           new THREE.MeshPhysicalMaterial({
             map: createTextTexture(text),
             color: 0xffffff,
-
-            // 피그마의 배경 흐림(Background Blur) 효과 구현
-            transmission: 0.95, // 빛 투과율 (높을수록 맑음)
-            roughness: 0.15, // 뽀얀 느낌 (피그마의 Blur 강도)
-            thickness: 1.0, // 유리 두께감
-            ior: 1.45, // 굴절률 (피그마 스타일은 1.4~1.5가 적당)
-
+            transmission: 0.95,
+            roughness: 0.15,
+            thickness: 1.0,
+            ior: 1.45,
             transparent: true,
-            opacity: 1, // transmission을 쓸 때는 1로 두는 것이 유리 질감이 삼
-
-            clearcoat: 0.5, // 표면 광택 (살짝만)
-            metalness: 0.05, // 아주 살짝의 반사광
-            reflectivity: 0.5,
+            opacity: 1,
+            clearcoat: 0.5,
           })
       );
 
@@ -1131,39 +586,10 @@ export default {
       const mesh = new THREE.Mesh(geometry, materials);
       scene.add(mesh);
 
-      // --- 4. 테두리 (피그마의 Stroke 효과) ---
-      const edges = new THREE.EdgesGeometry(geometry);
-      const line = new THREE.LineSegments(
-        edges,
-        new THREE.LineBasicMaterial({
-          color: 0xffffff,
-          transparent: true,
-          opacity: 0.4, // 피그마 스트로크처럼 약간 선명하게
-        })
-      );
-      mesh.add(line);
-
-      // --- 5. 마우스 및 렌더 (기존 로직 유지) ---
-      let mouseX = 0,
-        mouseY = 0,
-        targetX = 0,
-        targetY = 0;
-      window.addEventListener("mousemove", (e) => {
-        targetX = (e.clientX / window.innerWidth) * 2 - 1;
-        targetY = -(e.clientY / window.innerHeight) * 2 + 1;
-      });
-
-      const controls = new OrbitControls(camera, renderer.domElement);
-      controls.enableDamping = true;
-      controls.enableZoom = false;
-
       const animate = () => {
-        requestAnimationFrame(animate);
-        mouseX += (targetX - mouseX) * 0.05;
-        mouseY += (targetY - mouseY) * 0.05;
-        mesh.rotation.y += 0.005 + mouseX * 0.02;
-        mesh.rotation.x += 0.003 + mouseY * 0.02;
-        controls.update();
+        this.threeFrameId = requestAnimationFrame(animate);
+        mesh.rotation.y += 0.005;
+        mesh.rotation.x += 0.003;
         renderer.render(scene, camera);
       };
       animate();
@@ -1173,7 +599,7 @@ export default {
           y: Math.PI * 4,
           scrollTrigger: {
             trigger: ".focus-section",
-            containerAnimation: scrollTween,
+            containerAnimation: scrollTween, // 가로 스크롤 연동
             start: "left 50%",
             end: "right 20%",
             scrub: 2,
@@ -1186,95 +612,118 @@ export default {
         camera.updateProjectionMatrix();
         renderer.setSize(container.clientWidth, container.clientHeight);
       });
-    };
+    },
 
-    initFocusThree();
+    // 7. Workflow 섹션: 마우스 마스크 효과
+    // initWorkflowMask() {
+    //   const section = document.querySelector(".workflow-section");
+    //   const hiddenContent = section?.querySelector(".hidden-content");
+    //   const tags = section?.querySelectorAll(".base-content .tag");
+    //   if (!section || !hiddenContent) return;
 
-    const initWorkflowMask = () => {
-      const section = document.querySelector(".workflow-section");
-      const hiddenContent = section.querySelector(".hidden-content");
-      const tags = section.querySelectorAll(".base-content .tag");
+    //   const xTo = gsap.quickTo(hiddenContent, "--x", {
+    //     duration: 0.15,
+    //     ease: "none",
+    //   });
+    //   const yTo = gsap.quickTo(hiddenContent, "--y", {
+    //     duration: 0.15,
+    //     ease: "none",
+    //   });
 
-      if (!section || !hiddenContent) return;
+    //   section.addEventListener("mousemove", (e) => {
+    //     const rect = section.getBoundingClientRect();
+    //     xTo(e.clientX - rect.left);
+    //     yTo(e.clientY - rect.top);
+    //   });
 
-      // 1. quickTo 설정 (반응 속도 조절)
-      // duration이 너무 길면 마우스를 못 따라오니 0.1~0.2 정도로 짧게 잡습니다.
-      const xTo = gsap.quickTo(hiddenContent, "--x", {
-        duration: 0.15,
-        ease: "none",
-      });
-      const yTo = gsap.quickTo(hiddenContent, "--y", {
-        duration: 0.15,
-        ease: "none",
-      });
+    //   tags.forEach((tag) => {
+    //     tag.addEventListener("mouseenter", () =>
+    //       gsap.to(hiddenContent, { "--size": "150px", duration: 0.4 })
+    //     );
+    //     tag.addEventListener("mouseleave", () =>
+    //       gsap.to(hiddenContent, { "--size": "0px", duration: 0.3 })
+    //     );
+    //   });
+    // },
+  },
 
-      // 2. 좌표 업데이트 함수 (섹션 내 어디서든 마우스 이동 감지)
-      const updateMaskPos = (e) => {
-        const rect = section.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+  setup() {
+    const blobEffect = shallowRef(null); // 분리된 인스턴스를 담을 공간
+    const containerRef = ref(null);
+    const { x: mouseX, y: mouseY } = useMouse();
 
-        xTo(x);
-        yTo(y);
-      };
-
-      // 섹션 위에서 마우스가 움직이는 동안 계속 좌표를 쏴줍니다.
-      section.addEventListener("mousemove", updateMaskPos);
-
-      // 3. 태그 호버 시 크기만 조절
-      tags.forEach((tag) => {
-        tag.addEventListener("mouseenter", () => {
-          gsap.to(hiddenContent, {
-            "--size": "150px", // 마스크 나타남
-            duration: 0.4,
-            ease: "power2.out",
-          });
-        });
-
-        tag.addEventListener("mouseleave", () => {
-          gsap.to(hiddenContent, {
-            "--size": "0px", // 마스크 사라짐
-            duration: 0.3,
-            ease: "power2.in",
-          });
-        });
+    const handleMouseMove = (e) => {
+      gsap.to(".box", {
+        duration: 0.6,
+        rotationY: (i) =>
+          45 +
+          (i / projects.length) * 206.5 +
+          90 * (e.clientX / window.innerWidth),
       });
     };
 
-    initWorkflowMask();
+    const initGSAPProjectList = (container) => {
+      if (!container || projects.length === 0) return;
+      gsap.set(container, { perspective: 800 });
+      projects.forEach((project, i) => {
+        const b = document.createElement("div");
+        b.classList.add("box");
+        b.style.background = `hsl(${(i / projects.length) * 360}, 100%, 50%)`;
+        container.appendChild(b);
+        gsap.set(b, {
+          position: "absolute",
+          left: "50%",
+          top: "50%",
+          x: "-50%",
+          y: "-50%",
+          z: 600,
+          width: 300,
+          height: 600,
+          borderRadius: 20,
+          transformOrigin: "50% 50% 1200%",
+          rotationY: 90 + (i / projects.length) * 206.5,
+        });
+      });
+      window.addEventListener("mousemove", handleMouseMove);
+    };
+
+    return {
+      mouseX,
+      mouseY,
+      containerRef,
+      initGSAPProjectList,
+      blobEffect,
+      handleMouseMove,
+    };
+  },
+
+  mounted() {
+    // 1. 분리된 Three.js 배경 초기화
+    const canvas = document.getElementById("BlobBg");
+    if (canvas) {
+      this.blobEffect = initBlobBackground(canvas);
+    }
+
+    // 2. 타이핑 및 애니메이션 실행
+    this.typeEn();
+    this.$nextTick(() => {
+      this.initBioReveal();
+      this.initIntroAnimation();
+      this.initHorizontalScroll();
+      this.rollingTls = this.initRollingText();
+      if (this.containerRef) this.initGSAPProjectList(this.containerRef);
+      // Workflow 마스크 로직 호출 (생략됨, 필요시 추가)
+    });
   },
 
   beforeUnmount() {
-    // 타이핑 타이머 정리
     clearTimeout(this.timer);
+    // 1. Three.js 배경 정리 (분리된 파일의 destroy 함수 호출)
+    if (this.blobEffect) this.blobEffect.destroy();
 
-    // Three.js 정리 (setup에서 반환된 상태에 접근)
-    if (this.animationFrameId.value) {
-      cancelAnimationFrame(this.animationFrameId.value);
-    }
-    // setup에서 정의된 이벤트 리스너 함수를 제거
-    window.removeEventListener("resize", this.onResize);
-    window.removeEventListener("mousemove", this.onMouseMove);
-
-    if (this.renderer.value) {
-      this.renderer.value.dispose();
-    }
-    if (this.touchTexture.value) {
-      this.touchTexture.value.texture.dispose();
-      this.touchTexture.value.canvas = null;
-    }
-
-    window.removeEventListener("mousemove", this.handleMouseMove);
-
-    // 생성된 .box 요소들의 이벤트 리스너 정리 (선택 사항이지만 안전함)
-    const boxes = document.querySelectorAll(".box");
-    boxes.forEach((b) => {
-      b.removeEventListener("mouseenter", this.handleBoxMouseEnter);
-      b.removeEventListener("mouseleave", this.handleBoxMouseLeave);
-    });
-
-    ScrollTrigger.getAll().forEach((t) => t.kill());
-    this.rollingTls.forEach((tl) => tl.kill());
+    // window.removeEventListener("mousemove", this.handleMouseMove);
+    // ScrollTrigger.getAll().forEach((t) => t.kill());
+    // this.rollingTls.forEach((tl) => tl.kill());
   },
 };
 </script>
