@@ -25,6 +25,15 @@ const routes = [
         component: () => import("pages/ProjectPage.vue"),
         meta: { ProjectPage: true },
       },
+      {
+        path: "project/kmusical",
+        component: () => import("pages/project/KmusicalMarket.vue"),
+        meta: { isDarkPage: true },
+      },
+      {
+        path: "project/seoul80",
+        component: () => import("pages/project/Seoul80Anniversary.vue"),
+      },
     ],
   },
 

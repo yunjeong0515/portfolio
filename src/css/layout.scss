@@ -10,6 +10,26 @@
   // border-bottom: 1px solid #fff;
   background: rgba(233, 233, 233, 0.1);
   backdrop-filter: blur(20px);
+  transition: background 0.3s, backdrop-filter 0.3s, color 0.3s;
+  &.is-light {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    .dot-icon {
+      background-color: #ffffff !important;
+    }
+    .text-wrapper span {
+      color: #ffffff !important;
+    }
+    .main-title {
+      color: #ffffff !important;
+    }
+    svg path {
+      fill: #ffffff !important;
+    }
+    .hamburger-menu span {
+      background-color: #ffffff !important;
+    }
+  }
   .wrapper {
     display: flex;
     align-items: center;
@@ -195,6 +215,9 @@
           transform-origin: center;
         }
         &.is-active {
+          span {
+            background-color: $black900 !important;
+          }
           span:nth-child(1) {
             transform: translateY(7px) rotate(45deg);
           }

@@ -1,6 +1,12 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <header class="header" :class="{ main: $route.meta.IndexPage }">
+    <header
+      class="header"
+      :class="{
+        main: $route.meta.IndexPage,
+        'is-light': $route.meta.isDarkPage,
+      }"
+    >
       <div class="wrapper">
         <router-link to="/" class="home-btn">
           <div class="dot-icon"></div>

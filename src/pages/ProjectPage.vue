@@ -116,10 +116,11 @@
           <div
             v-for="project in projects"
             :key="project.id"
+            @click="goToDetail(project.id)"
             class="project-item grid-item"
-            @mouseenter="setHover(project.id)"
-            @mouseleave="clearHover()"
           >
+            <!-- @mouseenter="setHover(project.id)"
+            @mouseleave="clearHover()" -->
             <div class="project-thumb">
               <div class="project-skills">
                 <span
@@ -135,12 +136,12 @@
                 :alt="project.name + ' 썸네일'"
                 class="thumbnail-img"
               />
-              <img
+              <!-- <img
                 :src="project.hoverImage"
                 :alt="project.name + ' 호버 이미지'"
                 class="hover-img"
                 :class="{ active: hoveredProjectId === project.id }"
-              />
+              /> -->
             </div>
             <div class="project-info">
               <div class="title-wrap">
@@ -157,12 +158,21 @@
           class="project-list-container project-list-view"
           v-else-if="viewMode === 'list'"
         >
+          <div class="floating-thumbnail" ref="floatingThumb">
+            <img
+              :src="hoveredProjectThumb"
+              alt="플로팅 썸네일"
+              v-if="hoveredProjectThumb"
+            />
+          </div>
           <div
             v-for="project in projects"
             :key="project.id"
             class="project-item list-item"
-            @mouseenter="setHover(project.id)"
-            @mouseleave="clearHover()"
+            @click="goToDetail(project.id)"
+            @mouseenter="onMouseEnter(project.thumbnail)"
+            @mouseleave="onMouseLeave"
+            @mousemove="onMouseMove"
           >
             <div class="list-head-row">
               <div class="title-wrap">
@@ -234,15 +244,16 @@ export default defineComponent({
       viewMode: "grid",
       projects: projects,
       hoveredProjectId: null,
+      hoveredProjectThumb: null,
     };
   },
   methods: {
-    setHover(id) {
-      this.hoveredProjectId = id;
-    },
-    clearHover() {
-      this.hoveredProjectId = null;
-    },
+    // setHover(id) {
+    //   this.hoveredProjectId = id;
+    // },
+    // clearHover() {
+    //   this.hoveredProjectId = null;
+    // },
     initTitleAnimation() {
       gsap.from(".project-title .key", {
         scrollTrigger: {
@@ -256,9 +267,57 @@ export default defineComponent({
         ease: "back.out(1.7)",
       });
     },
+    goToDetail(id) {
+      this.$router.push(`/project/${id}`);
+    },
+    initListAnimation() {
+      const items = document.querySelectorAll(".project-item");
+
+      items.forEach((item) => {
+        gsap.from(item, {
+          scrollTrigger: {
+            trigger: item, // 각 아이템 자체가 트리거가 됩니다.
+            start: "top 90%", // 아이템 상단이 화면 하단 10% 지점에 도달하면 시작
+            toggleActions: "play none none none", // 한 번만 실행
+          },
+          y: 60, // 아래에서 위로 이동
+          opacity: 0, // 투명도 조절
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      });
+    },
+    onMouseEnter(thumb) {
+      this.hoveredProjectThumb = thumb;
+      gsap.to(this.$refs.floatingThumb, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    },
+    onMouseLeave() {
+      gsap.to(this.$refs.floatingThumb, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+      });
+    },
+    onMouseMove(e) {
+      // 마우스 위치에 맞춰 floating-thumbnail 이동
+      // 리스트 영역 내에서의 상대 좌표를 계산
+      gsap.to(this.$refs.floatingThumb, {
+        x: e.clientX + 20, // 마우스 화살표 옆으로 약간 띄움
+        y: e.clientY + 20,
+        duration: 0.6, // 숫자가 높을수록 쫀득하게 따라옴
+        ease: "power3.out",
+      });
+    },
   },
   mounted() {
     this.initTitleAnimation();
+    this.initListAnimation();
   },
 });
 </script>
