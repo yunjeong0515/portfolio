@@ -218,7 +218,13 @@
                   </p>
                 </div>
                 <div class="img-wrap">
-                  <div class=""></div>
+                  <div class="code-greeting">
+                    <span class="font_ibm font_500">&gt; Hello,</span>
+                    <span class="font_ibm font_500">world !</span>
+                  </div>
+                  <div class="code-symbol">
+                    <span class="font_ibm">&lt;/&gt;</span>
+                  </div>
                   <div class="macbook-img">
                     <img src="../assets/imgs/about/macbook.png" alt="" />
                   </div>
@@ -229,9 +235,9 @@
         </div>
       </div>
     </section>
-    <section class="skills-section">
+    <section class="skills-section" ref="skillsSection">
       <div class="fixed-area">
-        <h2 class="bg-title font_ibm" ref="bgTitle">Skills</h2>
+        <h2 class="bg-title font_ibm font_500" ref="bgTitle">Skills</h2>
       </div>
       <div class="wrapper">
         <div class="skill-card" data-title="HTML">
@@ -247,7 +253,6 @@
             </p>
           </div>
         </div>
-
         <div class="skill-card" data-title="CSS">
           <div class="skill-info">
             <div class="title-wrap">
@@ -314,10 +319,12 @@
       </div>
     </section>
     <section class="project-section">
-      <div class="title-wrap">
-        <span class="">SELECTED</span>
-        <h2>PROJECT</h2>
-        <span class="">2024~2025</span>
+      <div class="wrapper">
+        <div class="title-wrap">
+          <span class="">SELECTED</span>
+          <h2>PROJECT</h2>
+          <span class="">2024-</span>
+        </div>
       </div>
     </section>
     <section class="vision-section" ref="sectionRef">
@@ -380,6 +387,7 @@ export default {
       delayAfterTyping: 2000,
       timer: null,
       rollingTls: [],
+      horizontalScrollTween: null, // 가로 스크롤 인스턴스 저장용
     };
   },
 
@@ -615,7 +623,8 @@ export default {
         );
       });
     },
-    // 4. 가로 스크롤 메인 제어 (가장 중요)
+
+    // 가로 스크롤 메인 제어 (모든 내부 애니메이션의 기준)
     initHorizontalScroll() {
       const horiSection = document.querySelector(".horizontal-section");
       const horiInner = document.querySelector(".horizontal-inner");
@@ -623,6 +632,7 @@ export default {
 
       if (!horiSection || !horiInner) return;
 
+      // 가로 스크롤 인스턴스 생성 및 저장
       const scrollTween = gsap.to(horiInner, {
         x: () => -(horiInner.scrollWidth - window.innerWidth),
         ease: "none",
@@ -636,33 +646,53 @@ export default {
         },
       });
 
-      window.addEventListener("resize", () => {
-        ScrollTrigger.refresh();
-      });
-
+      // 가로 스크롤 섹션들(Focus, Workflow 등) 텍스트 등장 효과
       const revealSections = document.querySelectorAll(".one-page");
       revealSections.forEach((section) => {
         const elements = section.querySelectorAll(
           ".reveal-text h2, .reveal-text p"
         );
-
         if (elements.length > 0) {
           gsap.to(elements, {
-            clipPath: "inset(0 0% 0 0)", // 오른쪽 가림막을 0%로 (전체 다 보임)
+            clipPath: "inset(0 0% 0 0)",
             duration: 1.2,
-            stagger: 0.3, // 제목 나오고 본문 나오는 간격
-            ease: "power2.inOut", // 부드럽게 채워지는 느낌
+            stagger: 0.3,
+            ease: "power2.inOut",
             scrollTrigger: {
               trigger: section,
-              containerAnimation: scrollTween,
-              start: "left 70%", // 화면에 30% 정도 들어왔을 때 시작
+              containerAnimation: scrollTween, // 기준점 연결
+              start: "left 70%",
               toggleActions: "play none none reverse",
             },
           });
         }
+        const tags = section.querySelectorAll(".workflow-tags .tag");
+        if (tags.length > 0) {
+          gsap.fromTo(
+            tags,
+            {
+              opacity: 0,
+              x: 50, // 오른쪽에서 대기
+            },
+            {
+              opacity: 1,
+              x: 0,
+              rotateY: 0,
+              duration: 0.8,
+              stagger: 0.4,
+              ease: "back.out(1.2)",
+              scrollTrigger: {
+                trigger: section,
+                containerAnimation: scrollTween,
+                start: "left 40%", // 텍스트보다 살짝 늦게 나오게 조절
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        }
       });
 
-      // 기존 배경색 & 행성 로직
+      // 배경색 전환 (화이트 -> 블랙) 및 행성 등장
       ScrollTrigger.create({
         trigger: ".focus-section",
         containerAnimation: scrollTween,
@@ -684,10 +714,12 @@ export default {
         },
       });
 
+      // 개별 섹션 애니메이션 호출 (scrollTween 전달)
       this.initIdentityAnimation(scrollTween);
+      this.initExperienceFloating(scrollTween);
     },
 
-    // 5. Identity 섹션: 프로필 이미지 등장 및 SVG 텍스트 드로잉
+    // 2. Identity 섹션 애니메이션
     initIdentityAnimation(scrollTween) {
       const identitySec = document.querySelector(".identity-section");
       if (!identitySec) return;
@@ -698,27 +730,18 @@ export default {
       );
       const svgTarget = identitySec.querySelector(".scrolling-svg-text svg");
 
-      // 1. 초기값 설정 (가장 먼저 실행)
       gsap.set(profileImg, { opacity: 0, x: -50 });
       gsap.set(titleTexts, { opacity: 0, y: 20 });
-
       if (svgTarget) {
-        // CSS보다 JS 세팅이 우선되도록 확실히 가림
-        gsap.set(svgTarget, {
-          opacity: 1,
-          clipPath: "inset(0% 100% 0% 0%)",
-          webkitClipPath: "inset(0% 100% 0% 0%)",
-        });
+        gsap.set(svgTarget, { opacity: 1, clipPath: "inset(0% 100% 0% 0%)" });
       }
 
-      // 2. 프로필 & 텍스트: "딱" 등장
       gsap.to([profileImg, ...titleTexts], {
         opacity: 1,
         x: 0,
         y: 0,
         stagger: 0.1,
         duration: 0.8,
-        ease: "power2.out",
         scrollTrigger: {
           trigger: identitySec,
           containerAnimation: scrollTween,
@@ -727,30 +750,200 @@ export default {
         },
       });
 
-      // 3. SVG 텍스트: 스크롤 진행도에 맞춰 마스킹 해제
       if (svgTarget) {
-        gsap.fromTo(
-          svgTarget,
-          {
-            clipPath: "inset(0% 100% 0% 0%)",
-            webkitClipPath: "inset(0% 100% 0% 0%)",
+        gsap.to(svgTarget, {
+          clipPath: "inset(0% 0% 0% 0%)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".scrolling-svg-text",
+            containerAnimation: scrollTween,
+            start: "left 30%",
+            end: "center center",
+            scrub: 1,
           },
-          {
-            clipPath: "inset(0% 0% 0% 0%)",
-            webkitClipPath: "inset(0% 0% 0% 0%)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".scrolling-svg-text",
-              containerAnimation: scrollTween,
-              start: "left 30%",
-              end: "center center",
-              scrub: 1,
-              immediateRender: false,
-            },
-          }
-        );
+        });
       }
     },
+
+    initExperienceFloating(scrollTween) {
+      const container = document.querySelector(".experience-section .img-wrap");
+      if (!container) return;
+
+      const macbook = container.querySelector(".macbook-img");
+      const symbol = container.querySelector(".code-symbol");
+      const greeting = container.querySelector(".code-greeting");
+
+      // 1. [등장] yPercent를 사용하여 위치 충돌을 방지합니다.
+      // CSS의 원래 위치(bottom 5%)를 0으로 잡고, 아래(150%)에서 올라오게 합니다.
+      gsap.fromTo(
+        [macbook, symbol, greeting],
+        {
+          yPercent: 150, // y 대신 yPercent 사용 (CSS 위치 기준 아래쪽)
+          opacity: 0,
+          scale: 0.5,
+        },
+        {
+          yPercent: 0, // 제자리로 도착
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: "back.out(1.5)",
+          scrollTrigger: {
+            trigger: ".experience-section",
+            containerAnimation: scrollTween,
+            start: "left 75%",
+            toggleActions: "play none none reverse",
+            // 나타나는 도중에 둥둥 모션이 섞이지 않도록 완료 후 실행
+            onComplete: () => startFloating(),
+          },
+        }
+      );
+
+      // 2. [둥둥] y 값을 상대값("-=20")으로 조절
+      const startFloating = () => {
+        // 이미 애니메이션이 돌고 있다면 중복 방지
+        if (gsap.getTweensOf(macbook).length > 1) return;
+
+        // 맥북 본체
+        gsap.to(macbook, {
+          y: "-=25",
+          duration: 3,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
+
+        // 코드 심볼
+        gsap.to(symbol, {
+          y: "+=30",
+          x: "-=15",
+          rotation: "-=8",
+          duration: 2.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 0.2,
+        });
+
+        // 인사말
+        gsap.to(greeting, {
+          y: "-=35",
+          x: "+=20",
+          rotation: "+=5",
+          duration: 4,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: 0.4,
+        });
+      };
+    },
+
+    initSkillsAnimation() {
+      const section = this.$refs.skillsSection;
+      const cards = gsap.utils.toArray(".skill-card");
+      const bgTitle = this.$refs.bgTitle;
+      const projectSection = document.querySelector(".project-section");
+
+      if (!section || cards.length === 0 || !bgTitle || !projectSection) return;
+
+      gsap.set(cards, { y: "110vh" });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: `+=${cards.length * 80 + 50}%`,
+          pin: true,
+          scrub: 0.5,
+          pinSpacing: true,
+        },
+      });
+
+      cards.forEach((card, index) => {
+        const isLast = index === cards.length - 1;
+
+        if (!isLast) {
+          tl.to(
+            card,
+            {
+              y: 0,
+              duration: 1,
+              ease: "none",
+              onStart: () =>
+                this.animateBgTitle(card.getAttribute("data-title")),
+              // 역방향 스크롤 시 이전 타이틀로 복구
+              onReverseComplete: () => {
+                const prevTitle =
+                  index > 0
+                    ? cards[index - 1].getAttribute("data-title")
+                    : "Skills";
+                this.animateBgTitle(prevTitle);
+              },
+            },
+            index * 1.5
+          ).to(card, { y: "-100vh", duration: 1, ease: "none" }, "+=0.3");
+        } else {
+          // ⭐ 마지막 카드: 텍스트 변경 로직을 명확히 함
+          tl.to(
+            card,
+            {
+              y: 0,
+              duration: 1,
+              ease: "none",
+              onStart: () =>
+                this.animateBgTitle(card.getAttribute("data-title")),
+              onReverseComplete: () => {
+                // 마지막 카드에서 이전 카드로 올라갈 때 텍스트 복구
+                const prevTitle = cards[index - 1].getAttribute("data-title");
+                this.animateBgTitle(prevTitle);
+              },
+            },
+            index * 1.4
+          );
+        }
+      });
+
+      // 3. 프로젝트 섹션 덮기 + 역방향 타이틀 고정
+      tl.fromTo(
+        projectSection,
+        { y: 0 },
+        {
+          y: "-100vh",
+          duration: 2,
+          ease: "power2.inOut",
+          // 프로젝트 섹션이 내려갈 때(역방향) 마지막 카드 타이틀이 다시 보이게 보장
+          onReverseComplete: () => {
+            const lastTitle =
+              cards[cards.length - 1].getAttribute("data-title");
+            this.animateBgTitle(lastTitle);
+          },
+        },
+        "+=0.2"
+      );
+    },
+
+    animateBgTitle(text) {
+      const bgTitle = this.$refs.bgTitle;
+      if (!bgTitle || bgTitle.innerText === text) return;
+
+      gsap.killTweensOf(bgTitle);
+      gsap
+        .timeline()
+        .to(bgTitle, {
+          opacity: 0,
+          duration: 0.25,
+          onComplete: () => {
+            bgTitle.innerText = text;
+          },
+        })
+        .to(bgTitle, {
+          opacity: 0.1,
+          duration: 0.35,
+        });
+    },
+
     initVisionPhysics() {
       const container = this.$refs.canvasContainer;
       const mainTextEl = document.querySelector(".main-text");
@@ -760,8 +953,13 @@ export default {
       const { Engine, Render, Runner, Bodies, Composite, Events, Body } =
         Matter;
 
+      // 1. 엔진 및 러너 생성
       const engine = Engine.create();
       const runner = Runner.create();
+
+      // ⭐ [중요] 초기 로드 시 엔진이 멋대로 돌아가지 않게 물리 연산을 비활성화합니다.
+      runner.enabled = false;
+
       const render = Render.create({
         element: container,
         engine: engine,
@@ -776,7 +974,7 @@ export default {
 
       const wallThickness = 100;
 
-      // 1. 고정 벽 생성
+      // 2. 벽 생성 로직 (기존과 동일)
       const ground = Bodies.rectangle(
         container.clientWidth / 2,
         container.clientHeight + wallThickness / 2,
@@ -784,7 +982,6 @@ export default {
         wallThickness,
         { isStatic: true, render: { visible: false } }
       );
-
       const leftWall = Bodies.rectangle(
         -wallThickness / 2,
         container.clientHeight / 2,
@@ -792,7 +989,6 @@ export default {
         container.clientHeight * 2,
         { isStatic: true, render: { visible: false } }
       );
-
       const rightWall = Bodies.rectangle(
         container.clientWidth + wallThickness / 2,
         container.clientHeight / 2,
@@ -816,7 +1012,7 @@ export default {
       const mainWall = getRectBody(mainTextEl);
       const subWall = getRectBody(subTextEl);
 
-      // 2. 단어 객체 생성
+      // 3. 단어 객체 생성 (초기 위치는 화면 밖 아주 멀리)
       const words = [
         "DESIGN",
         "RESPONSIVE",
@@ -832,46 +1028,17 @@ export default {
       const wordBodies = words.map((word, i) => {
         return Bodies.rectangle(
           Math.random() * container.clientWidth,
-          -100 - i * 150,
+          -2000, // 로드 시 절대 보이지 않게 처리
           word.length * 18 + 30,
           45,
           {
             restitution: 0.5,
-
             render: { fillStyle: "transparent", strokeStyle: "transparent" },
             friction: 0.1,
             label: word,
-            chamfer: { radius: 22 }, // 더 둥글게
+            chamfer: { radius: 22 },
           }
         );
-      });
-
-      const mousePos = { x: 0, y: 0 };
-
-      container.addEventListener("mousemove", (e) => {
-        const rect = container.getBoundingClientRect();
-        mousePos.x = e.clientX - rect.left;
-        mousePos.y = e.clientY - rect.top;
-      });
-
-      // ⭐ 마우스 효과 로직
-      Events.on(engine, "beforeUpdate", () => {
-        const forceRange = 150;
-        const forceStrength = 0.000003; // 살짝 움직이는 강도
-
-        wordBodies.forEach((body) => {
-          const dx = body.position.x - mousePos.x;
-          const dy = body.position.y - mousePos.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-
-          if (distance < forceRange) {
-            const force = (forceRange - distance) * forceStrength;
-            Body.applyForce(body, body.position, {
-              x: dx * force,
-              y: dy * force,
-            });
-          }
-        });
       });
 
       Composite.add(engine.world, [
@@ -883,23 +1050,17 @@ export default {
         ...wordBodies,
       ]);
 
-      // 4. 커스텀 렌더링 (화질 보정 및 배경 제거 테두리 박스)
+      // 4. 커스텀 렌더링 (기존 유지)
       Events.on(render, "afterRender", () => {
         const ctx = render.context;
         wordBodies.forEach((body) => {
           const { x, y } = body.position;
-          const angle = body.angle;
-          const label = body.label;
-
+          const { angle, label } = body;
           const fixedWidth = label.length * 18 + 30;
           const fixedHeight = 45;
-          const r = 22; // 둥근 모서리
-
           ctx.save();
           ctx.translate(x, y);
           ctx.rotate(angle);
-
-          // 테두리 박스 그리기
           ctx.beginPath();
           ctx.strokeStyle = "#ffffff";
           ctx.lineWidth = 1.2;
@@ -908,32 +1069,43 @@ export default {
             -fixedHeight / 2,
             fixedWidth,
             fixedHeight,
-            r
+            22
           );
           ctx.stroke();
-
-          // 글자 그리기
           ctx.font = "500 20px IBM Plex Sans KR";
           ctx.fillStyle = "#ffffff";
           ctx.textAlign = "center";
           ctx.textBaseline = "middle";
           ctx.fillText(label, 0, 0);
-
           ctx.restore();
         });
       });
 
+      // 5. 렌더러는 미리 켜두되, 엔진은 끈 상태 유지
       Render.run(render);
 
+      // 6. ⭐ ScrollTrigger - 이 섹션이 실제로 '화면 안'으로 들어올 때만 가동
       ScrollTrigger.create({
         trigger: ".vision-section",
-        start: "top 60%",
+        start: "top 70%", // 섹션이 화면 하단에서 30% 정도 올라왔을 때
         onEnter: () => {
+          // 1) 단어들을 다시 낙하 대기 위치로 순간이동
+          wordBodies.forEach((body, i) => {
+            Body.setPosition(body, {
+              x: Math.random() * (container.clientWidth - 100) + 50,
+              y: -100 - i * 150,
+            });
+            Body.setVelocity(body, { x: 0, y: 0 }); // 속도 초기화
+          });
+
+          // 2) 이제야 엔진을 켜고 낙하를 시작함
+          runner.enabled = true;
           Runner.run(runner, engine);
         },
-        once: true,
+        once: true, // 한 번만 실행
       });
 
+      // 7. 리사이즈 대응 (기존 유지)
       window.addEventListener("resize", () => {
         if (!container) return;
         render.canvas.width = container.clientWidth;
@@ -1009,26 +1181,36 @@ export default {
   },
 
   mounted() {
-    // 1. 분리된 Three.js 배경 초기화
+    history.scrollRestoration = "manual";
+
     const canvas = document.getElementById("BlobBg");
     if (canvas) {
       this.blobEffect = initBlobBackground(canvas);
     }
 
-    // 2. 타이핑 및 애니메이션 실행
     this.typeEn();
+
     this.$nextTick(() => {
+      // 1. 레이아웃에 영향을 주는 애니메이션들 먼저 실행
       this.initBioReveal();
       this.initIntroAnimation();
-      this.initHorizontalScroll();
+      this.initHorizontalScroll(); // 가로 스크롤 (높이 변화 큼)
+      this.initSkillsAnimation(); // 스킬 섹션 Pin (높이 변화 큼)
+
       this.rollingTls = this.initRollingText();
-      this.initVisionPhysics();
       if (this.containerRef) this.initGSAPProjectList(this.containerRef);
-      // Workflow 마스크 로직 호출 (생략됨, 필요시 추가)
+
+      // 2. 모든 Pin과 레이아웃이 결정된 후 물리 엔진 초기화
+      // 조금의 여유 시간을 주어 브라우저가 높이 계산을 마치게 합니다.
       setTimeout(() => {
+        // 중요: 물리 엔진 시작 전 GSAP 위치값을 다시 계산
+        ScrollTrigger.refresh();
+
+        this.initVisionPhysics();
+
         console.log("3D 텍스트 초기화 시도...");
         this.initFocus3DText();
-      }, 500);
+      }, 100);
     });
   },
 

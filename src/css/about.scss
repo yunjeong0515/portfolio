@@ -128,7 +128,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: block;
           }
         }
         .scroll-icon {
@@ -339,6 +338,7 @@
           }
           p {
             font-size: 3.5rem;
+            white-space: nowrap;
           }
         }
         .reveal-text {
@@ -419,14 +419,15 @@
       }
       .focus-section {
         position: relative;
-        width: 90vw;
-        min-width: 1500px;
+        // min-width: 1500px;
         .inner {
           position: relative;
           display: flex;
+          justify-content: space-between;
           width: 100%;
           height: 100%;
-          padding: 100px 80px;
+          gap: 20rem;
+          padding: 13rem 20rem 10rem 20rem;
           .title-wrap {
             justify-content: flex-end;
             h2 {
@@ -437,10 +438,10 @@
             }
           }
           .fluid-container {
-            position: absolute;
-            right: 0%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
+            // right: 0%;
+            // top: 50%;
+            margin-top: 15%;
             width: 30vw;
             height: 30vh;
             z-index: 10;
@@ -480,7 +481,7 @@
             gap: 15rem;
             width: 100%;
             height: 100%;
-            padding: 150px 80px;
+            padding: 10rem 20rem;
             .title-wrap {
               h2 {
                 color: $mainpink;
@@ -529,7 +530,7 @@
           position: absolute;
           right: 0;
           top: 0;
-          transform: translate(40%, -40%);
+          transform: translate(50%, -50%);
           width: 60vw;
           aspect-ratio: 1 / 1;
           background: url(../assets/imgs/about/ellipse.png) no-repeat center
@@ -546,7 +547,7 @@
             gap: 15rem;
             width: 100%;
             height: 100%;
-            padding: 150px 200px;
+            padding: 10rem 20rem;
             .title-wrap {
               position: relative;
               z-index: 10;
@@ -560,11 +561,51 @@
             .img-wrap {
               position: absolute;
               left: 50%;
+              bottom: 5%;
+              width: clamp(25rem, 45vw, 100rem);
               transform: translate(-40%, 0%);
-              bottom: 0;
+              .code-symbol {
+                position: absolute;
+                left: 10%;
+                top: 20%;
+                z-index: 10;
+                transform: rotate(-10deg);
+                border-radius: 6rem;
+                padding: 10px 30px 15px 30px;
+                background-color: rgba($color: #fff, $alpha: 0.1);
+                box-shadow: inset 0px 3px 8px rgba($color: #fff, $alpha: 0.25);
+                span {
+                  font-size: clamp(2rem, 2.5vw, 4rem);
+                  color: rgba($color: #fff, $alpha: 0.7);
+                }
+              }
+              .code-greeting {
+                position: absolute;
+                right: 5%;
+                bottom: 33%;
+                z-index: 10;
+                transform: rotate(10deg);
+                display: flex;
+                flex-direction: column;
+                background-color: rgba($color: #fff, $alpha: 0.1);
+                border-radius: 16px;
+                width: fit-content;
+                padding: 10px 20px;
+                box-shadow: inset 0px 3px 8px rgba($color: #fff, $alpha: 0.25);
+                span {
+                  display: block;
+                  font-size: clamp(2rem, 2.5vw, 4rem);
+                  color: rgba($color: #fff, $alpha: 0.7);
+                  white-space: nowrap;
+                  &:nth-child(2) {
+                    margin-left: 8rem;
+                  }
+                }
+              }
               .macbook-img {
-                width: 40vw;
+                width: 100%;
                 transform: rotate(-22deg);
+
                 img {
                   display: block;
                   width: 100%;
@@ -583,24 +624,36 @@
     width: 100%;
     height: 100vh;
     background-color: $mainblue;
+    overflow: hidden;
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .fixed-area {
-      position: absolute;
-      left: 0;
+      position: absolute; // 화면에 고정
       top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 100%;
-      background-color: $mainblue;
+      z-index: 1;
       .bg-title {
         font-size: 15vw;
         color: #fff;
+        opacity: 0.1; // 은은하게 고정
         text-transform: uppercase;
-        transition: color 0.3s; // 부드러운 느낌
       }
     }
     .skill-card {
+      position: absolute;
+      // top: 0;
       width: 450px;
       min-height: 350px;
       padding: 40px 30px;
@@ -634,7 +687,26 @@
           color: rgba($color: #fff, $alpha: 0.8);
         }
       }
+      &:nth-child(odd) {
+        left: 10%;
+      }
+
+      &:nth-child(even) {
+        right: 10%;
+      }
     }
+  }
+
+  .project-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background-color: #fff;
+    // padding: 10rem;
+    margin-top: 0;
+    transform: translateY(0);
+    will-change: transform;
   }
   .vision-section {
     position: relative;
