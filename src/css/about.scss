@@ -86,11 +86,19 @@
             display: flex;
             align-items: center;
             font-size: 8vw;
+            letter-spacing: 0.1vw;
+            span {
+              color: rgba($color: #000000, $alpha: 0.8);
+            }
           }
           .stac-text {
-            font-size: 4vw;
+            position: relative;
+            z-index: 100;
+            font-size: 8vw;
+            letter-spacing: 0.1vw;
             text-align: right;
-            color: $black700;
+            color: rgba($color: #000000, $alpha: 0.8);
+            mix-blend-mode: difference;
           }
         }
         .intro-text {
@@ -113,6 +121,7 @@
           bottom: 0;
           transform: translate(-50%, 0);
           width: 20vw;
+          min-width: 300px;
           aspect-ratio: 3 / 4;
           img {
             display: block;
@@ -124,8 +133,8 @@
         }
         .scroll-icon {
           position: absolute;
-          left: 50%;
-          bottom: 20px;
+          right: 0;
+          bottom: 30px;
           transform: translate(-50%, 0);
         }
       }
@@ -208,22 +217,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
+      gap: 3rem;
       opacity: 1 !important;
       transform: none !important;
 
       .bio-text {
-        font-size: 5.5rem;
+        font-size: clamp(2.5rem, 3vw, 5rem);
         color: $black900;
         white-space: nowrap;
       }
 
       .video-box {
-        width: 160px;
-        height: 90px;
+        width: clamp(10rem, 7.2vw, 16rem);
+        aspect-ratio: 160 / 90;
         overflow: hidden;
-        background: #000;
         video {
+          display: block;
           width: 100%;
           height: 100%;
           object-fit: cover;
@@ -258,11 +267,12 @@
           text-align: center;
         }
         .en-text {
-          font-size: 5.5rem;
+          font-size: clamp(2.5rem, 3vw, 5rem);
           letter-spacing: 0.3rem;
           word-break: keep-all;
           text-align: center;
           .char {
+            font-family: "IBM Plex Mono", monospace;
             display: inline-block;
             color: rgba($color: #fff, $alpha: 0.2);
             position: relative;
@@ -294,14 +304,15 @@
   .horizontal-section {
     position: relative;
     width: 100%;
-    background-color: $black900;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease; /* 전환을 더 쫀득하게 */
     overflow: hidden;
     .pin-wrapper {
       display: flex;
       width: 100vw;
       height: 100vh;
       position: relative;
-      background-color: $black900;
+      background-color: transparent;
     }
 
     .horizontal-inner {
@@ -310,7 +321,6 @@
       width: max-content;
       height: 100%;
       will-change: transform;
-      background-color: $black900;
       .one-page {
         width: 100vw; // 한 화면 전체 너비
         min-width: 1000px;
@@ -319,6 +329,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: transparent !important;
+        .title-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 3rem;
+          h2 {
+            font-size: 3rem;
+          }
+          p {
+            font-size: 3.5rem;
+          }
+        }
+        .reveal-text {
+          h2,
+          p {
+            clip-path: inset(0 100% 0 0);
+            opacity: 1;
+          }
+        }
       }
       .identity-section {
         background-color: #fff;
@@ -339,12 +368,15 @@
                 min-width: 270px;
                 aspect-ratio: 289 / 422;
                 opacity: 0;
+                // background-color: #fff;
                 will-change: transform, opacity;
+                mix-blend-mode: multiply;
                 img {
                   display: block;
                   width: 100%;
                   height: 100%;
                   object-fit: contain;
+                  mix-blend-mode: multiply;
                 }
               }
             }
@@ -355,15 +387,10 @@
               width: 70%;
               padding: 5% 0;
               .title-wrap {
-                display: flex;
-                flex-direction: column;
-                gap: 3rem;
                 h2 {
-                  font-size: 3rem;
                   color: $blue500;
                 }
                 p {
-                  font-size: 3.5rem;
                   color: $black900;
                 }
               }
@@ -372,13 +399,18 @@
                 flex-direction: column;
                 align-items: flex-end;
                 width: 100%;
-
+                margin-left: 10%;
                 svg {
                   display: block;
-                  width: 70%;
-                  max-width: 969px;
-                  aspect-ratio: 969 / 189;
+
                   object-fit: contain;
+                  text {
+                    letter-spacing: 7px;
+                    font-size: 50px;
+                    font-weight: 400;
+                    font-family: "IBM Plex Mono";
+                    fill: $blue100;
+                  }
                 }
               }
             }
@@ -387,40 +419,50 @@
       }
       .focus-section {
         position: relative;
+        width: 90vw;
         min-width: 1500px;
-        background: url(../assets/imgs/about/focus_bg.png) no-repeat center
-          center / cover;
-        // background-color: $black900;
         .inner {
+          position: relative;
           display: flex;
           width: 100%;
           height: 100%;
           padding: 100px 80px;
           .title-wrap {
-            display: flex;
-            flex-direction: column;
             justify-content: flex-end;
-            gap: 3rem;
             h2 {
-              font-size: 3rem;
               color: #fff;
             }
             p {
-              font-size: 7rem;
               color: #fff;
             }
           }
-          #three-container {
-            width: 500px;
-            height: 500px;
+          .fluid-container {
             position: absolute;
-            right: 100px;
-            top: 0;
-
-            canvas {
-              display: block;
-              width: 100% !important;
-              height: 100% !important;
+            right: 0%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30vw;
+            height: 30vh;
+            z-index: 10;
+            .stage {
+              background-color: transparent; // 부모 배경 전환을 보여주기 위해 투명하게
+              .grain {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                // background-image: url(https://assets.codepen.io/721952/grain.png);
+                // mix-blend-mode: overlay;
+                pointer-events: none;
+                opacity: 0.5;
+              }
+              .char {
+                font-size: 10rem;
+                font-family: "IBM Plex Mono", monospace !important;
+                font-weight: 300;
+                text-shadow: 0 0 10px rgba(250, 250, 250, 0.3);
+              }
             }
           }
         }
@@ -440,26 +482,17 @@
             height: 100%;
             padding: 150px 80px;
             .title-wrap {
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              justify-content: flex-end;
-              gap: 3rem;
               h2 {
-                font-size: 3rem;
                 color: $mainpink;
               }
               p {
-                font-size: 3.5rem;
-                text-align: left;
                 color: #fff;
-                white-space: nowrap;
               }
             }
             .workflow-tags {
               display: flex;
               flex-direction: column;
-              align-items: flex-start;
+              align-items: flex-end;
               justify-content: space-between;
               gap: 20px;
               .tag {
@@ -476,7 +509,6 @@
             }
           }
         }
-
         .base-content {
           .inner {
             .workflow-tags {
@@ -492,6 +524,7 @@
       .experience-section {
         position: relative;
         background-color: $black900;
+        overflow: hidden;
         &::after {
           position: absolute;
           right: 0;
@@ -513,24 +546,15 @@
             gap: 15rem;
             width: 100%;
             height: 100%;
-            padding: 150px 80px;
+            padding: 150px 200px;
             .title-wrap {
               position: relative;
               z-index: 10;
-              display: flex;
-              flex-direction: column;
-              align-items: flex-start;
-              justify-content: flex-end;
-              gap: 3rem;
               h2 {
-                font-size: 3rem;
                 color: $mainblue;
               }
               p {
-                font-size: 3.5rem;
-                text-align: left;
                 color: #fff;
-                white-space: nowrap;
               }
             }
             .img-wrap {
@@ -539,7 +563,7 @@
               transform: translate(-40%, 0%);
               bottom: 0;
               .macbook-img {
-                width: 50vw;
+                width: 40vw;
                 transform: rotate(-22deg);
                 img {
                   display: block;
@@ -554,6 +578,64 @@
       }
     }
   }
+  .skills-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: $mainblue;
+    .fixed-area {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: $mainblue;
+      .bg-title {
+        font-size: 15vw;
+        color: #fff;
+        text-transform: uppercase;
+        transition: color 0.3s; // 부드러운 느낌
+      }
+    }
+    .skill-card {
+      width: 450px;
+      min-height: 350px;
+      padding: 40px 30px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.05);
+      .skill-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        .title-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          h3 {
+            font-size: 5rem;
+            color: #fff;
+          }
+          span {
+            font-size: 2rem;
+            color: #fff;
+          }
+        }
+        p {
+          font-size: 1.5rem;
+          line-height: 1.4;
+          color: rgba($color: #fff, $alpha: 0.8);
+        }
+      }
+    }
+  }
   .vision-section {
     position: relative;
     width: 100%;
@@ -561,10 +643,32 @@
     overflow: hidden;
     background-color: $mainblue;
     color: #fff;
-    padding: 100px 0;
+    padding: 0;
+
     .wrapper {
+      position: relative;
       width: 100%;
       height: 100%;
+      z-index: 1; // 캔버스보다 뒤에 배치
+      .canvas-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        // pointer-events: none;
+        .physics-canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 5;
+          canvas {
+            width: 100% !important;
+            height: 100% !important;
+            // pointer-events: auto;
+          }
+        }
+      }
     }
     .contents-wrap {
       display: flex;
@@ -572,6 +676,7 @@
       justify-content: space-between;
       width: 100%;
       height: 100%;
+      padding: 100px 0 50px 0;
       .title {
         font-size: 3rem;
         color: #fff;
@@ -585,14 +690,18 @@
           line-height: 1;
           color: #fff;
           white-space: nowrap;
+          display: inline-block;
         }
         .sub-text {
           display: flex;
           flex-direction: column;
           margin-bottom: 1vw;
+          flex: 1;
+          min-width: none;
           span {
             font-size: 1.5rem;
             color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
             &.row02 {
               margin-left: 2rem;
             }

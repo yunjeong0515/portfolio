@@ -1,15 +1,9 @@
 <template>
-  <q-page class="projectdetailpage-container kmusicalpage-container">
+  <q-page class="projectdetailpage-container seoul80page-container">
     <section class="visual-section">
       <div class="mockup-pc">
         <img
-          src="../../../src/assets/imgs/projects/kmusical/mockup_pc.png"
-          alt=""
-        />
-      </div>
-      <div class="mockup-m">
-        <img
-          src="../../../src/assets/imgs/projects/kmusical/mockup_m.png"
+          src="../../../src/assets/imgs/projects/seoul80/mockup_pc.png"
           alt=""
         />
       </div>
@@ -25,7 +19,7 @@
               v-if="project.link"
               :href="project.link"
               target="_blank"
-              class="view-more-btn"
+              class="view-more-btn black"
             >
               <div class="icon">
                 <svg
@@ -71,7 +65,7 @@
       </div>
     </section>
     <div class="project-body">
-      <section class="summary-section">
+      <section class="summary-section font_black">
         <div class="wrapper">
           <ul class="info-meta-list">
             <li class="meta-item">
@@ -115,25 +109,23 @@
           </ul>
         </div>
       </section>
-      <section class="overview-section">
+      <section class="overview-section font_black">
         <div class="wrapper">
           <span class="title font_ibm">&lt;Overview/&gt;</span>
           <div class="content-wrap">
             <p>
-              2025 K-뮤지컬국제마켓의 공식 웹사이트 및 운영 관리 시스템 구축
-              프로젝트입니다. 국내외 참가자들에게 행사 정보를 정확하고
-              효율적으로 전달하고, 티켓 구매 후 프로그램 예약까지 이어지는
-              사용자 경험(UX) 최적화된 예약 시스템을 구축하여 성공적인 행사
-              운영을 지원하는 데 중점을 두었습니다. <br /><br />본 프로젝트에서
-              K-뮤지컬국제마켓 웹사이트, 어드민페이지의 퍼블리싱(100%) 및
-              Front-end UI 구현을 전담했으며, 티켓구매-프로그램 예약 플로우의
-              기획 단계에 참여하여 사용자 동선을 설계하고 개발 가능성을
-              검토했습니다. <br />Vue.js 컴포넌트 구조를 기반으로 예약 시스템 및
-              복잡한 어드민 UI를 구현했으며, GSAP를 활용하여 페이지 콘텐츠에
-              생동감 있는 인터랙션을 추가했습니다. <br />i18n 라이브러리를 통해
-              다국어(영문) 페이지를 효율적으로 구현하고, SCSS와 반응형 웹
-              디자인을 적용하여 모든 디바이스에서 최적화된 사용자 경험과 높은
-              유지보수 효율성을 확보했습니다.
+              광복 80주년을 기념해 국민에게 다양한 기념사업 프로그램을 소개하는
+              홈페이지 구축 프로젝트입니다. <br />
+              방문자가 프로그램 정보를 직관적이고 흥미롭게 탐색할 수 있도록,
+              콘텐츠 중심의 UI 구성과 자연스러운 스크롤 인터랙션을 적용했습니다.
+              <br /><br />
+              본 프로젝트에서 전체 HTML 구조 설계, 인터랙션 기반 UI 구현, SVG
+              지도 연동 기능, 어드민 페이지 UI 작업 등을 담당했습니다. <br />
+              특히 스크롤 흐름에 따라 콘텐츠가 자연스럽게 등장하도록 설계해
+              단조로운 정보성 페이지의 사용자 피로도를 줄였으며, <br />SVG 기반
+              지도를 활용하여 지역별 프로그램을 시각적으로 탐색할 수 있는 기능을
+              구현하고, Vue.js 기반 구조를 활용해 핀 클릭 시 관련 정보를 즉시
+              노출하는 UX를 설계했습니다.
             </p>
           </div>
         </div>
@@ -147,10 +139,10 @@ import { defineComponent } from "vue";
 import { projects } from "src/data/projects";
 
 export default defineComponent({
-  name: "KmusicalMarket",
+  name: "Seoul80Anniversary",
   data() {
     return {
-      project: projects.find((p) => p.id === "kmusical"),
+      project: projects.find((p) => p.id === "heruelab"),
     };
   },
 });

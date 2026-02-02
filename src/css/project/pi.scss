@@ -1,0 +1,27 @@
+.picorporationpage-container {
+  .visual-section {
+    background-image: url(../../../src/assets/imgs/projects/pi/visual_bg.png);
+
+    .mockup-pc {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 70vw;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+    .mockup-m {
+      width: 35vw;
+      max-width: 660px;
+      transform: rotate(-12deg);
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}

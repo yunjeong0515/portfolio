@@ -8,45 +8,29 @@
       }"
     >
       <div class="wrapper">
-        <router-link to="/" class="home-btn">
-          <div class="dot-icon"></div>
-          <div class="text-wrapper home-title">
+        <router-link to="/" class="home-btn nav-btn" @click="handleSamePage">
+          <div class="text-wrapper">
             <span class="font_ibm font_400 original-text">HOME</span>
             <span class="font_ibm font_400 hover-text">HOME</span>
           </div>
-          <span class="font_ibm font_400 main-title"
-            >Yunjeong’s Web Portfolio</span
-          >
         </router-link>
-        <router-link class="header-logo" to="/">
-          <!-- <h1 class="font_ibm font_400">Yunjeong’s Web Portfolio</h1> -->
-          <svg
-            width="1000"
-            height="1000"
-            viewBox="0 0 1000 1000"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M267.695 875V628L46.6953 177H213.695L287.695 339L341.695 476H349.695L403.695 339L477.695 177H638.695L417.695 628V875H267.695ZM953.304 177V680C953.304 711.333 947.638 740 936.304 766C925.638 791.333 909.971 813 889.304 831C869.304 849 844.971 863 816.304 873C787.638 882.333 755.638 887 720.304 887C648.971 887 593.638 869.333 554.304 834C515.638 798 490.971 751 480.304 693L622.304 664C627.638 694 637.638 718.333 652.304 737C667.638 755.667 690.304 765 720.304 765C745.638 765 765.304 757 779.304 741C793.971 724.333 801.304 699 801.304 665V300H571.304V177H953.304Z"
-              fill="#0a0a0a"
-            />
-          </svg>
-        </router-link>
+
         <button
-          class="hamburger-menu"
+          class="hamburger-menu nav-btn"
           :class="{ 'is-active': leftDrawerOpen }"
           @click="leftDrawerOpen = !leftDrawerOpen"
         >
-          <span></span>
-          <span></span>
-          <span></span>
+          <span></span><span></span><span></span>
         </button>
+
         <div class="nav">
           <ul>
             <li>
-              <router-link to="/about" :class="{ on: $route.meta.AboutPage }">
-                <div class="dot-icon"></div>
+              <router-link
+                to="/about"
+                class="nav-btn"
+                :class="{ on: $route.meta.AboutPage }"
+              >
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">ABOUT</span>
                   <span class="font_ibm font_400 hover-text">ABOUT</span>
@@ -56,9 +40,9 @@
             <li>
               <router-link
                 to="/project"
+                class="nav-btn"
                 :class="{ on: $route.meta.ProjectPage }"
               >
-                <div class="dot-icon"></div>
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">PROJECT</span>
                   <span class="font_ibm font_400 hover-text">PROJECT</span>
@@ -69,12 +53,13 @@
         </div>
       </div>
     </header>
+
     <transition name="fade-slide">
       <div v-if="leftDrawerOpen" class="mobile-full-menu">
         <nav class="menu-content">
           <ul class="menu-list">
             <li>
-              <router-link to="/" @click="leftDrawerOpen = false">
+              <router-link to="/" @click="handleMobileHomeClick">
                 <span class="num font_mon">01</span>
                 <span class="text font_mon">HOME</span>
               </router-link>
@@ -95,27 +80,89 @@
         </nav>
       </div>
     </transition>
+
     <q-page-container>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition
+          :css="false"
+          @leave="onLeave"
+          @enter="onEnter"
+          mode="out-in"
+        >
+          <component :is="Component" :key="$route.fullPath" />
+        </transition>
+      </router-view>
     </q-page-container>
+
     <footer class="footer">
       <div class="wrapper"></div>
     </footer>
+
+    <div id="loader">
+      <div v-for="i in 8" :key="i" class="loader-bar"></div>
+    </div>
   </q-layout>
 </template>
 
 <script>
-import router from "src/router";
 import { defineComponent } from "vue";
-import { RouterLink } from "vue-router";
+import { gsap } from "gsap";
 
 export default defineComponent({
   name: "MainLayout",
-
   data() {
-    return { leftDrawerOpen: false };
+    return {
+      leftDrawerOpen: false,
+    };
   },
-  methods: {},
+  methods: {
+    handleSamePage(e) {
+      if (this.$route.path === "/") {
+        // 기본 이동 동작 중단 (이미 홈이므로)
+        if (e) e.preventDefault();
+
+        // 애니메이션 수동 실행
+        this.onLeave(null, () => {
+          window.scrollTo(0, 0); // 스크롤 상단으로
+          this.onEnter();
+        });
+      }
+    },
+
+    // 모바일 메뉴용 홈 클릭 핸들러
+    handleMobileHomeClick() {
+      this.leftDrawerOpen = false;
+      this.handleSamePage();
+    },
+
+    // 1. 페이지를 떠날 때 (박스들이 나타남)
+    onLeave(el, done) {
+      const tl = gsap.timeline({ onComplete: done });
+
+      tl.set("#loader", { display: "flex" }).fromTo(
+        ".loader-bar",
+        { x: "-100%" },
+        {
+          x: "0%",
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.inOut",
+        }
+      );
+    },
+
+    // 2. 새 페이지가 로드될 때 (박스들이 사라짐)
+    onEnter(el, done) {
+      const tl = gsap.timeline({ onComplete: done });
+
+      tl.to(".loader-bar", {
+        x: "100%",
+        duration: 0.5,
+        stagger: 0.08,
+        ease: "power2.inOut",
+      }).set("#loader", { display: "none" });
+    },
+  },
   mounted() {},
 });
 </script>

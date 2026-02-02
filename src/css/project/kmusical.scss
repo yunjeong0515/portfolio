@@ -1,4 +1,5 @@
 .kmusicalpage-container {
+  background-color: $black900;
   .visual-section {
     position: relative;
     background-image: url("../../../src/assets/imgs/projects/kmusical/visual_bg.jpg");
@@ -44,5 +45,10 @@
         display: block;
       }
     }
+  }
+  .project-body {
+    background-color: $black900;
+  }
+  .summary-section {
   }
 }

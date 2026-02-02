@@ -34,6 +34,30 @@ const routes = [
         path: "project/seoul80",
         component: () => import("pages/project/Seoul80Anniversary.vue"),
       },
+      {
+        path: "project/picorporation",
+        component: () => import("pages/project/PiCorporation.vue"),
+      },
+      {
+        path: "project/heruelab",
+        component: () => import("pages/project/HeruePage.vue"),
+      },
+      {
+        path: "project/hanwhalife",
+        component: () => import("pages/project/HanwhalifeEvent.vue"),
+      },
+      // {
+      //   path: "project/seouluniversity",
+      //   component: () => import("pages/project/HanwhalifeEvent.vue"),
+      // },
+      {
+        path: "project/rebound",
+        component: () => import("pages/project/ReboundFestival.vue"),
+      },
+      {
+        path: "project/louche9",
+        component: () => import("pages/project/ReboundFestival.vue"),
+      },
     ],
   },
 

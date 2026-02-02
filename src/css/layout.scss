@@ -1,19 +1,21 @@
+.pen-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
 .header {
   position: fixed;
-  left: 50%;
-  top: 20px;
-  transform: translate(-50%, 0);
-  width: calc(100% - 60px);
-  height: 50px;
-  border-radius: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 80px;
   z-index: 1000;
-  // border-bottom: 1px solid #fff;
-  background: rgba(233, 233, 233, 0.1);
-  backdrop-filter: blur(20px);
-  transition: background 0.3s, backdrop-filter 0.3s, color 0.3s;
   &.is-light {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
     .dot-icon {
       background-color: #ffffff !important;
     }
@@ -33,64 +35,47 @@
   .wrapper {
     display: flex;
     align-items: center;
-    height: 50px;
+    height: 80px;
     padding: 0 30px;
     justify-content: space-between;
-    .header-logo {
-      display: none;
-      h1 {
-        font-size: 18px;
-      }
-    }
-    .home-btn {
+    .nav-btn {
+      position: relative;
       display: flex;
       align-items: center;
-      gap: 8px;
-      .home-icon {
-        width: 24px;
-        aspect-ratio: 1 / 1;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-      }
-      .dot-icon {
-        width: 8px;
-        height: 8px;
-        border-radius: 1px;
-        aspect-ratio: 1/1;
-        background-color: $black900;
-      }
-      .home-title {
-        display: block;
-        &.text-wrapper {
-          position: relative;
-          overflow: hidden;
-          height: 20px;
-          span {
-            display: block;
-            font-size: 18px;
-            line-height: 1;
-            transition: transform 0.3s ease-out;
-            color: $black900;
-            &.original-text {
-              transform: translateY(0);
-            }
-            &.hover-text {
-              transform: translateY(0);
-            }
-          }
-        }
-      }
-      span {
-        font-size: 20px;
-        color: $black900;
-        &.main-title {
-          display: none;
-        }
+      justify-content: center;
+      padding: 0 18px;
+      height: 40px;
+      border-radius: 100px;
+      background-color: rgba($color: #efefef, $alpha: 0.2);
+      &::before {
+        content: "";
+        position: absolute;
+        inset: -1px; // 보더 두께만큼 확장
+        z-index: -1;
+        background: linear-gradient(
+          45deg,
+          rgba(170, 170, 170, 0.1) 0%,
+          rgba(255, 255, 255, 0.8) 50%,
+          rgba(255, 255, 255, 0.1) 100%
+        );
+        background-size: 200% auto;
+        background-size: 200% auto; // 움직일 여백 생성
+        border-radius: 100px;
+
+        // 마스크: 안쪽 칠해진 부분은 가리고 보더 라인만 남김
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor; // 안쪽을 파내는 핵심 설정
+        mask-composite: exclude;
+
+        padding: 1px; // 보더 두께
+        transition: opacity 0.3s ease;
       }
       &:hover {
+        &::before {
+          opacity: 1;
+          animation: whiteShine 3s linear infinite;
+        }
         .text-wrapper {
           span {
             &.original-text {
@@ -102,67 +87,45 @@
           }
         }
       }
+      &.on {
+        .text-wrapper {
+          span {
+            color: $blue500;
+          }
+        }
+      }
+      .text-wrapper {
+        position: relative;
+        overflow: hidden;
+        height: 20px;
+        span {
+          display: block;
+          font-size: 18px;
+          line-height: 1;
+          transition: transform 0.3s ease-out;
+          color: $black900;
+          &.original-text {
+            transform: translateY(0);
+          }
+          &.hover-text {
+            transform: translateY(0);
+          }
+        }
+      }
+    }
+    @keyframes whiteShine {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
     }
     .nav {
       ul {
         display: flex;
         align-items: center;
         gap: 45px;
-        li {
-          a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            .dot-icon {
-              width: 8px;
-              height: 8px;
-              border-radius: 1px;
-              aspect-ratio: 1/1;
-              background-color: $black900;
-            }
-            .text-wrapper {
-              position: relative;
-              overflow: hidden;
-              height: 18px;
-              span {
-                display: block;
-                font-size: 18px;
-                line-height: 1;
-                transition: transform 0.3s ease-out;
-                color: $black900;
-                &.original-text {
-                  transform: translateY(0);
-                }
-                &.hover-text {
-                  transform: translateY(0);
-                }
-              }
-            }
-            &:hover {
-              .text-wrapper {
-                span {
-                  &.original-text {
-                    transform: translateY(-100%);
-                  }
-                  &.hover-text {
-                    transform: translateY(-100%);
-                  }
-                }
-              }
-            }
-            &.on {
-              .dot-icon {
-                background-color: $blue500;
-              }
-              .text-wrapper {
-                span {
-                  color: $blue500;
-                }
-              }
-            }
-          }
-        }
       }
     }
     .hamburger-menu {
@@ -170,44 +133,71 @@
     }
   }
 }
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  z-index: 999999;
+  pointer-events: none;
+  overflow: hidden;
+
+  .loader-bar {
+    width: 100%;
+    height: 12.5vh; /* 8개이므로 100/8 = 12.5 */
+    background: $black900; /* 원하는 색상으로 변경 */
+    transform: translateX(-100%);
+  }
+}
+
+/* --- 핵심 애니메이션 로직 --- */
+
+/* 1. 페이지가 나갈 때: 박스가 가운데로 모여서 화면을 가림 */
+.split-gate-leave-active ~ .split-overlay {
+  .top-gate,
+  .bottom-gate {
+    transform: translateY(0%);
+  }
+}
+
+/* 2. 새 페이지가 들어올 때: 다시 밖으로 밀어냄 */
+/* enter-from 시점에 박스가 이미 닫혀있어야 하므로 아래처럼 설정 */
+.split-gate-enter-from ~ .split-overlay {
+  .top-gate,
+  .bottom-gate {
+    transform: translateY(0%);
+  }
+}
+
+.split-gate-enter-active ~ .split-overlay {
+  .top-gate {
+    transform: translateY(-100%);
+  }
+  .bottom-gate {
+    transform: translateY(100%);
+  }
+}
 
 @media (max-width: 1280px) {
   .header {
-    top: 0;
-    width: 100%;
-    border-radius: 0;
     .wrapper {
-      .header-logo {
-        display: block;
-        width: 30px;
-        height: 30px;
-        svg {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-        }
-      }
-      .home-btn {
-        display: none;
-      }
       .nav {
         display: none;
       }
       .hamburger-menu {
-        width: 24px;
-        height: 24px;
+        width: fit-content;
         display: flex;
         flex-direction: column;
         justify-content: center;
         gap: 5px;
-        background: transparent;
-        border: none;
         cursor: pointer;
-        padding: 0;
         position: relative;
         span {
           display: block;
-          width: 100%;
+          width: 24px;
           height: 2px;
           background-color: $black900;
           border-radius: 10px;
@@ -242,43 +232,43 @@
     z-index: 900;
     display: flex;
     justify-content: flex-end;
-    .menu-backdrop {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6); // 배경 어둡게
-      backdrop-filter: blur(4px); // 배경 블러 처리 (선택)
-    }
-
     .menu-content {
       position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       width: 100%;
       height: 100%;
-      background: #fff;
-      padding: 50px 30px;
+      background-color: rgba($color: #000, $alpha: 0.8);
+      backdrop-filter: blur(50px);
+      padding: 80px 30px;
       .menu-list {
         display: flex;
         flex-direction: column;
+        justify-content: center;
         align-items: center;
+        gap: 30px;
         margin: 20px 0;
         li {
           width: 100%;
           a {
             display: flex;
+            flex-direction: column;
             align-items: baseline;
-            gap: 10px;
-            color: $black700;
-            border-bottom: 1px solid $black50;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            color: #fff;
             padding: 15px 10px;
             .num {
-              font-size: 14px;
-              color: #999;
+              display: none;
+              font-size: 2vw;
+              color: rgba($color: #fff, $alpha: 0.7);
             }
             .text {
-              font-size: 32px;
+              font-size: 6vw;
               font-weight: 600;
+              color: #fff;
             }
             &:hover .text {
               color: $mainblue;
@@ -295,15 +285,27 @@
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
     .menu-content {
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
+  /* 시작 상태 (닫혀 있을 때) */
   .fade-slide-enter-from,
   .fade-slide-leave-to {
-    opacity: 0;
+    opacity: 0; /* 배경은 그 자리에서 투명해짐 */
+
     .menu-content {
-      transform: translateX(100%); // 오른쪽으로 사라짐
+      transform: translateY(-50px); /* 너무 멀리서 오지 않게 살짝 위에서 시작 */
+    }
+  }
+
+  /* 종료 상태 (완전히 열렸을 때) */
+  .fade-slide-enter-to,
+  .fade-slide-leave-from {
+    opacity: 1;
+
+    .menu-content {
+      transform: translateY(0);
     }
   }
 }

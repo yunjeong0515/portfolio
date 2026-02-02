@@ -1,17 +1,11 @@
 <template>
-  <q-page class="projectdetailpage-container kmusicalpage-container">
+  <q-page class="projectdetailpage-container picorporationpage-container">
     <section class="visual-section">
       <div class="mockup-pc">
-        <img
-          src="../../../src/assets/imgs/projects/kmusical/mockup_pc.png"
-          alt=""
-        />
+        <img src="../../../src/assets/imgs/projects/pi/mockup_pc.png" alt="" />
       </div>
       <div class="mockup-m">
-        <img
-          src="../../../src/assets/imgs/projects/kmusical/mockup_m.png"
-          alt=""
-        />
+        <img src="../../../src/assets/imgs/projects/pi/mockup_m.png" alt="" />
       </div>
       <div class="wrapper">
         <div class="project-info">
@@ -147,10 +141,10 @@ import { defineComponent } from "vue";
 import { projects } from "src/data/projects";
 
 export default defineComponent({
-  name: "KmusicalMarket",
+  name: "ReboundFestival",
   data() {
     return {
-      project: projects.find((p) => p.id === "kmusical"),
+      project: projects.find((p) => p.id === "rebound"),
     };
   },
 });
