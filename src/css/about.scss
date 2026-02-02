@@ -85,18 +85,26 @@
           .keyworld-wrap {
             display: flex;
             align-items: center;
-            font-size: 15rem;
+            font-size: 8vw;
+            letter-spacing: 0.1vw;
+            span {
+              color: rgba($color: #000000, $alpha: 0.8);
+            }
           }
           .stac-text {
-            font-size: 8rem;
-            margin-left: 65%;
-            color: $black700;
+            position: relative;
+            z-index: 100;
+            font-size: 8vw;
+            letter-spacing: 0.1vw;
+            text-align: right;
+            color: rgba($color: #000000, $alpha: 0.8);
+            mix-blend-mode: difference;
           }
         }
         .intro-text {
           position: absolute;
           left: 0;
-          bottom: 100px;
+          bottom: 50px;
           display: flex;
           flex-direction: column;
           span {
@@ -109,11 +117,14 @@
         }
         .profile-img {
           position: absolute;
-          right: 0;
+          left: 50%;
           bottom: 0;
-          width: 17vw;
+          transform: translate(-50%, 0);
+          width: 20vw;
+          min-width: 300px;
           aspect-ratio: 3 / 4;
           img {
+            display: block;
             width: 100%;
             height: 100%;
             object-fit: contain;
@@ -122,8 +133,8 @@
         }
         .scroll-icon {
           position: absolute;
-          left: 50%;
-          bottom: 20px;
+          right: 0;
+          bottom: 30px;
           transform: translate(-50%, 0);
         }
       }
@@ -132,8 +143,10 @@
   .rolling-section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 150px 0;
     gap: 100px;
-    padding: 100px 0;
     width: 100%;
     overflow: hidden;
     .rolling-wrapper {
@@ -183,9 +196,60 @@
       }
     }
   }
+  .bio-section {
+    width: 100%;
+    height: 100vh;
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+
+    .bio-content-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .bio-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      opacity: 1 !important;
+      transform: none !important;
+
+      .bio-text {
+        font-size: clamp(2.5rem, 3vw, 5rem);
+        color: $black900;
+        white-space: nowrap;
+      }
+
+      .video-box {
+        width: clamp(10rem, 7.2vw, 16rem);
+        aspect-ratio: 160 / 90;
+        overflow: hidden;
+        video {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
   .intro-section {
     width: 100%;
     height: 100vh;
+    background-color: $blue500;
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.08) 1px,
+      /* 선 색상과 두께 (아주 연한 블랙) */ transparent 1px
+    );
+    background-size: 20% 100%;
     .pin-wrapper {
       display: flex;
       flex-direction: column;
@@ -197,35 +261,451 @@
         display: flex;
         flex-direction: column;
         gap: 5rem;
-        .split-text {
+        .sub-title {
+          font-size: 2rem;
+          color: #fff;
+          text-align: center;
+        }
+        .en-text {
+          font-size: clamp(2.5rem, 3vw, 5rem);
+          letter-spacing: 0.3rem;
+          word-break: keep-all;
           text-align: center;
           .char {
+            font-family: "IBM Plex Mono", monospace;
             display: inline-block;
-            color: $blue50;
+            color: rgba($color: #fff, $alpha: 0.2);
             position: relative;
 
             // 위에 덮어씌울 글자 (진한 색)
-            &::after {
-              content: attr(data-char);
-              position: absolute;
-              left: 0;
-              top: 0;
-              color: $blue500; // 채워질 색상
-              width: var(--fill-width, 0%);
-              overflow: hidden;
-              transition: none;
+            // &::after {
+            //   content: attr(data-char);
+            //   position: absolute;
+            //   left: 0;
+            //   top: 0;
+            //   color: $blue500; // 채워질 색상
+            //   width: var(--fill-width, 0%);
+            //   overflow: hidden;
+            //   transition: none;
+            // }
+          }
+        }
+        .kr-text {
+          opacity: 0;
+          transform: translateY(50px);
+          font-size: 2.5rem;
+          text-align: center;
+          word-break: keep-all;
+          color: $blue50;
+        }
+      }
+    }
+  }
+  .horizontal-section {
+    position: relative;
+    width: 100%;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease; /* 전환을 더 쫀득하게 */
+    overflow: hidden;
+    .pin-wrapper {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      background-color: transparent;
+    }
+
+    .horizontal-inner {
+      display: flex;
+      flex-wrap: nowrap; // 줄바꿈 방지
+      width: max-content;
+      height: 100%;
+      will-change: transform;
+      .one-page {
+        width: 100vw; // 한 화면 전체 너비
+        min-width: 1000px;
+        height: 100%;
+        flex-shrink: 0; // 너비 고정
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent !important;
+        .title-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 3rem;
+          h2 {
+            font-size: 3rem;
+          }
+          p {
+            font-size: 3.5rem;
+          }
+        }
+        .reveal-text {
+          h2,
+          p {
+            clip-path: inset(0 100% 0 0);
+            opacity: 1;
+          }
+        }
+      }
+      .identity-section {
+        background-color: #fff;
+        .wrapper {
+          display: flex;
+          align-items: flex-end;
+          width: 100%;
+          height: 100%;
+          .contents-inner {
+            display: flex;
+            align-items: stretch;
+            gap: 3vw;
+            padding: 100px 0 0 0;
+            .img-area {
+              width: 30%;
+              .profile-img {
+                width: 100%;
+                min-width: 270px;
+                aspect-ratio: 289 / 422;
+                opacity: 0;
+                // background-color: #fff;
+                will-change: transform, opacity;
+                mix-blend-mode: multiply;
+                img {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                  mix-blend-mode: multiply;
+                }
+              }
+            }
+            .text-area {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              width: 70%;
+              padding: 5% 0;
+              .title-wrap {
+                h2 {
+                  color: $blue500;
+                }
+                p {
+                  color: $black900;
+                }
+              }
+              .scrolling-svg-text {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                width: 100%;
+                margin-left: 10%;
+                svg {
+                  display: block;
+
+                  object-fit: contain;
+                  text {
+                    letter-spacing: 7px;
+                    font-size: 50px;
+                    font-weight: 400;
+                    font-family: "IBM Plex Mono";
+                    fill: $blue100;
+                  }
+                }
+              }
             }
           }
         }
-
-        h2 {
-          font-size: 5.5rem;
-          letter-spacing: 0.3rem;
-          word-break: keep-all;
+      }
+      .focus-section {
+        position: relative;
+        width: 90vw;
+        min-width: 1500px;
+        .inner {
+          position: relative;
+          display: flex;
+          width: 100%;
+          height: 100%;
+          padding: 100px 80px;
+          .title-wrap {
+            justify-content: flex-end;
+            h2 {
+              color: #fff;
+            }
+            p {
+              color: #fff;
+            }
+          }
+          .fluid-container {
+            position: absolute;
+            right: 0%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 30vw;
+            height: 30vh;
+            z-index: 10;
+            .stage {
+              background-color: transparent; // 부모 배경 전환을 보여주기 위해 투명하게
+              .grain {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                // background-image: url(https://assets.codepen.io/721952/grain.png);
+                // mix-blend-mode: overlay;
+                pointer-events: none;
+                opacity: 0.5;
+              }
+              .char {
+                font-size: 10rem;
+                font-family: "IBM Plex Mono", monospace !important;
+                font-weight: 300;
+                text-shadow: 0 0 10px rgba(250, 250, 250, 0.3);
+              }
+            }
+          }
+        }
+      }
+      .workflow-section {
+        position: relative;
+        width: fit-content;
+        min-width: fit-content;
+        .content-wrap {
+          width: 100%;
+          height: 100%;
+          .inner {
+            display: flex;
+            align-items: flex-end;
+            gap: 15rem;
+            width: 100%;
+            height: 100%;
+            padding: 150px 80px;
+            .title-wrap {
+              h2 {
+                color: $mainpink;
+              }
+              p {
+                color: #fff;
+              }
+            }
+            .workflow-tags {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              justify-content: space-between;
+              gap: 20px;
+              .tag {
+                font-size: 13rem;
+                line-height: 1;
+                color: transparent;
+                -webkit-text-stroke-color: #fff;
+                -webkit-text-stroke-width: 1px;
+                transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+                &:hover {
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+        .base-content {
+          .inner {
+            .workflow-tags {
+              .tag {
+                color: transparent;
+                -webkit-text-stroke-color: #fff;
+                -webkit-text-stroke-width: 1px;
+              }
+            }
+          }
+        }
+      }
+      .experience-section {
+        position: relative;
+        background-color: $black900;
+        overflow: hidden;
+        &::after {
+          position: absolute;
+          right: 0;
+          top: 0;
+          transform: translate(40%, -40%);
+          width: 60vw;
+          aspect-ratio: 1 / 1;
+          background: url(../assets/imgs/about/ellipse.png) no-repeat center
+            center / contain;
+          content: "";
+        }
+        .content-wrap {
+          width: 100%;
+          height: 100%;
+          .inner {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 15rem;
+            width: 100%;
+            height: 100%;
+            padding: 150px 200px;
+            .title-wrap {
+              position: relative;
+              z-index: 10;
+              h2 {
+                color: $mainblue;
+              }
+              p {
+                color: #fff;
+              }
+            }
+            .img-wrap {
+              position: absolute;
+              left: 50%;
+              transform: translate(-40%, 0%);
+              bottom: 0;
+              .macbook-img {
+                width: 40vw;
+                transform: rotate(-22deg);
+                img {
+                  display: block;
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .skills-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: $mainblue;
+    .fixed-area {
+      position: absolute;
+      left: 0;
+      top: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: $mainblue;
+      .bg-title {
+        font-size: 15vw;
+        color: #fff;
+        text-transform: uppercase;
+        transition: color 0.3s; // 부드러운 느낌
+      }
+    }
+    .skill-card {
+      width: 450px;
+      min-height: 350px;
+      padding: 40px 30px;
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-top: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 5px 5px 5px rgba(255, 255, 255, 0.05);
+      .skill-info {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        .title-wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          h3 {
+            font-size: 5rem;
+            color: #fff;
+          }
+          span {
+            font-size: 2rem;
+            color: #fff;
+          }
         }
         p {
-          font-size: 3rem;
-          word-break: keep-all;
+          font-size: 1.5rem;
+          line-height: 1.4;
+          color: rgba($color: #fff, $alpha: 0.8);
+        }
+      }
+    }
+  }
+  .vision-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $mainblue;
+    color: #fff;
+    padding: 0;
+
+    .wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1; // 캔버스보다 뒤에 배치
+      .canvas-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        // pointer-events: none;
+        .physics-canvas {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 5;
+          canvas {
+            width: 100% !important;
+            height: 100% !important;
+            // pointer-events: auto;
+          }
+        }
+      }
+    }
+    .contents-wrap {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100%;
+      height: 100%;
+      padding: 100px 0 50px 0;
+      .title {
+        font-size: 3rem;
+        color: #fff;
+      }
+      .text-wrap {
+        display: flex;
+        align-items: flex-end;
+        gap: 4rem;
+        .main-text {
+          font-size: 8vw;
+          line-height: 1;
+          color: #fff;
+          white-space: nowrap;
+          display: inline-block;
+        }
+        .sub-text {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 1vw;
+          flex: 1;
+          min-width: none;
+          span {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.8);
+            white-space: nowrap;
+            &.row02 {
+              margin-left: 2rem;
+            }
+          }
         }
       }
     }

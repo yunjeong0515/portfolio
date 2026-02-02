@@ -241,7 +241,7 @@
                   }
                 }
                 span {
-                  font-size: 2.5rem;
+                  font-size: 2rem;
                   color: #fff;
                 }
                 &:hover {
@@ -345,7 +345,7 @@
   position: relative;
   .terminal-window {
     position: absolute;
-    left: 50%;
+    right: 5%;
     bottom: 0;
     transform: translate(0, 0);
     width: 40vw;
@@ -387,14 +387,14 @@
       padding: 2.5rem 1.5rem 3.5rem 1.5rem;
       .main-text {
         height: 100%;
-        min-height: 10vh;
+        min-height: 15vh;
         margin-bottom: 5vh;
         p {
           display: inline-block;
           white-space: pre-wrap;
           .char {
             font-family: "IBM Plex Mono", monospace;
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             color: #fff;
             display: inline-block;
             vertical-align: top;
@@ -403,6 +403,7 @@
       }
       p {
         font-size: 1.5rem;
+        letter-spacing: 0.1rem;
         color: #fff;
       }
       .dynamic-cursor {
@@ -491,7 +492,7 @@
 
   .terminal-container {
     .terminal-window {
-      left: 55%;
+      // left: 55%;
       .terminal-body {
         .dynamic-cursor {
           margin-left: 3px;
@@ -607,6 +608,7 @@
     background: rgba(0, 0, 0, 0.3);
     .terminal-window {
       left: 50%;
+      right: auto;
       top: 50%;
       transform: translate(-50%, -50%);
       bottom: auto;

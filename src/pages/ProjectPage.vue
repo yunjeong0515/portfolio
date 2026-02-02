@@ -1,26 +1,42 @@
 <template>
   <q-page class="projectpage-container">
     <section class="visual-section">
-      <div class="wrapper">
-        <div class="sub-title">
+      <div class="sub-title">
+        <div class="wrapper">
           <span class="font_ibm">Digital Experiences-</span>
         </div>
-        <div class="title-wrap">
-          <span class="font_ibm">2024-2025</span>
-          <h2 class="font_500">PROJECT</h2>
-        </div>
-        <div class="thumb-rolling-container">
-          <ul>
-            <li>
-              <img />
-            </li>
-          </ul>
-        </div>
-        <div class="scroll-icon">
-          <span class="font_ibm">SCROLL</span>
-          <div class="icon">
-            <img src="../assets/imgs/icon/arrow_down_b9.svg" alt="" />
+      </div>
+
+      <div class="thumb-rolling-container">
+        <div class="thumb-stage">
+          <div class="thumb-roller">
+            <template v-for="(p, i) in [...projects, ...projects]" :key="i">
+              <div v-if="p.thumbnail_sub" class="thumb-card">
+                <img :src="p.thumbnail_sub" :alt="p.name" />
+              </div>
+            </template>
           </div>
+        </div>
+      </div>
+
+      <div class="title-wrap">
+        <div class="wrapper">
+          <span class="font_ibm">2024-</span>
+          <h2 class="project-title font_500">
+            <span class="key">P</span>
+            <span class="key">R</span>
+            <span class="key">O</span>
+            <span class="key">J</span>
+            <span class="key">E</span>
+            <span class="key">C</span>
+            <span class="key">T</span>
+          </h2>
+        </div>
+      </div>
+      <div class="scroll-icon">
+        <span class="font_ibm">SCROLL</span>
+        <div class="icon">
+          <img src="../assets/imgs/icon/arrow_down_b9.svg" alt="" />
         </div>
       </div>
     </section>
@@ -29,7 +45,7 @@
         <div class="head-tite-wrap">
           <span class="count font_ibm">{{ projects.length }}</span>
           <div class="title-wrap">
-            <h2 class="font_400">PROJECT</h2>
+            <h2 class="font_mon font_400">PROJECT</h2>
             <div class="icon">
               <img src="../assets/imgs/icon/line_arrow_w.svg" alt="" />
             </div>
@@ -100,10 +116,11 @@
           <div
             v-for="project in projects"
             :key="project.id"
+            @click="goToDetail(project.id)"
             class="project-item grid-item"
-            @mouseenter="setHover(project.id)"
-            @mouseleave="clearHover()"
           >
+            <!-- @mouseenter="setHover(project.id)"
+            @mouseleave="clearHover()" -->
             <div class="project-thumb">
               <div class="project-skills">
                 <span
@@ -119,21 +136,21 @@
                 :alt="project.name + ' 썸네일'"
                 class="thumbnail-img"
               />
-              <img
+              <!-- <img
                 :src="project.hoverImage"
                 :alt="project.name + ' 호버 이미지'"
                 class="hover-img"
                 :class="{ active: hoveredProjectId === project.id }"
-              />
+              /> -->
             </div>
             <div class="project-info">
               <div class="title-wrap">
                 <h3 class="project-name font_500">{{ project.name }}</h3>
-                <span class="project-description">{{
+                <span class="project-description font_mon">{{
                   project.description
                 }}</span>
               </div>
-              <span class="project-date font_ibm">{{ project.date }}</span>
+              <span class="project-date font_mon">{{ project.date }}</span>
             </div>
           </div>
         </div>
@@ -141,12 +158,21 @@
           class="project-list-container project-list-view"
           v-else-if="viewMode === 'list'"
         >
+          <div class="floating-thumbnail" ref="floatingThumb">
+            <img
+              :src="hoveredProjectThumb"
+              alt="플로팅 썸네일"
+              v-if="hoveredProjectThumb"
+            />
+          </div>
           <div
             v-for="project in projects"
             :key="project.id"
             class="project-item list-item"
-            @mouseenter="setHover(project.id)"
-            @mouseleave="clearHover()"
+            @click="goToDetail(project.id)"
+            @mouseenter="onMouseEnter(project.thumbnail)"
+            @mouseleave="onMouseLeave"
+            @mousemove="onMouseMove"
           >
             <div class="list-head-row">
               <div class="title-wrap">
@@ -155,7 +181,6 @@
                   project.description
                 }}</span>
               </div>
-              <span class="project-date font_ibm">{{ project.date }}</span>
               <!-- <div class="project-skills">
                 <span
                   v-for="skill in project.skills"
@@ -165,6 +190,22 @@
                   {{ skill }}
                 </span>
               </div> -->
+              <div class="project-category">
+                <span
+                  v-for="(cat, index) in project.category"
+                  :key="index"
+                  class="category-tag font_ibm"
+                >
+                  {{ cat }}
+                  <i
+                    v-if="index < project.category.length - 1"
+                    class="separator"
+                    >/</i
+                  >
+                </span>
+              </div>
+
+              <span class="project-date font_mon">{{ project.date }}</span>
             </div>
             <!-- <div class="project-thumb">
                 <img
@@ -190,8 +231,11 @@
 import router from "src/router";
 import { defineComponent } from "vue";
 import { RouterLink } from "vue-router";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "src/data/projects";
 
+gsap.registerPlugin(ScrollTrigger);
 export default defineComponent({
   name: "ProjectPage",
 
@@ -200,16 +244,80 @@ export default defineComponent({
       viewMode: "grid",
       projects: projects,
       hoveredProjectId: null,
+      hoveredProjectThumb: null,
     };
   },
   methods: {
-    setHover(id) {
-      this.hoveredProjectId = id;
+    // setHover(id) {
+    //   this.hoveredProjectId = id;
+    // },
+    // clearHover() {
+    //   this.hoveredProjectId = null;
+    // },
+    initTitleAnimation() {
+      gsap.from(".project-title .key", {
+        scrollTrigger: {
+          trigger: ".project-title",
+          start: "top 85%",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.05,
+        ease: "back.out(1.7)",
+      });
     },
-    clearHover() {
-      this.hoveredProjectId = null;
+    goToDetail(id) {
+      this.$router.push(`/project/${id}`);
+    },
+    initListAnimation() {
+      const items = document.querySelectorAll(".project-item");
+
+      items.forEach((item) => {
+        gsap.from(item, {
+          scrollTrigger: {
+            trigger: item, // 각 아이템 자체가 트리거가 됩니다.
+            start: "top 90%", // 아이템 상단이 화면 하단 10% 지점에 도달하면 시작
+            toggleActions: "play none none none", // 한 번만 실행
+          },
+          y: 60, // 아래에서 위로 이동
+          opacity: 0, // 투명도 조절
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      });
+    },
+    onMouseEnter(thumb) {
+      this.hoveredProjectThumb = thumb;
+      gsap.to(this.$refs.floatingThumb, {
+        scale: 1,
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+      });
+    },
+    onMouseLeave() {
+      gsap.to(this.$refs.floatingThumb, {
+        scale: 0,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+      });
+    },
+    onMouseMove(e) {
+      // 마우스 위치에 맞춰 floating-thumbnail 이동
+      // 리스트 영역 내에서의 상대 좌표를 계산
+      gsap.to(this.$refs.floatingThumb, {
+        x: e.clientX + 20, // 마우스 화살표 옆으로 약간 띄움
+        y: e.clientY + 20,
+        duration: 0.6, // 숫자가 높을수록 쫀득하게 따라옴
+        ease: "power3.out",
+      });
     },
   },
-  mounted() {},
+  mounted() {
+    this.initTitleAnimation();
+    this.initListAnimation();
+  },
 });
 </script>

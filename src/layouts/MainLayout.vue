@@ -1,57 +1,48 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <div class="header" :class="{ main: $route.meta.IndexPage }">
+    <header
+      class="header"
+      :class="{
+        main: $route.meta.IndexPage,
+        'is-light': $route.meta.isDarkPage,
+      }"
+    >
       <div class="wrapper">
-        <router-link to="/" class="home-btn">
-          <!-- <div class="home-icon">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9.14373 20.7821V17.7152C9.14372 16.9381 9.77567 16.3067 10.5584 16.3018H13.4326C14.2189 16.3018 14.8563 16.9346 14.8563 17.7152V20.7732C14.8562 21.4473 15.404 21.9951 16.0829 22H18.0438C18.9596 22.0023 19.8388 21.6428 20.4872 21.0007C21.1356 20.3586 21.5 19.4868 21.5 18.5775V9.86585C21.5 9.13139 21.1721 8.43471 20.6046 7.9635L13.943 2.67427C12.7785 1.74912 11.1154 1.77901 9.98539 2.74538L3.46701 7.9635C2.87274 8.42082 2.51755 9.11956 2.5 9.86585V18.5686C2.5 20.4637 4.04738 22 5.95617 22H7.87229C8.19917 22.0023 8.51349 21.8751 8.74547 21.6464C8.97746 21.4178 9.10793 21.1067 9.10792 20.7821H9.14373Z"
-                fill="#fff"
-              />
-            </svg>
-          </div> -->
-          <div class="dot-icon"></div>
-          <div class="text-wrapper home-title">
+        <router-link to="/" class="home-btn nav-btn" @click="handleSamePage">
+          <div class="text-wrapper">
             <span class="font_ibm font_400 original-text">HOME</span>
             <span class="font_ibm font_400 hover-text">HOME</span>
           </div>
-          <span class="font_ibm font_400 main-title"
-            >Yunjeong’s Web Portfolio</span
-          >
         </router-link>
-        <router-link class="header-logo" to="/">
-          <h1 class="font_ibm font_400">Yunjeong’s Web Portfolio</h1>
-        </router-link>
+
+        <button
+          class="hamburger-menu nav-btn"
+          :class="{ 'is-active': leftDrawerOpen }"
+          @click="leftDrawerOpen = !leftDrawerOpen"
+        >
+          <span></span><span></span><span></span>
+        </button>
+
         <div class="nav">
           <ul>
             <li>
-              <router-link to="/" :class="{ on: $route.meta.AboutPage }">
-                <div class="dot-icon"></div>
+              <router-link
+                to="/about"
+                class="nav-btn"
+                :class="{ on: $route.meta.AboutPage }"
+              >
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">ABOUT</span>
                   <span class="font_ibm font_400 hover-text">ABOUT</span>
                 </div>
               </router-link>
             </li>
-            <!-- <li>
-              <router-link to="">
-                <div class="dot-icon"></div>
-                <div class="text-wrapper">
-                  <span class="font_ibm font_400 original-text">WORK</span>
-                  <span class="font_ibm font_400 hover-text">WORK</span>
-                </div>
-              </router-link>
-            </li> -->
             <li>
-              <router-link to="/" :class="{ on: $route.meta.ProjectPage }">
-                <div class="dot-icon"></div>
+              <router-link
+                to="/project"
+                class="nav-btn"
+                :class="{ on: $route.meta.ProjectPage }"
+              >
                 <div class="text-wrapper">
                   <span class="font_ibm font_400 original-text">PROJECT</span>
                   <span class="font_ibm font_400 hover-text">PROJECT</span>
@@ -61,25 +52,117 @@
           </ul>
         </div>
       </div>
-    </div>
+    </header>
+
+    <transition name="fade-slide">
+      <div v-if="leftDrawerOpen" class="mobile-full-menu">
+        <nav class="menu-content">
+          <ul class="menu-list">
+            <li>
+              <router-link to="/" @click="handleMobileHomeClick">
+                <span class="num font_mon">01</span>
+                <span class="text font_mon">HOME</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/about" @click="leftDrawerOpen = false">
+                <span class="num font_mon">02</span>
+                <span class="text font_mon">ABOUT</span>
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/project" @click="leftDrawerOpen = false">
+                <span class="num font_mon">03</span>
+                <span class="text font_mon">PROJECT</span>
+              </router-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </transition>
+
     <q-page-container>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition
+          :css="false"
+          @leave="onLeave"
+          @enter="onEnter"
+          mode="out-in"
+        >
+          <component :is="Component" :key="$route.fullPath" />
+        </transition>
+      </router-view>
     </q-page-container>
+
+    <footer class="footer">
+      <div class="wrapper"></div>
+    </footer>
+
+    <div id="loader">
+      <div v-for="i in 8" :key="i" class="loader-bar"></div>
+    </div>
   </q-layout>
 </template>
 
 <script>
-import router from "src/router";
 import { defineComponent } from "vue";
-import { RouterLink } from "vue-router";
+import { gsap } from "gsap";
 
 export default defineComponent({
   name: "MainLayout",
-
   data() {
-    return {};
+    return {
+      leftDrawerOpen: false,
+    };
   },
-  methods: {},
+  methods: {
+    handleSamePage(e) {
+      if (this.$route.path === "/") {
+        // 기본 이동 동작 중단 (이미 홈이므로)
+        if (e) e.preventDefault();
+
+        // 애니메이션 수동 실행
+        this.onLeave(null, () => {
+          window.scrollTo(0, 0); // 스크롤 상단으로
+          this.onEnter();
+        });
+      }
+    },
+
+    // 모바일 메뉴용 홈 클릭 핸들러
+    handleMobileHomeClick() {
+      this.leftDrawerOpen = false;
+      this.handleSamePage();
+    },
+
+    // 1. 페이지를 떠날 때 (박스들이 나타남)
+    onLeave(el, done) {
+      const tl = gsap.timeline({ onComplete: done });
+
+      tl.set("#loader", { display: "flex" }).fromTo(
+        ".loader-bar",
+        { x: "-100%" },
+        {
+          x: "0%",
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power2.inOut",
+        }
+      );
+    },
+
+    // 2. 새 페이지가 로드될 때 (박스들이 사라짐)
+    onEnter(el, done) {
+      const tl = gsap.timeline({ onComplete: done });
+
+      tl.to(".loader-bar", {
+        x: "100%",
+        duration: 0.5,
+        stagger: 0.08,
+        ease: "power2.inOut",
+      }).set("#loader", { display: "none" });
+    },
+  },
   mounted() {},
 });
 </script>
