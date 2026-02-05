@@ -43,7 +43,7 @@ module.exports = configure(function (/* ctx */) {
         browser: ["es2019", "edge88", "firefox78", "chrome87", "safari13.1"],
         node: "node20",
       },
-      vueRouterMode: "hash",
+      vueRouterMode: "history",
       // available values: 'hash', 'history'
       publicPath: "/portfolio/",
       // vueRouterBase,
@@ -85,7 +85,11 @@ module.exports = configure(function (/* ctx */) {
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
-      config: {},
+      config: {
+        screen: {
+          bodyClasses: true,
+        },
+      },
 
       // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
