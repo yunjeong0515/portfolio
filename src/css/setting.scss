@@ -49,3 +49,13 @@
     padding: 0 20px;
   }
 }
+
+.round-btn {
+  display: flex;
+  align-self: center;
+  font-size: 2.5rem;
+  padding: 2rem 4rem;
+  border-radius: 10rem;
+  color: $black900;
+  background-color: #fff;
+}
