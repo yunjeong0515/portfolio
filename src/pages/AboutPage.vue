@@ -387,7 +387,9 @@ export default {
       delayAfterTyping: 2000,
       timer: null,
       rollingTls: [],
-      horizontalScrollTween: null, // 가로 스크롤 인스턴스 저장용
+      horizontalScrollTween: null,
+      visionInstance: null,
+      handleResize: null,
     };
   },
 
@@ -928,6 +930,12 @@ export default {
       const bgTitle = this.$refs.bgTitle;
       if (!bgTitle || bgTitle.innerText === text) return;
 
+      if (text === "Skills") {
+        bgTitle.classList.add("is-skills");
+      } else {
+        bgTitle.classList.remove("is-skills");
+      }
+
       gsap.killTweensOf(bgTitle);
       gsap
         .timeline()
@@ -939,7 +947,7 @@ export default {
           },
         })
         .to(bgTitle, {
-          opacity: 0.1,
+          opacity: "",
           duration: 0.35,
         });
     },
@@ -1105,28 +1113,18 @@ export default {
         once: true, // 한 번만 실행
       });
 
-      // 7. 리사이즈 대응 (기존 유지)
-      window.addEventListener("resize", () => {
-        if (!container) return;
-        render.canvas.width = container.clientWidth;
-        render.canvas.height = container.clientHeight;
-        const newMainWall = getRectBody(mainTextEl);
-        const newSubWall = getRectBody(subTextEl);
-        Body.setPosition(mainWall, newMainWall.position);
-        Body.setPosition(subWall, newSubWall.position);
-        Body.setPosition(ground, {
-          x: container.clientWidth / 2,
-          y: container.clientHeight + wallThickness / 2,
-        });
-        Body.setPosition(leftWall, {
-          x: -wallThickness / 2,
-          y: container.clientHeight / 2,
-        });
-        Body.setPosition(rightWall, {
-          x: container.clientWidth + wallThickness / 2,
-          y: container.clientHeight / 2,
-        });
-      });
+      return {
+        engine,
+        runner,
+        render,
+        stop() {
+          Matter.Render.stop(render);
+          Matter.Runner.stop(runner);
+          Matter.World.clear(engine.world);
+          Matter.Engine.clear(engine);
+          render.canvas.remove();
+        },
+      };
     },
   },
 
@@ -1191,37 +1189,43 @@ export default {
     this.typeEn();
 
     this.$nextTick(() => {
-      // 1. 레이아웃에 영향을 주는 애니메이션들 먼저 실행
       this.initBioReveal();
       this.initIntroAnimation();
-      this.initHorizontalScroll(); // 가로 스크롤 (높이 변화 큼)
-      this.initSkillsAnimation(); // 스킬 섹션 Pin (높이 변화 큼)
-
-      this.rollingTls = this.initRollingText();
+      this.initHorizontalScroll();
+      this.initSkillsAnimation();
+      this.initRollingText();
       if (this.containerRef) this.initGSAPProjectList(this.containerRef);
 
-      // 2. 모든 Pin과 레이아웃이 결정된 후 물리 엔진 초기화
-      // 조금의 여유 시간을 주어 브라우저가 높이 계산을 마치게 합니다.
+      this.visionInstance = this.initVisionPhysics();
+
       setTimeout(() => {
-        // 중요: 물리 엔진 시작 전 GSAP 위치값을 다시 계산
         ScrollTrigger.refresh();
-
-        this.initVisionPhysics();
-
-        console.log("3D 텍스트 초기화 시도...");
         this.initFocus3DText();
       }, 100);
     });
-  },
 
+    this.handleResize = () => {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        if (this.visionInstance) {
+          this.visionInstance.stop();
+          this.visionInstance = null;
+        }
+        this.visionInstance = this.initVisionPhysics();
+        ScrollTrigger.refresh();
+      }, 300);
+    };
+
+    window.addEventListener("resize", this.handleResize);
+  },
   beforeUnmount() {
     clearTimeout(this.timer);
-    // 1. Three.js 배경 정리 (분리된 파일의 destroy 함수 호출)
-    if (this.blobEffect) this.blobEffect.destroy();
+    clearTimeout(this.resizeTimer);
 
-    // window.removeEventListener("mousemove", this.handleMouseMove);
-    // ScrollTrigger.getAll().forEach((t) => t.kill());
-    // this.rollingTls.forEach((tl) => tl.kill());
+    if (this.blobEffect) this.blobEffect.destroy();
+    if (this.visionInstance) this.visionInstance.stop();
+
+    window.removeEventListener("resize", this.handleResize);
   },
 };
 </script>
