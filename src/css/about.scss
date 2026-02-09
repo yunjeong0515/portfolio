@@ -86,7 +86,7 @@
           .keyworld-wrap {
             display: flex;
             align-items: center;
-            font-size: clamp(5rem, 18vw, 1rem);
+            font-size: clamp(5rem, 18vw, 10rem);
             letter-spacing: 0.1vw;
             span {
               color: rgba($color: #000000, $alpha: 0.8);
