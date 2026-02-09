@@ -94,25 +94,36 @@
       </router-view>
     </q-page-container>
 
-    <footer class="footer">
+    <footer
+      class="footer"
+      :class="{ 'type-b': $route.meta.footerType === 'B' }"
+    >
       <div class="wrapper">
-        <div class="contact-wrap">
-          <p class="font_ibm font_500">
-            Ready for your next challenge. <br />Let’s grow together.
-          </p>
-          <button class="round-btn font_ibm">CONTACT</button>
-        </div>
-        <div class="f-info">
-          <div class="left-wrap">
-            <span>010 - 2717 - 5354</span>
-            <span>dbswjd2825@naver.com</span>
+        <template
+          v-if="!$route.meta.footerType || $route.meta.footerType === 'A'"
+        >
+          <div class="contact-wrap">
+            <p class="font_ibm font_500">
+              Ready for your next challenge. <br />Let’s grow together.
+            </p>
+            <button class="round-btn font_ibm">CONTACT</button>
           </div>
-          <div class="right-wrap">
-            <span class="font_ibm"
-              >©2026 LEE YUN JEONG. All Rights Reserved.</span
-            >
+          <div class="f-info"></div>
+        </template>
+
+        <template v-else-if="$route.meta.footerType === 'B'">
+          <div class="f-info">
+            <div class="left-wrap">
+              <span>010 - 2717 - 5354</span>
+              <span>dbswjd2825@naver.com</span>
+            </div>
+            <div class="right-wrap">
+              <span class="font_ibm"
+                >©2026 LEE YUN JEONG. All Rights Reserved.</span
+              >
+            </div>
           </div>
-        </div>
+        </template>
       </div>
     </footer>
 

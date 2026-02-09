@@ -317,6 +317,25 @@
   background-color: $black900;
   color: #fff;
   padding: 100px 0 50px 0;
+  &.type-b {
+    height: 100%;
+    min-height: 100%;
+    border-top: 1px solid rgba($color: #fff, $alpha: 0.1);
+    padding: 30px 0;
+    .wrapper {
+      .f-info {
+        justify-content: flex-end;
+        .left-wrap {
+          display: none;
+        }
+        .right-wrap {
+          span {
+            font-size: 15px;
+          }
+        }
+      }
+    }
+  }
   .wrapper {
     position: relative;
     display: flex;
