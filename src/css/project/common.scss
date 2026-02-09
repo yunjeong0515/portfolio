@@ -2,7 +2,8 @@
   .visual-section {
     position: relative;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    aspect-ratio: 1920 / 1080;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -11,20 +12,36 @@
     background-position: center center;
     background-size: cover;
     overflow: hidden;
-    &::before {
+    .visual-pc,
+    .visual-m {
       position: absolute;
       left: 0;
-      bottom: 0;
+      top: 0;
       width: 100%;
-      height: 25%;
-      z-index: 30;
-      background-image: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 1) 60%
-      );
-      content: "";
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
+    .visual-m {
+      display: none;
+    }
+    // &::before {
+    //   position: absolute;
+    //   left: 0;
+    //   bottom: 0;
+    //   width: 100%;
+    //   height: 25%;
+    //   z-index: 30;
+    //   background-image: linear-gradient(
+    //     to bottom,
+    //     rgba(0, 0, 0, 0),
+    //     rgba(0, 0, 0, 1) 60%
+    //   );
+    //   content: "";
+    // }
     .wrapper {
       display: flex;
       flex-direction: column;
@@ -41,6 +58,7 @@
         .info-header {
           display: flex;
           flex-direction: column;
+          gap: 2rem;
           .sub-title {
             font-size: 14px;
             color: rgba($color: #fff, $alpha: 0.8);
@@ -88,12 +106,13 @@
     }
   }
   .project-body {
-    padding: 100px 0;
+    padding: 10rem 0;
     .summary-section {
-      padding: 0 0 100px 0;
+      padding: 0 0 10rem 0;
       .info-meta-list {
         display: flex;
         align-items: flex-start;
+        flex-wrap: wrap;
         gap: 10rem;
         padding: 30px 0;
         border-top: 1px solid rgba($color: #fff, $alpha: 0.1);
@@ -198,6 +217,61 @@
               color: $black500;
             }
           }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .projectdetailpage-container {
+    .visual-section {
+      height: 100%;
+      min-height: 90rem;
+      aspect-ratio: 768 / 900;
+      padding: 80px 0 50px 0;
+      .visual-pc {
+        display: none;
+      }
+      .visual-m {
+        display: block;
+      }
+      .wrapper {
+        .project-info {
+          flex-direction: column;
+          height: 100%;
+          flex-wrap: wrap;
+          .info-header {
+            width: 100%;
+            gap: 1rem;
+            .main-title {
+              font-size: 6rem;
+            }
+          }
+          .info-action {
+            .view-more-btn {
+              .icon {
+                width: 55px;
+                height: 55px;
+              }
+              span {
+                font-size: 10px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .project-body {
+      padding: 5rem 0;
+      .summary-section {
+        .info-meta-list {
+          gap: 5rem;
+        }
+      }
+      .overview-section {
+        .wrapper {
+          flex-direction: column;
+          gap: 5rem;
         }
       }
     }

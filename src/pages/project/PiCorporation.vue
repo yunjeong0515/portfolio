@@ -1,11 +1,8 @@
 <template>
   <q-page class="projectdetailpage-container picorporationpage-container">
     <section class="visual-section">
-      <div class="mockup-pc">
-        <img src="../../../src/assets/imgs/projects/pi/mockup_pc.png" alt="" />
-      </div>
-      <div class="mockup-m">
-        <img src="../../../src/assets/imgs/projects/pi/mockup_m.png" alt="" />
+      <div class="visual-pc">
+        <img src="../../../src/assets/imgs/projects/pi/visual_pc.jpg" alt="" />
       </div>
       <div class="wrapper">
         <div class="project-info">
