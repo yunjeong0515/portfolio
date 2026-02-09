@@ -146,11 +146,13 @@
             <div class="project-info">
               <div class="title-wrap">
                 <h3 class="project-name font_500">{{ project.name }}</h3>
-                <span class="project-description font_mon">{{
+              </div>
+              <div class="sub-info">
+                <span class="project-desc font_mon">{{
                   project.description
                 }}</span>
+                <span class="project-date font_mon">{{ project.date }}</span>
               </div>
-              <span class="project-date font_mon">{{ project.date }}</span>
             </div>
           </div>
         </div>
@@ -190,22 +192,24 @@
                   {{ skill }}
                 </span>
               </div> -->
-              <div class="project-category">
-                <span
-                  v-for="(cat, index) in project.category"
-                  :key="index"
-                  class="category-tag font_ibm"
-                >
-                  {{ cat }}
-                  <i
-                    v-if="index < project.category.length - 1"
-                    class="separator"
-                    >/</i
+              <div class="sub-info">
+                <div class="project-category">
+                  <span
+                    v-for="(cat, index) in project.category"
+                    :key="index"
+                    class="category-tag font_ibm"
                   >
-                </span>
-              </div>
+                    {{ cat }}
+                    <i
+                      v-if="index < project.category.length - 1"
+                      class="separator"
+                      >/</i
+                    >
+                  </span>
+                </div>
 
-              <span class="project-date font_mon">{{ project.date }}</span>
+                <span class="project-date font_mon">{{ project.date }}</span>
+              </div>
             </div>
             <!-- <div class="project-thumb">
                 <img

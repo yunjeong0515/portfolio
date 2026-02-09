@@ -1,15 +1,15 @@
 <template>
   <q-page class="projectdetailpage-container kmusicalpage-container">
     <section class="visual-section">
-      <div class="mockup-pc">
+      <div class="visual-pc">
         <img
-          src="../../../src/assets/imgs/projects/kmusical/mockup_pc.png"
+          src="../../../src/assets/imgs/projects/kmusical/visual_pc.jpg"
           alt=""
         />
       </div>
-      <div class="mockup-m">
+      <div class="visual-m">
         <img
-          src="../../../src/assets/imgs/projects/kmusical/mockup_m.png"
+          src="../../../src/assets/imgs/projects/kmusical/visual_m.jpg"
           alt=""
         />
       </div>

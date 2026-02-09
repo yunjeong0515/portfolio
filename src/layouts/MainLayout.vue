@@ -94,25 +94,50 @@
       </router-view>
     </q-page-container>
 
-    <footer class="footer">
+    <footer
+      class="footer"
+      :class="{
+        'type-a': !$route.meta.footerType || $route.meta.footerType === 'A',
+        'type-b': $route.meta.footerType === 'B',
+      }"
+    >
       <div class="wrapper">
-        <div class="contact-wrap">
-          <p class="font_ibm font_500">
-            Ready for your next challenge. <br />Let’s grow together.
-          </p>
-          <button class="round-btn font_ibm">CONTACT</button>
-        </div>
-        <div class="f-info">
-          <div class="left-wrap">
-            <span>010 - 2717 - 5354</span>
-            <span>dbswjd2825@naver.com</span>
+        <template
+          v-if="!$route.meta.footerType || $route.meta.footerType === 'A'"
+        >
+          <div class="contact-wrap">
+            <p class="font_ibm font_500">
+              Ready for your next challenge. <br />Let’s grow together.
+            </p>
+            <button class="round-btn font_ibm">CONTACT</button>
           </div>
-          <div class="right-wrap">
-            <span class="font_ibm"
-              >©2026 LEE YUN JEONG. All Rights Reserved.</span
-            >
+
+          <div class="f-info">
+            <div class="left-wrap">
+              <span>010 - 2717 - 5354</span>
+              <span>dbswjd2825@naver.com</span>
+            </div>
+            <div class="right-wrap">
+              <span class="font_ibm"
+                >©2026 LEE YUN JEONG. All Rights Reserved.</span
+              >
+            </div>
           </div>
-        </div>
+        </template>
+
+        <template v-else-if="$route.meta.footerType === 'B'">
+          <div class="f-info">
+            <div class="left-wrap">
+              <span>010 - 2717 - 5354</span>
+              <span>dbswjd2825@naver.com</span>
+            </div>
+            <div class="right-wrap">
+              <span class="font_ibm"
+                >©2026 LEE YUN JEONG. All Rights Reserved.</span
+              >
+            </div>
+          </div>
+        </template>
       </div>
     </footer>
 
@@ -182,5 +207,21 @@ export default defineComponent({
     },
   },
   mounted() {},
+  watch: {
+    leftDrawerOpen(isOpen) {
+      if (isOpen) {
+        // 메뉴가 열리면 스크롤 막기
+        document.body.style.overflow = "hidden";
+      } else {
+        // 메뉴가 닫히면 스크롤 복구
+        document.body.style.overflow = "";
+      }
+    },
+    // 페이지 이동 시 메뉴가 열려있다면 스크롤을 복구해야 하므로 라우트 감시 추가
+    $route() {
+      this.leftDrawerOpen = false;
+      document.body.style.overflow = "";
+    },
+  },
 });
 </script>

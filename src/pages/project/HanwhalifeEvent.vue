@@ -1,9 +1,9 @@
 <template>
   <q-page class="projectdetailpage-container seoul80page-container">
     <section class="visual-section">
-      <div class="mockup-pc">
+      <div class="visual-pc">
         <img
-          src="../../../src/assets/imgs/projects/seoul80/mockup_pc.png"
+          src="../../../src/assets/imgs/projects/seoul80/visual_pc.jpg"
           alt=""
         />
       </div>

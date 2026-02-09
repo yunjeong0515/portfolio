@@ -18,33 +18,37 @@ const routes = [
       {
         path: "about",
         component: () => import("pages/AboutPage.vue"),
-        meta: { AboutPage: true },
+        meta: { AboutPage: true, footerType: "A" },
       },
       {
         path: "project",
         component: () => import("pages/ProjectPage.vue"),
-        meta: { ProjectPage: true },
+        meta: { ProjectPage: true, footerType: "A" },
       },
       {
         path: "project/kmusical",
         component: () => import("pages/project/KmusicalMarket.vue"),
-        meta: { isDarkPage: true },
+        meta: { isDarkPage: true, footerType: "B" },
       },
       {
         path: "project/seoul80",
         component: () => import("pages/project/Seoul80Anniversary.vue"),
+        meta: { footerType: "B" },
       },
       {
         path: "project/picorporation",
         component: () => import("pages/project/PiCorporation.vue"),
+        meta: { isDarkPage: true, footerType: "B" },
       },
       {
         path: "project/heruelab",
         component: () => import("pages/project/HeruePage.vue"),
+        meta: { footerType: "B" },
       },
       {
         path: "project/hanwhalife",
         component: () => import("pages/project/HanwhalifeEvent.vue"),
+        meta: { footerType: "B" },
       },
       // {
       //   path: "project/seouluniversity",
@@ -53,11 +57,12 @@ const routes = [
       {
         path: "project/rebound",
         component: () => import("pages/project/ReboundFestival.vue"),
+        meta: { footerType: "B" },
       },
-      {
-        path: "project/louche9",
-        component: () => import("pages/project/ReboundFestival.vue"),
-      },
+      // {
+      //   path: "project/louche9",
+      //   component: () => import("pages/project/ReboundFestival.vue"),
+      // },
     ],
   },
 
