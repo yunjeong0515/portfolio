@@ -33,22 +33,22 @@ const routes = [
       {
         path: "project/seoul80",
         component: () => import("pages/project/Seoul80Anniversary.vue"),
-        meta: { footerType: "B" },
+        meta: { footerType: "B", lightfooter: true },
       },
       {
         path: "project/picorporation",
         component: () => import("pages/project/PiCorporation.vue"),
-        meta: { isDarkPage: true, footerType: "B" },
+        meta: { isDarkPage: true, footerType: "B", lightfooter: true },
       },
       {
         path: "project/heruelab",
         component: () => import("pages/project/HeruePage.vue"),
-        meta: { footerType: "B" },
+        meta: { footerType: "B", lightfooter: true },
       },
       {
         path: "project/hanwhalife",
         component: () => import("pages/project/HanwhalifeEvent.vue"),
-        meta: { footerType: "B" },
+        meta: { footerType: "B", lightfooter: true },
       },
       // {
       //   path: "project/seouluniversity",

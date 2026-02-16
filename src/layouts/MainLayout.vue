@@ -99,6 +99,7 @@
       :class="{
         'type-a': !$route.meta.footerType || $route.meta.footerType === 'A',
         'type-b': $route.meta.footerType === 'B',
+        'is-light': $route.meta.lightfooter,
       }"
     >
       <div class="wrapper">

@@ -276,6 +276,9 @@ export function initBlobBackground(canvasElement) {
     camera.updateProjectionMatrix();
     renderer.setSize(w, h);
     uniforms.uResolution.value.set(w, h);
+
+    mesh.geometry.dispose();
+    mesh.geometry = new THREE.PlaneGeometry(w, h, 1, 1);
   };
 
   const onMouseMove = (event) => {

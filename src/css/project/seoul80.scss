@@ -1,32 +1,5 @@
 .seoul80page-container {
   .visual-section {
-    justify-content: flex-start;
-    background: linear-gradient(
-        180deg,
-        #b4d7ff 2.81%,
-        #cae3ff 13.69%,
-        #e7f2ff 30.96%,
-        #f9fcff 45.92%,
-        #fff 56.8%,
-        #ffe6ff 100%
-      ),
-      linear-gradient(180deg, rgba(255, 255, 255, 0) 71.99%, #fff 94.44%);
-    &::before {
-      display: none;
-    }
-    .mockup-pc {
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      transform: translate(-50%, 0);
-      width: 90%;
-      max-width: 1200px;
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      }
-    }
     .wrapper {
       justify-content: flex-start;
       .project-info {
