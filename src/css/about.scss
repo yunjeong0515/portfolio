@@ -217,20 +217,22 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 2rem;
       opacity: 1 !important;
       transform: none !important;
-
       .bio-text {
         font-size: clamp(3.5rem, 3vw, 5rem);
         color: $black900;
-        white-space: nowrap;
+        text-align: center;
       }
 
       .video-box {
         width: clamp(10rem, 7.2vw, 16rem);
         aspect-ratio: 160 / 90;
+        border-radius: 5rem;
         overflow: hidden;
+        flex-shrink: 0;
         video {
           display: block;
           width: 100%;
@@ -335,10 +337,11 @@
           flex-direction: column;
           gap: 3rem;
           h2 {
+            font-size: clamp(2rem, 2.5vw, 3rem);
             font-size: 3rem;
           }
           p {
-            font-size: 3.5rem;
+            font-size: clamp(1.5rem, 3vw, 3.5rem);
             white-space: nowrap;
           }
         }
@@ -699,6 +702,7 @@
 
       &:nth-child(even) {
         right: 10%;
+        left: auto;
       }
     }
   }
@@ -803,6 +807,30 @@
         }
       }
     }
+    .rolling-section {
+      padding: 100px 0;
+      gap: 50px;
+      .rolling-wrapper {
+        .rolling-content {
+          .rolling-item {
+            gap: 50px;
+            padding-right: 50px;
+            span {
+              font-size: 10rem;
+            }
+            .circle-icon {
+              width: 9rem;
+              .dev-icon {
+                width: 60%;
+              }
+            }
+            .rolling-icon {
+              width: 14rem;
+            }
+          }
+        }
+      }
+    }
   }
 }
 /* ProjectPage.vue <style lang="scss"> 또는 SCSS 파일 */
@@ -856,12 +884,36 @@
 @media (max-width: 768px) {
   .aboutpage-container {
     .visual-section {
+      min-height: 750px;
+      padding-top: 100px;
+      .gradient-overlay,
+      canvas {
+        min-height: 750px;
+      }
       .wrapper {
         .contents-wrap {
+          .title-wrap {
+            .keyworld-wrap,
+            .stac-text {
+              font-size: clamp(3rem, 10vw, 8rem);
+            }
+          }
           .profile-img {
             right: 0;
             left: auto;
             transform: translate(0, 0);
+            // min-width: 70vw;
+          }
+          .intro-text {
+            position: relative;
+            left: auto;
+            bottom: auto;
+            margin-top: 30px;
+            span {
+              &:nth-child(2) {
+                margin-left: 0;
+              }
+            }
           }
         }
       }

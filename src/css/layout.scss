@@ -351,6 +351,31 @@
       }
     }
   }
+  &.is-light {
+    background-color: #fff;
+    &.type-b {
+      border-top: 1px solid rgba($color: #000, $alpha: 0.05);
+    }
+    .wrapper {
+      .contact-wrap {
+        p {
+          color: $black700;
+        }
+      }
+      .f-info {
+        .left-wrap {
+          span {
+            color: $black700;
+          }
+        }
+        .right-wrap {
+          span {
+            color: $black200;
+          }
+        }
+      }
+    }
+  }
   .wrapper {
     position: relative;
     display: flex;
