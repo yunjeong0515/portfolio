@@ -22,7 +22,7 @@
     }
   }
   .project-body {
-    padding: 10rem 0;
+    padding: 10rem 0 0 0;
     background-color: #ffffff;
     .project-info {
       position: relative;
@@ -72,7 +72,6 @@
       }
     }
     .summary-section {
-      padding: 0 0 10rem 0;
       .info-meta-list {
         display: flex;
         align-items: flex-start;
@@ -80,8 +79,7 @@
         column-gap: 10rem;
         row-gap: 3rem;
         padding: 30px 0;
-        // border-top: 1px solid rgba($color: #000, $alpha: 0.1);
-        border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
+
         .meta-item {
           display: flex;
           flex-direction: column;
@@ -143,23 +141,79 @@
         }
       }
     }
-    .overview-section {
-      .wrapper {
-        display: flex;
-        align-items: flex-start;
-        gap: 20rem;
-        .title {
+    .contents-section-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10rem;
+      padding: 10rem 0;
+      border-top: 1px solid rgba($color: #000, $alpha: 0.1);
+      // border-bottom: 1px solid rgba($color: #000, $alpha: 0.1);
+      section {
+        .section-title {
           font-size: 20px;
           color: $black900;
         }
-        .content-wrap {
-          p {
-            font-size: 15px;
-            color: $black500;
+      }
+      .overview-section {
+        .wrapper {
+          display: flex;
+          align-items: flex-start;
+          gap: 20rem;
+          .content-wrap {
+            p {
+              font-size: 15px;
+              color: $black500;
+            }
+          }
+        }
+      }
+      .technical-section {
+        .wrapper {
+          .section-title {
+            display: block;
+            margin-bottom: 2rem;
+          }
+          .tech-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10rem;
+            .tech-item {
+              display: flex;
+              flex-direction: column;
+              gap: 7rem;
+              .tech-info {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                .info-label {
+                  font-size: 3rem;
+                  color: #fff;
+                }
+                .info-desc {
+                  font-size: 1.5rem;
+                  color: rgba($color: #fff, $alpha: 0.9);
+                  em {
+                    font-size: 1.5rem;
+                    color: rgba($color: #fff, $alpha: 0.9);
+                    font-weight: 700;
+                  }
+                }
+              }
+              .contents-wrap {
+                .tech-img {
+                  width: 100%;
+                  img {
+                    width: 100%;
+                    object-fit: contain;
+                  }
+                }
+              }
+            }
           }
         }
       }
     }
+
     &.is-dark {
       .project-info {
         .info-header {
@@ -187,8 +241,6 @@
       }
       .summary-section {
         .info-meta-list {
-          // border-top: 1px solid rgba($color: #fff, $alpha: 0.1);
-          border-bottom: 1px solid rgba($color: #fff, $alpha: 0.1);
           .meta-item {
             .label {
               &::before {
@@ -216,15 +268,29 @@
           }
         }
       }
-      .overview-section {
-        .wrapper {
-          .title {
+      .contents-section-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10rem;
+        border-top: 1px solid rgba($color: #fff, $alpha: 0.1);
+        // border-bottom: 1px solid rgba($color: #fff, $alpha: 0.1);
+        section {
+          .section-title {
+            font-size: 20px;
             color: #fff;
           }
-          .content-wrap {
-            p {
-              color: rgba($color: #fff, $alpha: 0.8);
+        }
+        .overview-section {
+          .wrapper {
+            .content-wrap {
+              p {
+                color: rgba($color: #fff, $alpha: 0.8);
+              }
             }
+          }
+        }
+        .technical-section {
+          .wrapper {
           }
         }
       }
@@ -260,31 +326,48 @@
         .info-action {
           .view-more-btn {
             .icon {
-              width: 55px;
-              height: 55px;
+              display: none;
             }
             span {
-              font-size: 10px;
+              position: relative;
+              font-size: 13px;
+              white-space: nowrap;
+              padding-right: 21px;
+              &::after {
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translate(0, -50%);
+                width: 16px;
+                height: 16px;
+                background: url(../../../src/assets/imgs/icon/arrow_forward_w.svg)
+                  no-repeat center center / contain;
+                content: "";
+              }
             }
           }
         }
       }
-      .summary-section {
-        padding: 0 0 30px 0;
-        .info-meta-list {
-          gap: 30px;
-        }
-      }
-      .overview-section {
-        .wrapper {
-          flex-direction: column;
-          gap: 20px;
-          .title {
+      .contents-section-container {
+        section {
+          .section-title {
             font-size: 18px;
           }
-          .content-wrap {
-            p {
-              font-size: 13px;
+        }
+        .summary-section {
+          .info-meta-list {
+            gap: 30px;
+          }
+        }
+        .overview-section {
+          .wrapper {
+            flex-direction: column;
+            gap: 20px;
+
+            .content-wrap {
+              p {
+                font-size: 13px;
+              }
             }
           }
         }
