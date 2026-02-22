@@ -161,6 +161,7 @@
           width: 50%;
           ul {
             display: flex;
+            align-items: flex-end;
             gap: 10rem;
             li {
               a {
@@ -169,10 +170,12 @@
                 align-items: center;
                 gap: 1.5rem;
                 padding: 1rem;
+                cursor: none;
                 .folder-wrapper {
                   position: relative;
                   overflow: visible;
                   margin: 0 auto;
+
                   .folder-icon-wrap {
                     position: relative;
                     z-index: 10;
@@ -218,6 +221,30 @@
                     }
                     .folder-back {
                       z-index: 2;
+                    }
+                    .folder-thumbnails {
+                      position: absolute;
+                      top: 50%;
+                      left: 50%;
+                      transform: translate(-50%, -50%);
+                      width: 10rem; /* 크기를 조금 더 키우면 시원해 보입니다 */
+                      aspect-ratio: 1 /1;
+                      z-index: 6; /* folder-front(10) 보다는 낮고, default-center(5) 보다는 높게 */
+                      pointer-events: none;
+
+                      .thumb-item {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 0.5rem;
+                        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+                        opacity: 0; /* 평소엔 숨김 */
+                        transform: scale(0.5); /* 폴더 안에서는 작게 */
+                        transition: opacity 0.3s;
+                      }
                     }
                     .folder-front {
                       display: flex;
@@ -433,6 +460,42 @@
   }
 }
 
+.custom-tooltip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 8px 12px;
+  background-color: rgba($color: #fff, $alpha: 0.8);
+  color: white;
+  border-radius: 20px;
+  font-size: 13px;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 9999;
+  white-space: nowrap;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translate(-50%, -50%);
+}
+.custom-tooltip .tooltip-arrow {
+  width: 16px;
+  height: 16px;
+  animation: arrow-move 0.6s infinite alternate ease-in-out;
+}
+.custom-tooltip .tooltip-arrow img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: rotate(-90deg);
+}
+@keyframes arrow-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(3px);
+  }
+}
+
 @media (max-width: 1280px) {
   .mainpage-container {
     .container-wrap {
@@ -503,6 +566,9 @@
 }
 
 @media (max-width: 768px) {
+  .custom-tooltip {
+    display: none !important;
+  }
   .mainpage-container {
     .container-wrap {
       padding: 30px 0 120px 0;
@@ -532,12 +598,12 @@
             width: 100%;
             ul {
               justify-content: center;
-              gap: 4rem;
+              gap: 10vw;
               li {
                 a {
                   .folder-wrapper {
                     .folder-icon-wrap {
-                      width: 13rem;
+                      width: 30vw;
                       .text-card {
                         transform: translateX(-30%) translateY(-90%)
                           rotate(-10deg);
@@ -550,6 +616,13 @@
                       .folder-back {
                         z-index: 2;
                       }
+                      .folder-thumbnails {
+                        .thumb-item {
+                          width: 90%;
+                          height: 90%;
+                        }
+                      }
+
                       .folder-front {
                         transform: rotateX(-30deg) rotateY(0deg) rotateZ(0deg);
                         .front-box {

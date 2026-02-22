@@ -133,6 +133,75 @@
     }
   }
 }
+
+.floating-download-btn {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  z-index: 100;
+  background-color: rgba($color: #fff, $alpha: 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: inset 0 4px 10px rgba(255, 255, 255, 0.3),
+    inset 0 -4px 12px rgba(0, 0, 0, 0.1), 0 10px 30px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.1);
+    .rotating-svg {
+      animation-play-state: paused;
+    }
+  }
+  .circle-text-wrap {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rotating-svg {
+    width: 95px;
+    height: 95px;
+    animation: rotateText 15s linear infinite;
+    textPath {
+      fill: $black900; // 배경이 어두우면 흰색, 밝으면 #000
+      font-family: "IBM Plex Mono", monospace !important;
+      font-size: 11px;
+      letter-spacing: -0.15px;
+    }
+  }
+  .center-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+}
+@keyframes rotateText {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 다크모드 대응이 필요할 경우 */
+.is-light .floating-download-btn .rotating-svg text {
+  fill: #fff;
+}
+
 #loader {
   position: fixed;
   top: 0;
@@ -425,6 +494,24 @@
   .header {
     .wrapper {
       padding: 0 20px;
+    }
+  }
+
+  .floating-download-btn {
+    right: 20px;
+    bottom: 40px;
+    width: 70px;
+    height: 70px;
+    &:hover {
+      transform: scale(1);
+    }
+    .rotating-svg {
+      width: 65px;
+      height: 65px;
+    }
+    .center-icon {
+      width: 20px;
+      height: 20px;
     }
   }
 }

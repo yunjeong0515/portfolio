@@ -12,19 +12,20 @@
 
       <div class="terminal-body">
         <div class="main-text">
-          <!-- <p class="font_ibm font_500 main-text-output" ref="typingOutput">
-            Welcome to Yunjeong’s Web Portfolio.<br /><br />
-            Something great is in the works! <br />
-            Stay tuned for the new updates.<br />
-            Coming Soon...
-          </p> -->
           <p class="font_ibm font_400 main-text-output" ref="typingOutput">
+            Welcome to Yunjeong’s Web Portfolio.<br /><br />
+            기획을 디자인하고 코드로 완성하는, 디자인하는 퍼블리셔 이윤정입니다.
+            <br />
+            웹·모바일 환경에서 사용성과 완성도를 함께 고민하는 퍼블리셔로
+            <br />실무와 개인 프로젝트를 통해 성장하고 있습니다.
+          </p>
+          <!-- <p class="font_ibm font_400 main-text-output" ref="typingOutput">
             Welcome to Yunjeong’s Web Portfolio.<br /><br />
             UI를 구조로 설계하고, 경험을 코드로 구현하는 퍼블리셔 이윤정입니다.
             <br />
             웹·모바일 환경에서 사용성과 완성도를 함께 고민하는 퍼블리셔로
             <br />실무와 개인 프로젝트를 통해 성장하고 있습니다.
-          </p>
+          </p> -->
         </div>
         <p class="sub-text font_ibm font_400">
           yunjeong@publisher-portfolio:~ $
