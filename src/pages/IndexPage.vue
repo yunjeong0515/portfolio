@@ -1,6 +1,18 @@
 <template>
   <q-page class="mainpage-container">
+    <div
+      class="custom-tooltip font_ibm"
+      id="tooltip-container"
+      style="display: none; opacity: 0; position: fixed; z-index: 9999"
+    >
+      <span id="tooltip-text" class="font_ibm"></span>
+      <div class="tooltip-arrow">
+        <img src="../assets/imgs/icon/arrow_down_b9.svg" alt="arrow" />
+      </div>
+    </div>
+
     <div id="pixel-container" class="pixel-container"></div>
+
     <div class="container-wrap">
       <div class="wrapper">
         <div class="main-title-wrap">
@@ -11,41 +23,39 @@
               </span>
             </div>
           </div>
-          <span class="font_ibm sub-text text-r"
-            >&lt;User-Centric Publisher/&gt;</span
-          >
+          <span class="font_ibm sub-text text-r">&lt;Design_to_Code /&gt;</span>
         </div>
+
         <div class="main-wrap">
           <div class="folder-list">
             <ul>
               <li>
-                <router-link to="/about">
-                  <div class="folder-wrapper" ref="folderItem">
+                <router-link
+                  to="/about"
+                  @mouseenter="showTooltip('about')"
+                  @mouseleave="hideTooltip"
+                >
+                  <div class="folder-wrapper">
                     <div class="folder-icon-wrap">
                       <div class="folder-front folder-icon">
                         <div class="front-box"></div>
                       </div>
-                      <!-- <div class="text-card">
-                        <span class="font_ibm fonbt_500"
-                          >저에 대해 알아보세요!</span
-                        >
-                      </div> -->
                       <div class="folder-center folder-icon">
                         <img
                           src="../assets/imgs/index/about_card01.png"
-                          alt=""
+                          alt="about"
                         />
                       </div>
                       <div class="default-center folder-icon">
                         <img
                           src="../assets/imgs/index/folder_center.svg"
-                          alt=""
+                          alt="folder"
                         />
                       </div>
                       <div class="folder-back folder-icon">
                         <img
                           src="../assets/imgs/index/folder_back01.svg"
-                          alt=""
+                          alt="folder-back"
                         />
                       </div>
                     </div>
@@ -53,28 +63,39 @@
                   <span class="font_ibm font_400">About</span>
                 </router-link>
               </li>
+
               <li>
-                <router-link to="/project">
-                  <div class="folder-wrapper" ref="folderItem">
+                <router-link
+                  to="/project"
+                  @mouseenter="animateThumbnails"
+                  @mouseleave="resetThumbnails"
+                >
+                  <div class="folder-wrapper project-folder">
                     <div class="folder-icon-wrap">
                       <div class="folder-front folder-icon">
                         <div class="front-box"></div>
                       </div>
-                      <!-- <div class="text-card">
-                        <span class="font_ibm fonbt_500"
-                          >저에 대해 알아보세요!</span
-                        >
-                      </div> -->
-                      <!-- <div class="folder-center folder-icon">
-                        <img
-                          src="../assets/imgs/index/about_card01.png"
-                          alt=""
-                        />
-                      </div> -->
                       <div class="default-center folder-icon">
                         <img
                           src="../assets/imgs/index/folder_center.svg"
                           alt=""
+                        />
+                      </div>
+                      <div class="folder-thumbnails">
+                        <img
+                          src="../assets/imgs/projects/herue/thumb02.jpg"
+                          class="thumb-item"
+                          alt="p1"
+                        />
+                        <img
+                          src="../assets/imgs/projects/kmusical/thumb02.jpg"
+                          class="thumb-item"
+                          alt="p2"
+                        />
+                        <img
+                          src="../assets/imgs/projects/seouluniversity/thumb02.jpg"
+                          class="thumb-item"
+                          alt="p3"
                         />
                       </div>
                       <div class="folder-back folder-icon">
@@ -91,12 +112,13 @@
             </ul>
           </div>
         </div>
+
         <div class="dock-wrap">
           <div
             class="dock-item"
             :class="{
-              'is-running': isTerminalOpen /* 창이 열려 있을 때 */,
-              'is-minimized': isTerminalMinimized /* 창이 최소화되었을 때 */,
+              'is-running': isTerminalOpen,
+              'is-minimized': isTerminalMinimized,
             }"
           >
             <button class="dock-icon" @click.stop="toggleTerminal">
@@ -109,10 +131,7 @@
           </div>
           <div class="dock-item">
             <button class="dock-icon">
-              <img
-                src="../assets/imgs/icon/dock_mail.svg"
-                alt="terminal icon"
-              />
+              <img src="../assets/imgs/icon/dock_mail.svg" alt="mail icon" />
             </button>
             <div class="running-dot"></div>
           </div>
@@ -120,13 +139,14 @@
             <button class="dock-icon">
               <img
                 src="../assets/imgs/icon/dock_messages.svg"
-                alt="terminal icon"
+                alt="message icon"
               />
             </button>
             <div class="running-dot"></div>
           </div>
         </div>
       </div>
+
       <TerminalModal
         v-if="isTerminalOpen"
         @close="toggleTerminal"
@@ -137,8 +157,8 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, onBeforeUnmount, ref } from "vue";
-import { gsap } from "gsap"; // 💡 GSAP를 import 합니다.
+import { defineComponent } from "vue";
+import { gsap } from "gsap";
 import pixelEffect from "src/assets/js/stacking-pixels.js";
 import TerminalModal from "src/components/TerminalModal.vue";
 
@@ -146,42 +166,172 @@ export default defineComponent({
   name: "IndexPage",
   components: { TerminalModal },
   data() {
-    const shouldTerminalBeOpen = () => window.innerWidth > 768;
-
     return {
-      isTerminalOpen: shouldTerminalBeOpen(),
+      isTerminalOpen: window.innerWidth > 768,
       isTerminalMinimized: false,
-
-      isMobileSize: !shouldTerminalBeOpen(),
+      isMobileSize: window.innerWidth <= 768,
     };
   },
-
   methods: {
     toggleTerminal() {
       this.isTerminalOpen = !this.isTerminalOpen;
     },
-
     handleResize() {
-      const isCurrentlyMobile = window.innerWidth <= 768;
+      const wasMobile = this.isMobileSize;
+      this.isMobileSize = window.innerWidth <= 768;
 
-      // 창 크기가 768px 이하로 줄어들면 모달을 닫음
-      // if (isCurrentlyMobile) {
-      //   this.isTerminalOpen = false;
-      // }
+      if (wasMobile !== this.isMobileSize) {
+        if (this.isMobileSize) {
+          this.forceShowMobile();
+        } else {
+          const tooltip = document.getElementById("tooltip-container");
+          if (tooltip) {
+            gsap.set(tooltip, { display: "none", opacity: 0 });
+          }
+          window.removeEventListener("mousemove", this.moveTooltip);
 
-      // 만약 모바일 크기에서 데스크톱 크기로 커지면,
-      // isTerminalOpen의 상태는 유지(false)되지만, 다음 갱신을 위해 isMobileSize 업데이트
-      this.isMobileSize = isCurrentlyMobile;
+          const thumbs = document.querySelectorAll(
+            ".project-folder .thumb-item"
+          );
+          if (thumbs.length > 0) {
+            gsap.killTweensOf(thumbs);
+            gsap.set(thumbs, {
+              opacity: 0,
+              scale: 0.5,
+              x: 0,
+              y: 0,
+              rotation: 0,
+            });
+          }
+        }
+      }
+    },
+
+    showTooltip(type) {
+      if (this.isMobileSize && type !== "mobile") return;
+      const tooltip = document.getElementById("tooltip-container");
+      const textEl = document.getElementById("tooltip-text");
+      if (!tooltip || !textEl) return;
+
+      gsap.killTweensOf(tooltip);
+      const content = {
+        about: "Who is Yunjeong?",
+        project: "진행한 프로젝트 보러가기",
+      };
+      textEl.innerText = content[type];
+
+      gsap.to(tooltip, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.2,
+        display: "flex",
+        overwrite: "all",
+      });
+      if (!this.isMobileSize) {
+        window.addEventListener("mousemove", this.moveTooltip);
+      }
+    },
+
+    hideTooltip() {
+      if (this.isMobileSize) return;
+
+      const tooltip = document.getElementById("tooltip-container");
+      if (!tooltip) return;
+      gsap.killTweensOf(tooltip);
+      gsap.to(tooltip, {
+        opacity: 0,
+        scale: 0.9,
+        duration: 0.2,
+        onComplete: () => {
+          tooltip.style.display = "none";
+        },
+        overwrite: "all",
+      });
+      window.removeEventListener("mousemove", this.moveTooltip);
+    },
+
+    moveTooltip(e) {
+      if (this.isMobileSize) return;
+
+      const tooltip = document.getElementById("tooltip-container");
+      if (tooltip) {
+        gsap.to(tooltip, {
+          x: e.clientX + 20,
+          y: e.clientY + 20,
+          duration: 0.1,
+        });
+      }
+    },
+
+    animateThumbnails() {
+      if (this.isMobileSize) return;
+      this.showTooltip("project");
+      const thumbs = document.querySelectorAll(".project-folder .thumb-item");
+      if (thumbs.length > 0) {
+        gsap.killTweensOf(thumbs);
+        gsap.to(thumbs, {
+          opacity: 1,
+          scale: 1,
+          y: (i) => -70 - i * 10,
+          x: (i) => (i - 1) * 50,
+          rotation: (i) => (i - 1) * 10,
+          duration: 0.4,
+          ease: "back.out(1.5)",
+          stagger: 0.05,
+          overwrite: "all",
+        });
+      }
+    },
+
+    resetThumbnails() {
+      if (this.isMobileSize) return;
+      this.hideTooltip();
+      const thumbs = document.querySelectorAll(".project-folder .thumb-item");
+      if (thumbs.length > 0) {
+        gsap.killTweensOf(thumbs);
+        gsap.to(thumbs, {
+          opacity: 0,
+          scale: 0.5,
+          x: 0,
+          y: 0,
+          rotation: 0,
+          duration: 0.3,
+          ease: "power2.in",
+          overwrite: "all",
+        });
+      }
+    },
+
+    forceShowMobile() {
+      if (!this.isMobileSize) return;
+
+      const thumbs = document.querySelectorAll(".project-folder .thumb-item");
+      if (thumbs.length > 0) {
+        gsap.set(thumbs, {
+          opacity: 1,
+          scale: 1,
+          y: (i) => -60 - i * 8,
+          x: (i) => (i - 1) * 40,
+          rotation: (i) => (i - 1) * 8,
+        });
+      }
+
+      // 2. 툴팁 강제 노출
+      this.showTooltip("mobile");
     },
   },
-
   mounted() {
-    // 1. 기존 픽셀 효과 호출
     pixelEffect();
     window.addEventListener("resize", this.handleResize);
-  },
 
+    if (this.isMobileSize) {
+      setTimeout(() => {
+        this.forceShowMobile();
+      }, 300);
+    }
+  },
   beforeUnmount() {
+    window.removeEventListener("mousemove", this.moveTooltip);
     window.removeEventListener("resize", this.handleResize);
   },
 });
