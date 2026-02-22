@@ -23,7 +23,7 @@
               </span>
             </div>
           </div>
-          <span class="font_ibm sub-text text-r">&lt;Design_to_Code /&gt;</span>
+          <span class="font_ibm sub-text text-r">&lt;/Design_to_Code&gt;</span>
         </div>
 
         <div class="main-wrap">

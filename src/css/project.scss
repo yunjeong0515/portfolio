@@ -408,6 +408,54 @@
   }
 }
 
+/* ProjectPage.vue <style lang="scss"> 또는 SCSS 파일 */
+
+#gsap-container {
+  // 3D 컨테이너는 뷰포트 중앙에 오도록 설정
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.box {
+  // GSAP가 3D 위치를 제어하므로, 기본 스타일만 정의
+  position: absolute;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  overflow: visible;
+  transform-style: preserve-3d;
+  // 텍스트 스타일 (색상은 GSAP로 설정된 배경색에 따라 반전시켜야 함)
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px;
+  color: #fff; // 텍스트를 흰색으로 설정 (밝은 배경색 위에)
+  filter: brightness(0.8);
+  .card-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &:hover {
+    filter: brightness(1.1);
+    // 호버 시 카드가 앞으로 툭 튀어나오는 효과
+    z-index: 100 !important;
+  }
+  .project-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  .project-date {
+    font-size: 1.2rem;
+  }
+}
+
 @media (max-width: 1280px) {
   .projectpage-container {
     .visual-section {

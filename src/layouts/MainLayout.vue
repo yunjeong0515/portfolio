@@ -80,7 +80,33 @@
         </nav>
       </div>
     </transition>
-
+    <transition name="fade">
+      <a
+        v-if="$route.meta.AboutPage || $route.meta.ProjectPage"
+        class="floating-download-btn"
+        href="/assets/file/resume_yunjeong.pdf"
+        target="_blank"
+        download="이윤정_자기소개서.pdf"
+      >
+        <div class="circle-text-wrap">
+          <svg viewBox="0 0 100 100" class="rotating-svg">
+            <path
+              id="circlePath"
+              d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+              fill="none"
+            />
+            <text class="font_ibm">
+              <textPath xlink:href="#circlePath">
+                DOWNLOAD RESUME • DOWNLOAD RESUME •
+              </textPath>
+            </text>
+          </svg>
+          <div class="center-icon">
+            <img src="../assets/imgs/icon/download_b9.svg" alt="down" />
+          </div>
+        </div>
+      </a>
+    </transition>
     <q-page-container>
       <router-view v-slot="{ Component }">
         <transition
