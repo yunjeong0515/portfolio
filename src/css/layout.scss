@@ -397,7 +397,9 @@
   min-height: 900px;
   background-color: $black900;
   color: #fff;
-  padding: 100px 0 50px 0;
+  padding: 50px 0 50px 0;
+  background: url(../../src/assets/imgs/footer_bg.jpg) no-repeat center center /
+    cover;
   &.type-b {
     height: 100%;
     min-height: 100%;
@@ -426,6 +428,11 @@
       border-top: 1px solid rgba($color: #000, $alpha: 0.05);
     }
     .wrapper {
+      .sub-info {
+        span {
+          color: $black700;
+        }
+      }
       .contact-wrap {
         p {
           color: $black700;
@@ -449,8 +456,17 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: space-between;
     height: 100%;
+    .sub-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        font-size: clamp(15px, 2vw, 22px);
+        color: #fff;
+      }
+    }
     .contact-wrap {
       position: absolute;
       left: 50%;
@@ -471,6 +487,8 @@
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
+      padding: 2rem;
+      border-top: 1px solid rgba($color: #fff, $alpha: 0.2);
       .left-wrap {
         display: flex;
         flex-direction: column;

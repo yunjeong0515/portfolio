@@ -541,7 +541,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 // 외부로 분리한 Three.js 로직 임포트
 import { initBlobBackground } from "src/assets/js/visualEffects";
 import Swiper from "swiper";
-import { EffectCoverflow, Pagination, Autoplay } from "swiper/modules";
+import { FreeMode, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
@@ -787,7 +787,7 @@ export default {
 
       let mm = gsap.matchMedia();
 
-      // ✅ 768px 이상: 모든 화려한 효과 활성화
+      // ✅ 768px 이상: 모든 효과 활성화
       mm.add("(min-width: 768px)", () => {
         // 1. 가로 스크롤 본체
         const scrollTween = gsap.to(horiInner, {
@@ -878,22 +878,85 @@ export default {
         };
       });
 
-      // ✅ 768px 미만 (모바일): 애니메이션 없이 즉시 노출
       mm.add("(max-width: 767px)", () => {
-        // 모바일에서는 clip-path 등을 제거하여 텍스트가 바로 보이게 설정
-        gsap.set(".reveal-text h2, .reveal-text p", {
-          clipPath: "inset(0 0% 0 0)",
-          opacity: 1,
+        // 1. 초기 상태 설정 (클립패스 제거 및 아래로 살짝 내림)
+        const fadeElements = document.querySelectorAll(
+          ".one-page .reveal-text h2, .one-page .reveal-text p, .one-page .workflow-tags .tag"
+        );
+
+        gsap.set(fadeElements, {
+          opacity: 0,
+          y: 40,
+          clipPath: "none",
           visibility: "visible",
         });
-        gsap.set(".workflow-tags .tag", { opacity: 1, x: 0 });
 
-        // 모바일에서는 Identity 아이콘도 둥둥 효과 없이 고정
-        const iconItems = document.querySelectorAll(".icon-item");
-        iconItems.forEach((item) => {
-          item.classList.remove("is-floating");
-          gsap.set(item, { opacity: 1, scale: 1, y: 0 });
+        // 2. 스크롤 시 Fade-Up (Batch 사용으로 성능 최적화)
+        ScrollTrigger.batch(fadeElements, {
+          start: "top 90%", // 화면 하단에서 10% 올라왔을 때 실행
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power2.out",
+              overwrite: true,
+            });
+          },
+          onLeaveBack: (batch) => {
+            // 다시 위로 올릴 때 초기화 (원치 않으면 이 블록 삭제)
+            gsap.set(batch, { opacity: 0, y: 40 });
+          },
         });
+
+        // 3. Identity 아이콘 등 기타 요소도 동일하게 적용 가능
+        const iconItems = document.querySelectorAll(".icon-item");
+        gsap.set(iconItems, { opacity: 0, scale: 0.8 });
+
+        ScrollTrigger.batch(iconItems, {
+          start: "top 85%",
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "back.out(1.7)",
+            });
+          },
+        });
+
+        const focusSection = document.querySelector(".focus-section");
+        const horiSection = document.querySelector(".horizontal-section");
+
+        if (focusSection && horiSection) {
+          ScrollTrigger.create({
+            trigger: focusSection,
+            start: "top 50%", // 섹션의 상단이 화면 중간에 왔을 때
+            end: "bottom 50%", // 섹션의 하단이 화면 중간을 지나갈 때
+            onEnter: () => {
+              gsap.to(horiSection, {
+                backgroundColor: "#0E0E0E",
+                duration: 0.8,
+              });
+            },
+            onEnterBack: () => {
+              // 아래에서 위로 다시 올라올 때 블랙으로
+              gsap.to(horiSection, {
+                backgroundColor: "#0E0E0E",
+                duration: 0.8,
+              });
+            },
+            onLeaveBack: () => {
+              // 맨 위로 돌아가면 다시 흰색으로
+              gsap.to(horiSection, {
+                backgroundColor: "#ffffff",
+                duration: 0.8,
+              });
+            },
+          });
+        }
       });
     },
     initFocus3DText() {
@@ -1242,7 +1305,7 @@ export default {
       }
 
       this.swiperInstance = new Swiper(".project-swiper", {
-        modules: [Pagination, Autoplay],
+        modules: [Pagination, Autoplay, FreeMode],
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",
@@ -1250,9 +1313,9 @@ export default {
         loop: true,
         loopedSlides: 6,
         loopPreventsSliding: false,
-        speed: 600,
+        speed: 5000,
         autoplay: {
-          delay: 3000,
+          delay: 0,
           disableOnInteraction: false,
         },
         observer: true,
