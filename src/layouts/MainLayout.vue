@@ -132,17 +132,20 @@
         <template
           v-if="!$route.meta.footerType || $route.meta.footerType === 'A'"
         >
+          <div class="sub-info">
+            <span class="font_ibm">Yunjeong’s Web Portfolio</span>
+            <span class="font_ibm">design | Publishing</span>
+          </div>
           <div class="contact-wrap">
             <p class="font_ibm font_500">
-              Ready for your next challenge. <br />Let’s grow together.
+              My skills are ready <br />for your next challenge. <br />Let's
+              grow together.
             </p>
-            <button class="round-btn font_ibm">CONTACT</button>
           </div>
 
           <div class="f-info">
             <div class="left-wrap">
-              <span>010 - 2717 - 5354</span>
-              <span>dbswjd2825@naver.com</span>
+              <span>010-2717-5354 / dbswjd2825@naver.com</span>
             </div>
             <div class="right-wrap">
               <span class="font_ibm"
