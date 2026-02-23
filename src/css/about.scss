@@ -779,8 +779,10 @@
   .project-section {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 80px;
     width: 100%;
+    min-height: 100vh;
     padding: 100px 0;
     background: #fff; // 다크 모드일 때 3D 그림자가 더 돋보임
     overflow: hidden;
@@ -800,7 +802,9 @@
       position: relative;
       width: 100%;
       overflow: visible !important;
-
+      .swiper-wrapper {
+        animation-timing-function: linear !important;
+      }
       &::before {
         content: "";
         position: absolute;
@@ -1033,7 +1037,7 @@
     .bio-section {
       .bio-row {
         .bio-text {
-          font-size: clamp(3rem, 5vw, 5rem);
+          font-size: clamp(2rem, 5vw, 5rem);
         }
       }
     }
@@ -1224,7 +1228,6 @@
           }
         }
         .focus-section {
-          background-color: $black900 !important;
           .inner {
             padding: 0 20px;
             flex-direction: column;
@@ -1246,9 +1249,16 @@
               align-items: flex-start;
               flex-direction: column;
               padding: 0 20px;
+              .workflow-tags {
+                width: 100%;
+                .tag {
+                  font-size: 13vw;
+                }
+              }
             }
           }
         }
+
         .experience-section {
           background-color: $black900 !important;
           &::after {
@@ -1265,6 +1275,8 @@
                 left: auto;
                 bottom: auto;
                 transform: translate(0, 0);
+                width: 80vw;
+                margin-left: auto;
               }
             }
           }
@@ -1326,6 +1338,14 @@
 
 @media (max-width: 500px) {
   .aboutpage-container {
+    .visual-section {
+      max-height: 500px;
+      .gradient-overlay,
+      canvas {
+        max-height: 500px;
+      }
+    }
+
     .profile-section {
       .wrapper {
         .title {
