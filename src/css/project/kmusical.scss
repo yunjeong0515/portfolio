@@ -5,7 +5,20 @@
   }
   .project-body {
     background-color: $black900;
-  }
-  .summary-section {
+    .contents-section-container {
+      .task-section {
+        .wrapper {
+          .content-wrap {
+            ul {
+              li {
+                .title {
+                  color: #c3e62a;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

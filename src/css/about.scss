@@ -720,11 +720,14 @@
         color: #fff;
       }
       .bg-title {
+        display: block;
         font-size: 15vw;
+        height: 15vw;
         color: #fff;
-        opacity: 0.1; // 은은하게 고정
+        opacity: 0.1;
         text-transform: uppercase;
         transition: opacity 0.3s ease;
+        flex-shrink: 0;
         &.is-skills {
           opacity: 1;
         }
@@ -803,7 +806,7 @@
       width: 100%;
       overflow: visible !important;
       .swiper-wrapper {
-        animation-timing-function: linear !important;
+        transition-timing-function: linear !important;
       }
       &::before {
         content: "";

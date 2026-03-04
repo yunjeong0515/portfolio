@@ -403,11 +403,15 @@
   &.type-b {
     height: 100%;
     min-height: 100%;
+    background: none;
+    background-color: $black900;
     border-top: 1px solid rgba($color: #fff, $alpha: 0.1);
     padding: 30px 0;
     .wrapper {
       .f-info {
         justify-content: flex-end;
+        border: none;
+        padding: 2rem 0;
         .left-wrap {
           display: none;
         }
@@ -423,9 +427,11 @@
     }
   }
   &.is-light {
+    background: none;
     background-color: #fff;
     &.type-b {
-      border-top: 1px solid rgba($color: #000, $alpha: 0.05);
+      background: none;
+      border-top: 1px solid rgba($color: #000, $alpha: 0.1);
     }
     .wrapper {
       .sub-info {

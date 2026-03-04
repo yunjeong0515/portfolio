@@ -1,20 +1,19 @@
 <template>
-  <q-page class="projectdetailpage-container hanwhalifepage-container">
+  <q-page class="projectdetailpage-container chakansonsapage-container">
     <section class="visual-section">
       <div class="visual-pc">
         <img
-          src="../../../src/assets/imgs/projects/hanwhalife/visual_pc.jpg"
-          alt="PC Visual"
+          src="../../../src/assets/imgs/projects/chakansonsa/visual_pc.jpg"
+          alt=""
         />
       </div>
       <div class="visual-m">
         <img
-          src="../../../src/assets/imgs/projects/hanwhalife/visual_m.jpg"
-          alt="Mobile Visual"
+          src="../../../src/assets/imgs/projects/chakansonsa/visual_m.jpg"
+          alt=""
         />
       </div>
     </section>
-
     <div class="project-body">
       <section class="summary-section">
         <div class="wrapper">
@@ -72,7 +71,6 @@
               </a>
             </div>
           </div>
-
           <ul class="info-meta-list">
             <li class="meta-item">
               <span class="label font_ibm">Category</span>
@@ -115,25 +113,22 @@
           </ul>
         </div>
       </section>
-
       <div class="contents-section-container">
-        <section class="overview-section">
+        <section class="overview-section font_black">
           <div class="wrapper">
             <span class="section-title font_ibm">&lt;Overview/&gt;</span>
             <div class="content-wrap">
               <p>
-                한화생명 프로모션 캠페인의 일환으로 진행된 3종 이벤트 페이지
-                구축 프로젝트입니다. <br />OX 퀴즈, 히트곡 투표, 사연 이벤트로
-                구성되었으며, 사용자의 참여 흐름에 맞춘 인터랙션과 입력 UI를
-                중심으로 설계되었습니다. <br />이벤트 사용자 페이지는 HTML
-                기반으로 퍼블리싱 및 기능 구현을 진행했으며, 참여 데이터 관리를
-                위한 관리자 페이지는 Vue.js 기반으로 별도 구축했습니다.
-                <br /><br />본 프로젝트에서는 이벤트 유형별로 다른 참여 방식을
-                고려해 단계형 화면 전환 구조를 설계하고, 상태값에 따른 조건부
-                렌더링을 적용하여 단일 페이지 내에서 자연스럽게 참여가
-                완료되도록 구현했습니다. <br />또한 관리자 페이지에서는 참여자
-                리스트 및 응답 데이터를 효율적으로 확인·관리할 수 있는 UI를
-                구성해 운영 편의성을 강화했습니다.
+                착한손해사정사 기업 소개 웹사이트 구축 프로젝트입니다. 손해사정
+                서비스 안내 및 상담 유도에 초점을 맞춘 정보 전달형 웹사이트로,
+                간결하고 신뢰감 있는 UI 구성을 중심으로 설계되었습니다.
+                <br /><br />본 프로젝트는 HTML 기반으로 전체 퍼블리싱을
+                진행했으며, 콘텐츠 계층 구조를 고려한 시맨틱 마크업으로 페이지를
+                구성했습니다. <br />모바일 환경을 기준으로 화면을 설계하고, PC
+                환경에서는 모바일 화면이 축소된 형태로 노출되도록 구현하여 내부
+                스크롤이 작동하는 구조를 적용했습니다. <br />이를 통해
+                디바이스와 관계없이 동일한 사용자 경험을 유지하면서도 모바일
+                중심 UX 전략을 일관되게 반영했습니다.
               </p>
             </div>
           </div>
@@ -145,24 +140,24 @@
               <ul class="items-2">
                 <li>
                   <span class="title font_500"
-                    >HTML 기반 이벤트 페이지 퍼블리싱 및 기능 구현</span
+                    >HTML 기반 웹사이트 퍼블리싱</span
                   >
                   <p class="desc">
-                    OX 퀴즈, 히트곡 투표, 사연 모집 3가지 이벤트 페이지를
-                    제작했습니다. 각 이벤트 유형에 맞춰 입력 폼, 선택 UI, 결과
-                    안내 화면을 구성하고, 사용자 참여 흐름에 맞는 화면 전환 및
-                    인터랙션을 구현했습니다.
+                    기업 소개, 서비스 안내, 상담 유도 섹션 등 전체 페이지를
+                    시맨틱 마크업 기반으로 구성했습니다. 정보 계층 구조를 고려해
+                    콘텐츠 흐름이 자연스럽게 이어지도록 레이아웃을 설계했습니다.
                   </p>
                 </li>
                 <li>
                   <span class="title font_500"
-                    >Vue.js 기반 관리자 페이지 구축
-                  </span>
+                    >모바일 중심 UI 구조 설계 및 PC 환경 최적화 구현</span
+                  >
                   <p class="desc">
-                    이벤트 참여자 데이터를 관리할 수 있는 관리자 페이지를
-                    Vue.js로 구현했습니다. 참여자 리스트 조회, OX 선택 결과 및
-                    사연 내용 확인, 투표 데이터 확인 기능을 구성하여 운영자가
-                    참여 현황을 효율적으로 확인할 수 있도록 설계했습니다.
+                    모바일 화면을 기준으로 UI를 설계하고, 핵심 콘텐츠가
+                    직관적으로 전달되도록 단일 뷰 구조로 구성했습니다. PC
+                    환경에서는 모바일 화면이 축소된 형태로 노출되도록 레이아웃을
+                    설계하고, 내부 스크롤이 동작하도록 구현하여 디바이스와
+                    관계없이 일관된 사용자 경험이 유지되도록 구성했습니다.
                   </p>
                 </li>
               </ul>
@@ -179,10 +174,10 @@ import { defineComponent } from "vue";
 import { projects } from "src/data/projects";
 
 export default defineComponent({
-  name: "HanwhalifeEvent",
+  name: "chakansonsaAnniversary",
   data() {
     return {
-      project: projects.find((p) => p.id === "hanwhalife"),
+      project: projects.find((p) => p.id === "chakansonsa"),
     };
   },
 });

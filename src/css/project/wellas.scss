@@ -1,15 +1,15 @@
-.seoul80page-container {
+.wellaspage-container {
   .project-body {
-    background-color: #fff;
+    background-image: linear-gradient(to top, $black900, #030a0d);
     .contents-section-container {
       .task-section {
         .wrapper {
           .content-wrap {
             ul {
               li {
-                background-color: rgba($color: #184aff, $alpha: 0.1);
+                background-color: rgba($color: #fff, $alpha: 0.1);
                 .title {
-                  color: #184aff;
+                  color: #1bb3c5;
                 }
               }
             }

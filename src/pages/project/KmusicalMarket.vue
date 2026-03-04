@@ -106,7 +106,7 @@
                 <li
                   v-for="(task, index) in project.tasks"
                   :key="index"
-                  class="font_ibm"
+                  class="font_300"
                 >
                   {{ task }}
                 </li>
@@ -140,6 +140,68 @@
             </div>
           </div>
         </section>
+        <section class="task-section">
+          <div class="wrapper">
+            <span class="section-title font_ibm">&lt;Task/&gt;</span>
+            <div class="content-wrap">
+              <ul class="items-5">
+                <li>
+                  <span class="title font_500">UX/UI 기획 참여</span>
+                  <p class="desc">
+                    기획 단계부터 예약 시스템 설계 회의에 참여하여, 티켓
+                    구매부터 프로그램 신청까지 이어지는 다단계 사용자 흐름을
+                    정리하고 퍼블리셔 관점에서 직관적인 UI/UX 프로세스를
+                    설계했습니다. 복잡한 플로우를 사용자 동선 중심으로
+                    재구성하여, 혼란 없이 자연스럽게 다음 단계로 이어지는 예약
+                    경험을 구현하는 데 기여했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >Vue.js 기반 사용자 웹사이트 UI/UX 구현
+                  </span>
+                  <p class="desc">
+                    Vue.js 컴포넌트 구조를 기반으로 사용자 페이지 전반의 UI를
+                    구현하고, 디자인 의도를 정확히 반영한 마크업과 스타일링을
+                    적용해 반응형 웹 환경에 최적화된 사용자 경험을 구축했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >동적 데이터 관리 및 컴포넌트 분리 구현
+                  </span>
+                  <p class="desc">
+                    여러 페이지에서 공통으로 사용되는 프로그램 상세 정보 모달을
+                    컴포넌트로 분리해 재사용 구조로 설계하고, 프로그램별
+                    콘텐츠는 JS 데이터 파일로 관리하여 동일한 레이아웃의 모달에
+                    동적으로 바인딩되도록 구현했습니다. 이를 통해 코드 중복을
+                    줄이고, 콘텐츠 변경 시에도 빠르게 대응할 수 있는 유지보수
+                    효율적인 구조를 구축했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500">다국어 처리 (i18n) </span>
+                  <p class="desc">
+                    i18n 라이브러리를 활용해 국·영문 페이지를 효율적으로
+                    관리하고, 언어 전환 시에도 동일한 UI 구조와 사용자 경험이
+                    유지되도록 구현했습니다. 공통 컴포넌트와 텍스트 리소스를
+                    분리해 관리함으로써, 콘텐츠 수정 및 확장 시에도 유지보수가
+                    용이한 다국어 구조를 구축했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >Vue.js 기반 관리자 페이지 구축
+                  </span>
+                  <p class="desc">
+                    티켓 구매 내역, 프로그램 예약 현황, 공지사항 관리 기능을
+                    중심으로 Vue.js 기반 어드민 UI를 설계·퍼블리싱했습니다.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
         <section class="technical-section">
           <div class="wrapper">
             <span class="section-title font_ibm"
@@ -154,7 +216,7 @@
                     관람권 시스템을 단일 페이지 내에 통합하고,
                     <em>Vue.js 상태 기반 렌더링과 v-if를 활용</em>해 사용자
                     타입과 티켓 종류에 따라 필요한 옵션만 노출되도록
-                    구현했습니다. 또한 프로그램 선택 화면을 탭 메뉴 구조로
+                    구현했습니다. <br />또한 프로그램 선택 화면을 탭 메뉴 구조로
                     구성하고,
                     <em
                       >스크롤 시에도 선택 항목이 고정되는 리스트 박스를 배치</em
@@ -169,6 +231,12 @@
                     <img
                       src="../../../src/assets/imgs/projects/kmusical/tech01_pc.png"
                       alt=""
+                      class="pc-img"
+                    />
+                    <img
+                      src="../../../src/assets/imgs/projects/kmusical/tech01_mo.png"
+                      alt=""
+                      class="mo-img"
                     />
                   </div>
                 </div>
@@ -181,9 +249,9 @@
                     프로그램 상세 정보는
                     <em>별도의 JS 데이터 파일로 분리하여 관리</em>하고,
                     <em>공통 모달 컴포넌트</em>를 통해 선택된 프로그램의
-                    데이터만 동적으로 바인딩되도록 구현했습니다. 이를 통해 여러
-                    페이지에서 동일한 모달 UI를 재사용할 수 있도록 구조화했으며,
-                    콘텐츠 변경 시에도 빠르게 대응할 수 있는
+                    데이터만 동적으로 바인딩되도록 구현했습니다. <br />이를 통해
+                    여러 페이지에서 동일한 모달 UI를 재사용할 수 있도록
+                    구조화했으며, 콘텐츠 변경 시에도 빠르게 대응할 수 있는
                     <em>확장성 있는 구조를 설계</em>했습니다.
                   </p>
                 </div>
@@ -192,6 +260,12 @@
                     <img
                       src="../../../src/assets/imgs/projects/kmusical/tech02_pc.png"
                       alt=""
+                      class="pc-img"
+                    />
+                    <img
+                      src="../../../src/assets/imgs/projects/kmusical/tech02_mo.png"
+                      alt=""
+                      class="mo-img"
                     />
                   </div>
                 </div>
@@ -204,10 +278,11 @@
                   <p class="info-desc">
                     사용자 페이지와 어드민 페이지의 구조와 흐름을 분석하고
                     이해하며, Vue.js와 Quasar Framework를 활용해 대시보드 형태의
-                    어드민 시스템을 구축했습니다. 회원 관리, 티켓 결제 처리,
-                    프로그램 예약 관리뿐만 아니라 게시판 관리 기능도 구현했으며,
-                    게시글 작성, 편집, 관리 기능을 포함하여
-                    <em>콘텐츠를 효율적으로 운영할 수 있도록 설계</em>했습니다.
+                    어드민 시스템을 구축했습니다. <br />회원 관리, 티켓 결제
+                    처리, 프로그램 예약 관리뿐만 아니라 게시판 관리 기능도
+                    구현했으며, 게시글 작성, 편집, 관리 기능을 포함하여
+                    <em>콘텐츠를 효율적으로 운영할 수 있도록 설계</em
+                    >했습니다.<br />
                     대시보드는 정보를 체계적으로 정리하여 관리자가 필요한
                     데이터를 빠르고 정확하게 확인하고 처리할 수 있도록
                     지원합니다.
@@ -218,6 +293,12 @@
                     <img
                       src="../../../src/assets/imgs/projects/kmusical/tech03_pc.png"
                       alt=""
+                      class="pc-img"
+                    />
+                    <img
+                      src="../../../src/assets/imgs/projects/kmusical/tech03_mo.png"
+                      alt=""
+                      class="mo-img"
                     />
                   </div>
                 </div>

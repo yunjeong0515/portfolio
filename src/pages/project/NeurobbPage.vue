@@ -1,20 +1,19 @@
 <template>
-  <q-page class="projectdetailpage-container hanwhalifepage-container">
+  <q-page class="projectdetailpage-container neurobbpage-container">
     <section class="visual-section">
       <div class="visual-pc">
         <img
-          src="../../../src/assets/imgs/projects/hanwhalife/visual_pc.jpg"
-          alt="PC Visual"
+          src="../../../src/assets/imgs/projects/neurobb/visual_pc.jpg"
+          alt=""
         />
       </div>
       <div class="visual-m">
         <img
-          src="../../../src/assets/imgs/projects/hanwhalife/visual_m.jpg"
-          alt="Mobile Visual"
+          src="../../../src/assets/imgs/projects/neurobb/visual_m.jpg"
+          alt=""
         />
       </div>
     </section>
-
     <div class="project-body">
       <section class="summary-section">
         <div class="wrapper">
@@ -72,7 +71,6 @@
               </a>
             </div>
           </div>
-
           <ul class="info-meta-list">
             <li class="meta-item">
               <span class="label font_ibm">Category</span>
@@ -115,25 +113,26 @@
           </ul>
         </div>
       </section>
-
       <div class="contents-section-container">
-        <section class="overview-section">
+        <section class="overview-section font_black">
           <div class="wrapper">
             <span class="section-title font_ibm">&lt;Overview/&gt;</span>
             <div class="content-wrap">
               <p>
-                한화생명 프로모션 캠페인의 일환으로 진행된 3종 이벤트 페이지
-                구축 프로젝트입니다. <br />OX 퀴즈, 히트곡 투표, 사연 이벤트로
-                구성되었으며, 사용자의 참여 흐름에 맞춘 인터랙션과 입력 UI를
-                중심으로 설계되었습니다. <br />이벤트 사용자 페이지는 HTML
-                기반으로 퍼블리싱 및 기능 구현을 진행했으며, 참여 데이터 관리를
-                위한 관리자 페이지는 Vue.js 기반으로 별도 구축했습니다.
-                <br /><br />본 프로젝트에서는 이벤트 유형별로 다른 참여 방식을
-                고려해 단계형 화면 전환 구조를 설계하고, 상태값에 따른 조건부
-                렌더링을 적용하여 단일 페이지 내에서 자연스럽게 참여가
-                완료되도록 구현했습니다. <br />또한 관리자 페이지에서는 참여자
-                리스트 및 응답 데이터를 효율적으로 확인·관리할 수 있는 UI를
-                구성해 운영 편의성을 강화했습니다.
+                바이오 테크 전문 기업 뉴로비비(NeuroBB)의 기업 웹사이트 구축
+                프로젝트에서 전체 퍼블리싱 및 프론트엔드 UI 구현을 전담했습니다.
+                <br /><br />
+                기업의 분석 데이터를 효과적으로 보여주기 위해 Chart.js
+                라이브러리를 직접 도입하고, 서비스 성격에 맞게 Radar View(방사형
+                차트)를 커스텀 작업했습니다. <br />단순히 기본 차트를 출력하는
+                것에 그치지 않고, 기업의 아이덴티티가 느껴지도록 디자인 가이드에
+                맞춰 스타일을 세밀하게 조정하여 데이터 시각화의 완성도를
+                높였습니다. <br />또한, 원페이지(One-page) 레이아웃 내에서
+                사용자 경험을 개선하기 위해 자바스크립트를 활용한 '타겟팅 스크롤
+                내비게이션'을 구현했습니다. <br />메뉴 클릭 시 각 섹션의 위치
+                값을 정확히 계산하여 부드럽게 이동하도록 설계했으며, 이를 통해
+                사용자가 복잡한 기술 정보를 혼선 없이 체계적으로 탐색할 수 있는
+                환경을 구축했습니다.
               </p>
             </div>
           </div>
@@ -142,27 +141,40 @@
           <div class="wrapper">
             <span class="section-title font_ibm">&lt;Task/&gt;</span>
             <div class="content-wrap">
-              <ul class="items-2">
+              <ul class="items-3">
                 <li>
                   <span class="title font_500"
-                    >HTML 기반 이벤트 페이지 퍼블리싱 및 기능 구현</span
+                    >시맨틱 HTML 구조 설계 및 구축</span
                   >
                   <p class="desc">
-                    OX 퀴즈, 히트곡 투표, 사연 모집 3가지 이벤트 페이지를
-                    제작했습니다. 각 이벤트 유형에 맞춰 입력 폼, 선택 UI, 결과
-                    안내 화면을 구성하고, 사용자 참여 흐름에 맞는 화면 전환 및
-                    인터랙션을 구현했습니다.
+                    웹사이트의 전체 레이아웃과 콘텐츠 구조를 시맨틱 HTML
+                    기반으로 설계하고 구축했습니다. 브랜드 메시지, 에이전시
+                    소개, 포트폴리오 섹션 등이 명확히 구분되어 흐름이 자연스럽고
+                    가독성이 높은 구조로 구현되었습니다.
                   </p>
                 </li>
                 <li>
                   <span class="title font_500"
-                    >Vue.js 기반 관리자 페이지 구축
-                  </span>
+                    >Chart.js 도입 및 Radar View 커스텀 작업을 통한 데이터
+                    시각화 구현</span
+                  >
                   <p class="desc">
-                    이벤트 참여자 데이터를 관리할 수 있는 관리자 페이지를
-                    Vue.js로 구현했습니다. 참여자 리스트 조회, OX 선택 결과 및
-                    사연 내용 확인, 투표 데이터 확인 기능을 구성하여 운영자가
-                    참여 현황을 효율적으로 확인할 수 있도록 설계했습니다.
+                    메인 화면 및 각 섹션에 스크롤 진입에 따라 콘텐츠가 부드럽게
+                    등장하는 인터랙션, 섹션 간 자연스러운 전환 등 다양한
+                    인터랙션을 적용해 단순 정보 전달을 넘어 브랜드 감성 경험
+                    중심 구조로 구현했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >JavaScript 기반의 섹션별 타겟팅 스크롤 내비게이션 시스템
+                    구축</span
+                  >
+                  <p class="desc">
+                    어드민 페이지를 Vue.js를 활용해 구성하고, 포트폴리오 및
+                    프로젝트 데이터를 입력/수정/관리할 수 있는 UI를
+                    설계·구현했습니다. 관리자는 별도 개발 없이 UI로 데이터를
+                    제어할 수 있도록 작업했습니다.
                   </p>
                 </li>
               </ul>
@@ -179,10 +191,10 @@ import { defineComponent } from "vue";
 import { projects } from "src/data/projects";
 
 export default defineComponent({
-  name: "HanwhalifeEvent",
+  name: "neurobbAnniversary",
   data() {
     return {
-      project: projects.find((p) => p.id === "hanwhalife"),
+      project: projects.find((p) => p.id === "neurobb"),
     };
   },
 });
