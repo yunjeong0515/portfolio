@@ -38,7 +38,7 @@ const routes = [
       {
         path: "project/picorporation",
         component: () => import("pages/project/PiCorporation.vue"),
-        meta: { isDarkPage: true, footerType: "B", lightfooter: true },
+        meta: { isDarkPage: true, footerType: "B" },
       },
       {
         path: "project/heruelab",
@@ -50,19 +50,56 @@ const routes = [
         component: () => import("pages/project/HanwhalifeEvent.vue"),
         meta: { footerType: "B", lightfooter: true },
       },
-      // {
-      //   path: "project/seouluniversity",
-      //   component: () => import("pages/project/HanwhalifeEvent.vue"),
-      // },
+      {
+        path: "project/seouluniversity",
+        component: () => import("pages/project/SeouluniversityPage.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
       {
         path: "project/rebound",
         component: () => import("pages/project/ReboundFestival.vue"),
-        meta: { footerType: "B" },
+        meta: { footerType: "B", lightfooter: true },
       },
-      // {
-      //   path: "project/louche9",
-      //   component: () => import("pages/project/ReboundFestival.vue"),
-      // },
+      {
+        path: "project/louche9",
+        component: () => import("pages/project/Louche9Page.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
+      {
+        path: "project/avanjewelry",
+        component: () => import("pages/project/AvanjewelryPage.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
+      {
+        path: "project/shortkong",
+        component: () => import("pages/project/ShortkongPage.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
+      {
+        path: "project/eumyang",
+        component: () => import("pages/project/EumyangPage.vue"),
+        meta: { isDarkPage: true, footerType: "B" },
+      },
+      {
+        path: "project/neurobb",
+        component: () => import("pages/project/NeurobbPage.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
+      {
+        path: "project/chakansonsa",
+        component: () => import("pages/project/ChakansonsaPage.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
+      {
+        path: "project/phyxup",
+        component: () => import("pages/project/PhyxupPage.vue"),
+        meta: { footerType: "B", lightfooter: true },
+      },
+      {
+        path: "project/wellas",
+        component: () => import("pages/project/WellasPage.vue"),
+        meta: { isDarkPage: true, footerType: "B" },
+      },
     ],
   },
 

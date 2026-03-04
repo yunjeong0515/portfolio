@@ -904,10 +904,6 @@ export default {
               overwrite: true,
             });
           },
-          onLeaveBack: (batch) => {
-            // 다시 위로 올릴 때 초기화 (원치 않으면 이 블록 삭제)
-            gsap.set(batch, { opacity: 0, y: 40 });
-          },
         });
 
         // 3. Identity 아이콘 등 기타 요소도 동일하게 적용 가능
@@ -1276,27 +1272,22 @@ export default {
     },
     animateBgTitle(text) {
       const bgTitle = this.$refs.bgTitle;
-
-      // 요소가 없거나 현재 텍스트와 바꿀 텍스트가 이미 같다면 중단
       if (!bgTitle || bgTitle.innerText === text) return;
 
-      // 진행 중인 모든 애니메이션 강제 종료 (중첩 방지)
       gsap.killTweensOf(bgTitle);
 
-      gsap
-        .timeline()
-        .to(bgTitle, {
-          opacity: 0,
-          duration: 0.2, // 사라지는 시간
-          onComplete: () => {
-            // 조건 없이 무조건 전달받은 text로 교체
-            bgTitle.innerText = text;
-          },
-        })
-        .to(bgTitle, {
-          opacity: 1,
-          duration: 0.3, // 나타나는 시간
-        });
+      gsap.to(bgTitle, {
+        opacity: 0.05,
+        duration: 0.2,
+        onComplete: () => {
+          bgTitle.innerText = text;
+          gsap.to(bgTitle, {
+            opacity: 1,
+            duration: 0.3,
+            ease: "none",
+          });
+        },
+      });
     },
     initProjectSwiper() {
       // 중복 생성 방지
@@ -1306,6 +1297,10 @@ export default {
 
       this.swiperInstance = new Swiper(".project-swiper", {
         modules: [Pagination, Autoplay, FreeMode],
+        freeMode: {
+          enabled: true,
+          momentum: false,
+        },
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: "auto",

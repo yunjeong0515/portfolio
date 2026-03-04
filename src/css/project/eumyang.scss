@@ -1,15 +1,16 @@
-.seoul80page-container {
+.eumyangpage-container {
   .project-body {
-    background-color: #fff;
+    background-color: none;
+    background-image: linear-gradient(to top, $black900, $black600);
     .contents-section-container {
       .task-section {
         .wrapper {
           .content-wrap {
             ul {
               li {
-                background-color: rgba($color: #184aff, $alpha: 0.1);
+                background-color: rgba($color: #fff, $alpha: 0.1);
                 .title {
-                  color: #184aff;
+                  color: #9eedff;
                 }
               }
             }

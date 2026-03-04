@@ -1,5 +1,5 @@
 <template>
-  <q-page class="projectdetailpage-container seoul80page-container">
+  <q-page class="projectdetailpage-container heruepage-container">
     <section class="visual-section">
       <div class="visual-pc">
         <img
@@ -115,28 +115,159 @@
           </ul>
         </div>
       </section>
-
-      <section class="overview-section">
-        <div class="wrapper">
-          <span class="title font_ibm">&lt;Overview/&gt;</span>
-          <div class="content-wrap">
-            <p>
-              광복 80주년을 기념해 국민에게 다양한 기념사업 프로그램을 소개하는
-              홈페이지 구축 프로젝트입니다. <br />
-              방문자가 프로그램 정보를 직관적이고 흥미롭게 탐색할 수 있도록,
-              콘텐츠 중심의 UI 구성과 자연스러운 스크롤 인터랙션을 적용했습니다.
-              <br /><br />
-              본 프로젝트에서 전체 HTML 구조 설계, 인터랙션 기반 UI 구현, SVG
-              지도 연동 기능, 어드민 페이지 UI 작업 등을 담당했습니다. <br />
-              특히 스크롤 흐름에 따라 콘텐츠가 자연스럽게 등장하도록 설계해
-              단조로운 정보성 페이지의 사용자 피로도를 줄였으며, <br />SVG 기반
-              지도를 활용하여 지역별 프로그램을 시각적으로 탐색할 수 있는 기능을
-              구현하고, Vue.js 기반 구조를 활용해 핀 클릭 시 관련 정보를 즉시
-              노출하는 UX를 설계했습니다.
-            </p>
+      <div class="contents-section-container">
+        <section class="overview-section">
+          <div class="wrapper">
+            <span class="section-title font_ibm">&lt;Overview/&gt;</span>
+            <div class="content-wrap">
+              <p>
+                디자인 에이전시 헤루랩(HERULAB)의 공식 웹사이트 리뉴얼
+                프로젝트로, 브랜드 아이덴티티를 돋보이게 하는 인터랙션 중심의
+                UI/UX 개선을 진행했습니다. <br /><br />본 프로젝트에서는 사용자
+                페이지 및 관리자(Admin) 페이지의 퍼블리싱과 프론트엔드 UI 구현을
+                전담했습니다. <br />내부 디자이너가 아닌 외부 클라이언트 측
+                디자인 팀과 긴밀하게 소통하며, 디자인 의도를 완벽히 구현하기
+                위해 마운트 단위의 세심한 퍼블리싱에 집중했습니다. <br />특히
+                GSAP를 활용한 고도화된 스크롤 트리거 인터랙션을 페이지 곳곳에
+                적용하여 자칫 단조로울 수 있는 콘텐츠에 생동감을 부여하고,
+                에이전시만의 창의적인 이미지를 시각적으로 극대화했습니다.
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+        <section class="task-section">
+          <div class="wrapper">
+            <span class="section-title font_ibm">&lt;Task/&gt;</span>
+            <div class="content-wrap">
+              <ul class="items-4">
+                <li>
+                  <span class="title font_500"
+                    >시맨틱 HTML 웹사이트 구조 설계 및 구축</span
+                  >
+                  <p class="desc">
+                    웹사이트의 전체 레이아웃과 콘텐츠 구조를 시맨틱 HTML
+                    기반으로 설계하고 구축했습니다. 브랜드 메시지, 에이전시
+                    소개, 포트폴리오 섹션 등이 명확히 구분되어 흐름이 자연스럽고
+                    가독성이 높은 구조로 구현되었습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >인터랙티브 UI/UX 요소 구현
+                  </span>
+                  <p class="desc">
+                    메인 화면 및 각 섹션에 스크롤 진입에 따라 콘텐츠가 부드럽게
+                    등장하는 인터랙션, 섹션 간 자연스러운 전환 등 다양한
+                    인터랙션을 적용해 단순 정보 전달을 넘어 브랜드 감성 경험
+                    중심 구조로 구현했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >Vue.js 기반 관리자 페이지 구축
+                  </span>
+                  <p class="desc">
+                    Vue.js 기반 관리자 페이지 구축 어드민 페이지를 Vue.js를
+                    활용해 구성하고, 포트폴리오 및 프로젝트 데이터를
+                    입력/수정/관리할 수 있는 UI를 설계·구현했습니다. 관리자는
+                    별도 개발 없이 UI로 데이터를 제어할 수 있도록 작업했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >다국어(국/영문) 콘텐츠 최적화 및 구조 설계</span
+                  >
+                  <p class="desc">
+                    클라이언트 사례 및 작업 포트폴리오 리스트를 구성하고,각
+                    프로젝트가 어드민에서 관리될 수 있도록 상세 페이지 구조를
+                    설계했습니다.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <section class="technical-section">
+          <div class="wrapper">
+            <span class="section-title font_ibm"
+              >&lt;Technical Details/&gt;</span
+            >
+            <div class="tech-container">
+              <div class="tech-item">
+                <div class="tech-info">
+                  <span class="info-label font_500"
+                    >인터랙티브 UI/UX 요소 구현</span
+                  >
+                  <p class="info-desc">
+                    Swiper, GSAP, IntersectionObserver, JavaScript를 활용해
+                    페이지 전반에 사용자 반응형 인터랙션 구조를
+                    설계·구현했습니다. <br />리뷰 영역은 PC/모바일 환경을 감지해
+                    서로 다른 Swiper 설정을 적용하고, 디바이스 변경 시 기존
+                    인스턴스를 제거한 뒤 재생성하는 구조로 반응형 안정성을
+                    확보했습니다. <br />또한 GSAP를 활용해 마우스 커서에
+                    반응하는 시각 요소(Shapes)가 서로 다른 속도로 따라오도록
+                    구현해, 단순한 마우스 이동이 아닌 레이어드 인터랙션 효과를
+                    연출했습니다. <br />이를 통해 사용자는 스크롤·마우스·터치 등
+                    다양한 입력 방식에 자연스럽게 반응하는, 몰입감 있는 브랜드
+                    경험형 UI를 체감할 수 있도록 설계했습니다.
+                  </p>
+                </div>
+                <div class="contents-wrap tech-visual">
+                  <div class="tech-img">
+                    <img
+                      src="../../../src/assets/imgs/projects/herue/tech01_pc.png"
+                      alt=""
+                      class="pc-img"
+                    />
+                    <img
+                      src="../../../src/assets/imgs/projects/herue/tech01_mo.png"
+                      alt=""
+                      class="mo-img"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="tech-item">
+                <div class="tech-info">
+                  <span class="info-label font_500"
+                    >스크롤 기반 모션 인터랙션 및 사용자 반응형 UI 구현</span
+                  >
+                  <p class="info-desc">
+                    페이지 전반에 걸쳐 스크롤과 사용자 행동에 반응하는
+                    인터랙션을 적극적으로 적용하여, 정적인 정보 전달이 아닌
+                    몰입감 있는 탐색 경험을 제공하는 UI 흐름을 구축했습니다.
+                    <br />
+                    스크롤 진입 시에는 수치 정보가 목표 값까지 자연스럽게
+                    증가하는 카운트업 애니메이션을 적용해 성과 데이터를
+                    시각적으로 인지할 수 있도록 구성했고, <br />로고가 축소되며
+                    영상 콘텐츠로 전환되는 인터랙션을 설계해 브랜드 아이덴티티를
+                    강조한 뒤 콘텐츠로 자연스럽게 이어지도록 했습니다.
+                    <br />또한 카드 UI에는 Hover 시 타이틀과 SNS 아이콘이
+                    순차적으로 노출되는 구조를 적용하여, 정보의 우선순위에 따라
+                    시선이 흐르도록 설계하고, 사용자가 콘텐츠를 보다 직관적으로
+                    탐색할 수 있는 인터랙션 경험을 구현했습니다.
+                  </p>
+                </div>
+                <div class="contents-wrap">
+                  <div class="tech-img">
+                    <img
+                      src="../../../src/assets/imgs/projects/herue/tech02_pc.png"
+                      alt=""
+                      class="pc-img"
+                    />
+                    <img
+                      src="../../../src/assets/imgs/projects/herue/tech02_mo.png"
+                      alt=""
+                      class="mo-img"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   </q-page>
 </template>

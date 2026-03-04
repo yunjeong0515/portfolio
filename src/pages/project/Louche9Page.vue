@@ -1,20 +1,19 @@
 <template>
-  <q-page class="projectdetailpage-container hanwhalifepage-container">
+  <q-page class="projectdetailpage-container louche9page-container">
     <section class="visual-section">
       <div class="visual-pc">
         <img
-          src="../../../src/assets/imgs/projects/hanwhalife/visual_pc.jpg"
-          alt="PC Visual"
+          src="../../../src/assets/imgs/projects/louche9/visual_pc.jpg"
+          alt=""
         />
       </div>
       <div class="visual-m">
         <img
-          src="../../../src/assets/imgs/projects/hanwhalife/visual_m.jpg"
-          alt="Mobile Visual"
+          src="../../../src/assets/imgs/projects/louche9/visual_m.jpg"
+          alt=""
         />
       </div>
     </section>
-
     <div class="project-body">
       <section class="summary-section">
         <div class="wrapper">
@@ -72,7 +71,6 @@
               </a>
             </div>
           </div>
-
           <ul class="info-meta-list">
             <li class="meta-item">
               <span class="label font_ibm">Category</span>
@@ -115,25 +113,31 @@
           </ul>
         </div>
       </section>
-
       <div class="contents-section-container">
-        <section class="overview-section">
+        <section class="overview-section font_black">
           <div class="wrapper">
             <span class="section-title font_ibm">&lt;Overview/&gt;</span>
             <div class="content-wrap">
               <p>
-                한화생명 프로모션 캠페인의 일환으로 진행된 3종 이벤트 페이지
-                구축 프로젝트입니다. <br />OX 퀴즈, 히트곡 투표, 사연 이벤트로
-                구성되었으며, 사용자의 참여 흐름에 맞춘 인터랙션과 입력 UI를
-                중심으로 설계되었습니다. <br />이벤트 사용자 페이지는 HTML
-                기반으로 퍼블리싱 및 기능 구현을 진행했으며, 참여 데이터 관리를
-                위한 관리자 페이지는 Vue.js 기반으로 별도 구축했습니다.
-                <br /><br />본 프로젝트에서는 이벤트 유형별로 다른 참여 방식을
-                고려해 단계형 화면 전환 구조를 설계하고, 상태값에 따른 조건부
-                렌더링을 적용하여 단일 페이지 내에서 자연스럽게 참여가
-                완료되도록 구현했습니다. <br />또한 관리자 페이지에서는 참여자
-                리스트 및 응답 데이터를 효율적으로 확인·관리할 수 있는 UI를
-                구성해 운영 편의성을 강화했습니다.
+                아바타 커스터마이징 서비스와 이커머스가 결합된 혁신적인 통합
+                플랫폼, 루치나인(LOUCHE 9)의 웹사이트 구축 프로젝트입니다.
+                <br />본 프로젝트에서 전체 사용자 페이지 및 관리자 시스템의
+                퍼블리싱 100%를 담당했습니다. <br />특히, 단순 구현을 넘어
+                관리자(Admin) 페이지의 상품 및 아이템 등록 프로세스 기획 단계에
+                참여했습니다. <br />
+                운영 효율성을 고려하여 복잡한 아이템 속성과 레이어 데이터를
+                체계적으로 관리할 수 있는 화면 구조를 제안하고 구축함으로써,
+                관리자가 방대한 자산을 직관적으로 운영할 수 있는 최적의 시스템을
+                완성했습니다. <br /><br />본 프로젝트의 핵심인 ‘아바타 착장
+                시스템’을 구축하기 위해 Quasar 프레임워크를 기반으로 조건부
+                렌더링(v-if) 기술을 적극 활용했습니다. <br />사용자가 아이템을
+                선택하거나 해제함에 따라 아바타의 레이어 상태가 실시간으로
+                변경되도록 설계했으며, 복잡한 아이템 카테고리 내에서도 데이터
+                상태에 따라 정확한 레이어 순서(Z-index)와 착용 모습이 노출되도록
+                최적화했습니다. <br />단순한 상품 나열을 넘어, 쇼핑몰의 장바구니
+                시스템과 아바타 시뮬레이션을 유기적으로 연결하여 사용자가 자신의
+                디지털 페르소나를 직접 편집하고 구매까지 이어지는 고도화된
+                이커머스 경험을 완성했습니다.
               </p>
             </div>
           </div>
@@ -142,27 +146,40 @@
           <div class="wrapper">
             <span class="section-title font_ibm">&lt;Task/&gt;</span>
             <div class="content-wrap">
-              <ul class="items-2">
+              <ul class="items-3">
                 <li>
                   <span class="title font_500"
-                    >HTML 기반 이벤트 페이지 퍼블리싱 및 기능 구현</span
+                    >Vue.js 기반 쇼핑몰 구조 설계 및 구축</span
                   >
                   <p class="desc">
-                    OX 퀴즈, 히트곡 투표, 사연 모집 3가지 이벤트 페이지를
-                    제작했습니다. 각 이벤트 유형에 맞춰 입력 폼, 선택 UI, 결과
-                    안내 화면을 구성하고, 사용자 참여 흐름에 맞는 화면 전환 및
-                    인터랙션을 구현했습니다.
+                    상품 리스트, 상세 페이지, 장바구니, 구매 프로세스 등
+                    전반적인 커머스 UI를 Vue.js 기반으로 구현했습니다. 상품
+                    정보와 디지털 아이템 데이터를 구조화하여 관리하고, 구매 완료
+                    시 아바타 아이템이 연동되는 흐름을 고려해 화면을
+                    설계했습니다.
                   </p>
                 </li>
                 <li>
                   <span class="title font_500"
-                    >Vue.js 기반 관리자 페이지 구축
-                  </span>
+                    >아바타 커스터마이징 UI 구현</span
+                  >
                   <p class="desc">
-                    이벤트 참여자 데이터를 관리할 수 있는 관리자 페이지를
-                    Vue.js로 구현했습니다. 참여자 리스트 조회, OX 선택 결과 및
-                    사연 내용 확인, 투표 데이터 확인 기능을 구성하여 운영자가
-                    참여 현황을 효율적으로 확인할 수 있도록 설계했습니다.
+                    구매한 아이템을 기반으로 캐릭터에 장착·해제할 수 있는 UI를
+                    구현했습니다. 아이템 상태에 따라 아바타 외형이 즉시
+                    반영되도록 구성하여, 사용자 상호작용 중심의 인터페이스를
+                    설계했습니다.
+                  </p>
+                </li>
+                <li>
+                  <span class="title font_500"
+                    >Vue.js 기반 관리자 페이지 구축</span
+                  >
+                  <p class="desc">
+                    Vue.js 기반으로 관리자 페이지를 구성하고, 상품
+                    등록·수정·삭제 기능과 함께 디지털 아이템 데이터를 함께
+                    관리할 수 있는 구조를 설계했습니다. 주문 내역 및 사용자
+                    아이템 지급 상태를 확인할 수 있는 관리 화면을 구현하여 운영
+                    효율성을 고려한 시스템을 구축했습니다.
                   </p>
                 </li>
               </ul>
@@ -179,10 +196,10 @@ import { defineComponent } from "vue";
 import { projects } from "src/data/projects";
 
 export default defineComponent({
-  name: "HanwhalifeEvent",
+  name: "louche9Anniversary",
   data() {
     return {
-      project: projects.find((p) => p.id === "hanwhalife"),
+      project: projects.find((p) => p.id === "louche9"),
     };
   },
 });
