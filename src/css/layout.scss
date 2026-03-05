@@ -538,4 +538,27 @@
       height: 20px;
     }
   }
+
+  .footer {
+    .wrapper {
+      .sub-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .f-info {
+        padding: 5rem 2rem 0 2rem;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+        .left-wrap,
+        .right-wrap {
+          span {
+            display: block;
+            text-align: right;
+          }
+        }
+      }
+    }
+  }
 }

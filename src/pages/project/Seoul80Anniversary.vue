@@ -13,6 +13,12 @@
           alt=""
         />
       </div>
+      <div class="scroll-icon">
+        <span class="font_ibm">SCROLL</span>
+        <div class="icon">
+          <img src="../../assets/imgs/icon/arrow_down_b9.svg" alt="" />
+        </div>
+      </div>
     </section>
     <div class="project-body">
       <section class="summary-section">

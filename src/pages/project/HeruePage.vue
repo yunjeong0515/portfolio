@@ -9,9 +9,15 @@
       </div>
       <div class="visual-m">
         <img
-          src="../../../src/assets/imgs/projects/herue/visual_pc.jpg"
+          src="../../../src/assets/imgs/projects/herue/visual_m.jpg"
           alt="Mobile Visual"
         />
+      </div>
+      <div class="scroll-icon">
+        <span class="font_ibm">SCROLL</span>
+        <div class="icon">
+          <img src="../../assets/imgs/icon/arrow_down_b9.svg" alt="" />
+        </div>
       </div>
     </section>
 

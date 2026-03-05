@@ -20,6 +20,17 @@
     .visual-m {
       display: none;
     }
+    .scroll-icon {
+      position: absolute;
+      left: 50%;
+      bottom: 30px;
+      transform: translate(-50%, 0);
+      span {
+        &.text_w {
+          color: #fff;
+        }
+      }
+    }
   }
   .project-body {
     padding: 10rem 0 0 0;
@@ -493,6 +504,18 @@
       }
       .visual-m {
         display: block;
+      }
+      .scroll-icon {
+        position: absolute;
+        left: 50%;
+        bottom: 30px;
+        transform: translate(-50%, 0);
+        span {
+          font-size: 10px;
+        }
+        .icon {
+          width: 18px;
+        }
       }
     }
     .project-body {

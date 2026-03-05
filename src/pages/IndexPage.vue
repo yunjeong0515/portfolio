@@ -130,18 +130,18 @@
             <div class="running-dot"></div>
           </div>
           <div class="dock-item">
-            <button class="dock-icon">
+            <a href="mailto:dbswjd2825@naver.com" class="dock-icon">
               <img src="../assets/imgs/icon/dock_mail.svg" alt="mail icon" />
-            </button>
+            </a>
             <div class="running-dot"></div>
           </div>
           <div class="dock-item">
-            <button class="dock-icon">
+            <a href="sms:01027175354" class="dock-icon">
               <img
                 src="../assets/imgs/icon/dock_messages.svg"
                 alt="message icon"
               />
-            </button>
+            </a>
             <div class="running-dot"></div>
           </div>
         </div>
