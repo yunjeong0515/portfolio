@@ -1,0 +1,23 @@
+.reboundpage-container {
+  .visual-section {
+    position: relative;
+  }
+  .project-body {
+    .contents-section-container {
+      .task-section {
+        .wrapper {
+          .content-wrap {
+            ul {
+              li {
+                background-color: rgba($color: #b2dbc7, $alpha: 0.2);
+                .title {
+                  color: $black900;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

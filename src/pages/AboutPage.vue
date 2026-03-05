@@ -165,7 +165,7 @@
       <div class="wrapper">
         <div class="bio-content-wrap">
           <div class="bio-row row01">
-            <div class="video-box">
+            <!-- <div class="video-box">
               <video
                 autoplay
                 muted
@@ -173,7 +173,7 @@
                 playsinline
                 src="../assets/video/bio03.mp4"
               ></video>
-            </div>
+            </div> -->
             <span class="bio-text font_ibm">I'm Yunjeong Lee!</span>
           </div>
           <div class="bio-row row02">
@@ -501,7 +501,7 @@
         </div>
       </div>
       <div class="more-btn-wrap">
-        <router-link to="/projects" class="more-btn font_ibm">
+        <router-link to="/project" class="more-btn font_ibm">
           MORE THE PROJECT
         </router-link>
       </div>
