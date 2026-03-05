@@ -84,9 +84,9 @@
       <a
         v-if="$route.meta.AboutPage || $route.meta.ProjectPage"
         class="floating-download-btn"
-        href="/assets/file/resume_yunjeong.pdf"
+        href="/public/file/leeyunjeong_portfolio.pdf"
         target="_blank"
-        download="이윤정_자기소개서.pdf"
+        download="이윤정_포트폴리오.pdf"
       >
         <div class="circle-text-wrap">
           <svg viewBox="0 0 100 100" class="rotating-svg">
@@ -97,7 +97,7 @@
             />
             <text class="font_ibm">
               <textPath xlink:href="#circlePath">
-                DOWNLOAD RESUME • DOWNLOAD RESUME •
+                DOWNLOAD PORTFOLIO • DOWNLOAD PORTFOLIO •
               </textPath>
             </text>
           </svg>
