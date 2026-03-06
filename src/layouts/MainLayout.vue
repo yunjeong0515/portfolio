@@ -84,7 +84,7 @@
       <a
         v-if="$route.meta.AboutPage || $route.meta.ProjectPage"
         class="floating-download-btn"
-        href="/public/file/leeyunjeong_portfolio.pdf"
+        href="/file/leeyunjeong_portfolio.pdf"
         target="_blank"
         download="이윤정_포트폴리오.pdf"
       >
