@@ -33,8 +33,8 @@
       <div class="wrapper">
         <div class="title">
           <h2 class="font_ibm">
-            기획을 디자인하고 <br class="m-br" />코드로 완성하는, <br />
-            디자인하는 퍼블리셔 이윤정입니다.
+            디자인을 설계하고 <br class="m-br" />코드로 완성하는,<br />
+유지보수와 확장성을 고려하는 <br class="m-br" />퍼블리셔 이윤정입니다.
           </h2>
           <div class="profile-img">
             <img
