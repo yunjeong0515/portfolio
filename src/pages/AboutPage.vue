@@ -34,7 +34,8 @@
         <div class="title">
           <h2 class="font_ibm">
             디자인을 설계하고 <br class="m-br" />코드로 완성하는,<br />
-유지보수와 확장성을 고려하는 <br class="m-br" />퍼블리셔 이윤정입니다.
+            유지보수와 확장성을 고려하는 <br class="m-br" />퍼블리셔
+            이윤정입니다.
           </h2>
           <div class="profile-img">
             <img
@@ -584,7 +585,7 @@ export default {
           ],
         },
         experience: [
-          { date: "2024.07 ~", text: "(주)크레딧 웹퍼블리셔" },
+          { date: "2024.07 - 2026.04 ", text: "(주)크레딧 웹퍼블리셔" },
           { date: "2021.10 - 2023.10", text: "의료법인혜원의료재단 사무" },
         ],
         education: [
@@ -603,6 +604,7 @@ export default {
           },
         ],
         licenses: [
+          { date: "2026.06", text: "Google 애널리틱스" },
           { date: "2024.04", text: "웹디자인기능사" },
           { date: "2024.02", text: "GTQ그래픽기술자격 1급" },
           { date: "2021.07", text: "운전면허 2종 보통" },
