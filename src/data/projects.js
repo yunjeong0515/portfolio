@@ -68,7 +68,7 @@ export const projects = [
     id: "heruelab",
     name: "HERUE",
     description: "Corporate Website Development",
-    date: "2025.01",
+    date: "2026.01",
     role: ["Publishing (100%)"],
     tasks: [
       "시맨틱 HTML 웹사이트 구조 설계 및 구축",
